@@ -1,4 +1,4 @@
-gameDate,weekDay,homeTeam,homeTeamEdition,homeTeamBGColor,awayTeam,awayTeamEdition,awayTeamBGColor
+gameDate,weekDay,homeTeam,homeTeamEdition,homeTeamHex,awayTeam,awayTeamEdition,awayTeamHex
 10/24/2023,Tuesday,Denver Nuggets,Statement Edition,#1a428a,Los Angeles Lakers,Icon Edition,#ffc629
 10/24/2023,Tuesday,Golden State Warriors,Association Edition,#ffffff,Phoenix Suns,Icon Edition,#201747
 10/25/2023,Wednesday,Charlotte Hornets,Classic Edition,#00758D,Atlanta Hawks,Statement Edition,#000000
