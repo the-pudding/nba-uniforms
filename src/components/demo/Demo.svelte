@@ -12,10 +12,12 @@
 	import DemoFigure from "$components/demo/Demo.Figure.svelte";
 	import DemoTip from "$components/demo/Demo.Tip.svelte";
 	import DemoScrolly from "$components/demo/Demo.Scrolly.svelte";
+	import DemoWaffle from "$components/demo/Demo.Waffle.svelte";
 </script>
 
 <div id="demo">
 	<h1>Demo</h1>
+	<DemoWaffle />
 	<DemoLink />
 	<DemoImg />
 	<DemoButtonSet />
