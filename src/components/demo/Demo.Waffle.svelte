@@ -9,11 +9,12 @@
 	import demoData from "$components/demo/demo-layercake.csv";
 
 	let home, away
+	let team = "Sacramento Kings"
  	onMount(
 		async () => {
 			let allGames = await loadCsv('./src/data/nba2324/output.csv')
-			home = allGames.filter(d => d.homeTeam === "Milwaukee Bucks")
-			away = allGames.filter(d => d.awayTeam === "Milwaukee Bucks")
+			home = allGames.filter(d => d.homeTeam === team)
+			away = allGames.filter(d => d.awayTeam === team)
 		}
 	)
 	$: console.log(home)
