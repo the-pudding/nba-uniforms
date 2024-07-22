@@ -1,5 +1,5 @@
 <script>
-	import DemoWaffle from "$components/demo/Demo.Waffle.svelte";
+	import DemoWaffle from "$components/nba/Demo.Waffle.svelte";
 </script>
 
 <div id="nba">

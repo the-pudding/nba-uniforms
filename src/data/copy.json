@@ -1,1 +1,34 @@
-{"graphic":[]}
+{
+    "intro": [
+        {
+            "type": "text",
+            "value": "When you watch classic NBA footage from the first six decades of the league’s existence, it’s not too difficult to get your bearings. Generally you’ll see the home team wearing a white uniform (unless it’s the Lakers, tweaking the formula in gold). The away team’s wearing a uniform in their predominant color. Team names or locations lettered across the chest, with a number below that – bam, easy."
+        },
+        {
+            "type": "text",
+            "value": "Gradually, though, the aesthetic traditions of pro basketball have shifted through the years. Quietly, the shift began in the 1990s — beyond that decade’s general aesthetic hallmarks, teams like Atlanta, Chicago and Charlotte rolled out alternate third jerseys in a different team color. The 2000s and 2010s, with Adidas in charge of kitting out NBA players, brought us even more alternate jerseys, with more far-out designs, even sleeves — an era perhaps most infamously defined by the Cleveland Cavaliers winning the epic 2016 Finals in a black sleeved shirt with a giant “C” front and center, looking more like a t-shirt than a basketball top."
+        },
+        {
+            "type": "text",
+            "value": "In 2017 Nike took over the contract to produce the jerseys for NBA teams — and ushered in the most extreme overhaul of aesthetic standards yet. The white-at-home standard was officially eliminated; teams were now free to wear the color of their choosing. In fact, the very notion of a “home” or “away” jersey was eliminated, with Nike now classifying each team’s wardrobe into four “editions”:"
+        },
+        {
+            "type": "list",
+            "value": [
+                "Association (roughly analogous to the old home whites)",
+                "Icon (same but away colors)",
+                "Statement (an alternate jersey in a different team color, and maybe with a different logo)",
+                "City (often a springboard for full departures from teams’ usual brands)"
+            ]
+        },
+        {
+            "type": "text",
+            "value": "(In one nod to tradition, though, the sleeved jerseys were left in the mid 2010s.)"
+        },
+        {
+            "type": "text",
+            "value": "Today’s NBA is unrecognizable in many ways, compared to previous generations — from the superteam approach and player empowerment, to the tactical shift to three-point shots and positional switching. But today we’ll look at how it’s unrecognizable in a literal sense — the new fashion landscape of the on-court product. Turning on a random NBA game can now be a disorienting experience to the casual or even the diehard fan. The viewer may ask themselves: which team is which, again? Who’s this team in black and neon green, or a brown and teal?"
+        }
+    ],
+    "graphic": []
+}
