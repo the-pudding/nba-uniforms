@@ -28,7 +28,44 @@
         {
             "type": "text",
             "value": "Today’s NBA is unrecognizable in many ways, compared to previous generations — from the superteam approach and player empowerment, to the tactical shift to three-point shots and positional switching. But today we’ll look at how it’s unrecognizable in a literal sense — the new fashion landscape of the on-court product. Turning on a random NBA game can now be a disorienting experience to the casual or even the diehard fan. The viewer may ask themselves: which team is which, again? Who’s this team in black and neon green, or a brown and teal?"
+        },
+        {
+            "type": "Head",
+            "value": "white at home"
+        },
+        {
+            "type": "text",
+            "value": "For decades, the basketball standard was that the home team would wear a white jersey, with only occasional exceptions for teams who wore a different light color as their preferred home (most famously, the Lakers and gold). But these days, it’s quite rare to see a team wear its Association Edition jersey or any other white jerseys at home. Including this season’s City Edition for Boston, which is a slightly off-white shade, home teams wore white in just 327 games, or 27% of the time. You’re actually more likely to see teams wear white on the road nowadays, which occurred in slightly over half of all games this season – 640, to be exact. On average, teams wore their white Association jerseys in nearly half of their road games, but only a quarter of their home games — an inversion of the classic “home whites” concept."
+        },
+        {
+            "type": "graphic",
+            "value": [
+                "waffle charts for home games for one team, maybe Milwaukee, a season 15 years ago vs this past season. Scroll to flip between the seasons."
+            ]
+        },
+        {
+            "type": "text",
+            "value": "The rest of the time, fans were treated to a color vs. color matchup. These were once almost exclusively the domain of Lakers-in-gold home games, but this season made up 264 games, or 21% of all games this year. Owing to the popularity of both colors, the most common dual-color matchup was a black jersey against a red one; this occurred in 81 games total. True aficionados of the crayon box might take a particularly keen interest in the 105 games in which neither team wore black or white; these were most frequently blue vs. red matchups."
+        },
+        {
+            "type": "graphic",
+            "value": [
+                "waffle charts for home and away games, each square the uni color"
+            ]
+        },
+        {
+            "type": "heading",
+            "value": [
+                "TRADITIONAL TEAMS"
+            ]
+        },
+        {
+            "type": "text",
+            "value": "Individual teams in the league still have some amount of leeway for how much they’d like to color outside the lines. The Chicago Bulls, for example, have remained fairly no-nonsense with their brand since the days of Michael Jordan — not only have their core uniforms barely changed, but they keep up with a relatively classic schedule of wearing them, wearing their white Association uniforms for 68% of home games and only 10% of their away games."
+        },
+        {
+            "type": "text",
+            "value": "By contrast, the Orlando Magic wore white at home for just two games all season, preferring instead to wear one of their many blue or black options. But their white uniforms did get play on the road — worn in nearly 60% of their road games, in fact."
         }
-    ],
-    "graphic": []
+    ]
 }
