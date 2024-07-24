@@ -1,5 +1,5 @@
 {
-    "intro": [
+    "copy": [
         {
             "type": "text",
             "value": "When you watch classic NBA footage from the first six decades of the league’s existence, it’s not too difficult to get your bearings. Generally you’ll see the home team wearing a white uniform (unless it’s the Lakers, tweaking the formula in gold). The away team’s wearing a uniform in their predominant color. Team names or locations lettered across the chest, with a number below that – bam, easy."
@@ -30,7 +30,7 @@
             "value": "Today’s NBA is unrecognizable in many ways, compared to previous generations — from the superteam approach and player empowerment, to the tactical shift to three-point shots and positional switching. But today we’ll look at how it’s unrecognizable in a literal sense — the new fashion landscape of the on-court product. Turning on a random NBA game can now be a disorienting experience to the casual or even the diehard fan. The viewer may ask themselves: which team is which, again? Who’s this team in black and neon green, or a brown and teal?"
         },
         {
-            "type": "Head",
+            "type": "heading",
             "value": "white at home"
         },
         {
@@ -55,9 +55,7 @@
         },
         {
             "type": "heading",
-            "value": [
-                "TRADITIONAL TEAMS"
-            ]
+            "value": "Traditional Teams"
         },
         {
             "type": "text",
