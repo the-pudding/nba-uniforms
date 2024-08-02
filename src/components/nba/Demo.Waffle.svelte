@@ -45,6 +45,7 @@
 			{#each location as game, i}
 				<BasketballJersey
 					fill={location === home ? game.homeTeamHex : game.awayTeamHex}
+					city={location === home ? (game.homeTeamEdition === "City Edition") : (game.awayTeamEdition === "City Edition")}
 				/>
 			{/each}
 		{/if}
