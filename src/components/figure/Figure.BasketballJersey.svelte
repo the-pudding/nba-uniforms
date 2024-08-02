@@ -19,13 +19,16 @@ Props:
 <script>
 	export let fill = "#000";
 	export let city = false;
+
+	let width = 38;
+	let height = 60;
 </script>
 
 <figure>
 	<svg
-		width="38"
-		height="60"
-		viewBox="0 0 38 60"
+		width={width}
+		height={height}
+		viewBox={`0 0 ${width} ${height}`}
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 	>
@@ -37,7 +40,7 @@ Props:
 				stroke-width="2"
 			/>
             {#if city}
-                <text x="7" y="50" fill="#7f7f7f">CITY</text>
+                <text x={width/2} y={height-10} fill="#7f7f7f" text-anchor="middle">CITY</text>
             {/if}
 		</g>
 	</svg>
@@ -52,6 +55,6 @@ Props:
 	text {
 		font-weight:400;
 		font-size: 10px;
-		font-family:Arial, Helvetica, sans-serif
+		font-family:"Arial Narrow", Helvetica, sans-serif
 	}
 </style>
