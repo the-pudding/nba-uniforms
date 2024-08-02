@@ -7,9 +7,10 @@
 	import AxisX from "$components/layercake/AxisX.svg.svelte";
 	import AxisY from "$components/layercake/AxisY.svg.svelte";
 	import demoData from "$components/demo/demo-layercake.csv";
+	import BasketballJersey from "$components/figure/Figure.BasketballJersey.svelte";
 
 	let home, away
-	let team = "Sacramento Kings"
+	let team = "LA Clippers"
  	onMount(
 		async () => {
 			let allGames = await loadCsv('./src/data/nba2324/output.csv')
@@ -43,6 +44,9 @@
 							y={Math.floor(i / 14) * (squarewidth+0.5)}
 							width={squarewidth}
 							height={squarewidth}
+							fill={location === home ? game.homeTeamHex : game.awayTeamHex}
+						/>
+						<BasketballJersey
 							fill={location === home ? game.homeTeamHex : game.awayTeamHex}
 						/>
 					{/each}
