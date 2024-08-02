@@ -51,7 +51,7 @@
 	<h2>{location}</h2>
 	<StackedBarChart
 		data={filteredGames}
-		stackKey={location === 'home' ? "homeTeamEdition" : "awayTeamEdition"}
+		stackKey={location}
 		width={600}
 		height={100}
 	/>
