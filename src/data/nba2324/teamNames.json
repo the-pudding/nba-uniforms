@@ -1,92 +1,122 @@
 [
     {
-        "team": "Denver Nuggets"
+        "team": "Atlanta Hawks",
+        "code": "ATL"
     },
     {
-        "team": "Los Angeles Lakers"
+        "team": "Boston Celtics",
+        "code": "BOS"
     },
     {
-        "team": "Golden State Warriors"
+        "team": "Brooklyn Nets",
+        "code": "BKN"
     },
     {
-        "team": "Phoenix Suns"
+        "team": "Charlotte Hornets",
+        "code": "CHA"
     },
     {
-        "team": "Charlotte Hornets"
+        "team": "Chicago Bulls",
+        "code": "CHI"
     },
     {
-        "team": "Atlanta Hawks"
+        "team": "Cleveland Cavaliers",
+        "code": "CLE"
     },
     {
-        "team": "Indiana Pacers"
+        "team": "Dallas Mavericks",
+        "code": "DAL"
     },
     {
-        "team": "Washington Wizards"
+        "team": "Denver Nuggets",
+        "code": "DEN"
     },
     {
-        "team": "New York Knicks"
+        "team": "Detroit Pistons",
+        "code": "DET"
     },
     {
-        "team": "Boston Celtics"
+        "team": "Golden State Warriors",
+        "code": "GSW"
     },
     {
-        "team": "Orlando Magic"
+        "team": "Houston Rockets",
+        "code": "HOU"
     },
     {
-        "team": "Houston Rockets"
+        "team": "Indiana Pacers",
+        "code": "IND"
     },
     {
-        "team": "Brooklyn Nets"
+        "team": "LA Clippers",
+        "code": "LAC"
     },
     {
-        "team": "Cleveland Cavaliers"
+        "team": "Los Angeles Lakers",
+        "code": "LAL"
     },
     {
-        "team": "Miami Heat"
+        "team": "Memphis Grizzlies",
+        "code": "MEM"
     },
     {
-        "team": "Detroit Pistons"
+        "team": "Miami Heat",
+        "code": "MIA"
     },
     {
-        "team": "Toronto Raptors"
+        "team": "Milwaukee Bucks",
+        "code": "MIL"
     },
     {
-        "team": "Minnesota Timberwolves"
+        "team": "Minnesota Timberwolves",
+        "code": "MIN"
     },
     {
-        "team": "Chicago Bulls"
+        "team": "New Orleans Pelicans",
+        "code": "NOP"
     },
     {
-        "team": "Oklahoma City Thunder"
+        "team": "New York Knicks",
+        "code": "NYK"
     },
     {
-        "team": "Memphis Grizzlies"
+        "team": "Oklahoma City Thunder",
+        "code": "OKC"
     },
     {
-        "team": "New Orleans Pelicans"
+        "team": "Orlando Magic",
+        "code": "ORL"
     },
     {
-        "team": "Utah Jazz"
+        "team": "Philadelphia 76ers",
+        "code": "PHI"
     },
     {
-        "team": "Sacramento Kings"
+        "team": "Phoenix Suns",
+        "code": "PHX"
     },
     {
-        "team": "San Antonio Spurs"
+        "team": "Portland Trail Blazers",
+        "code": "POR"
     },
     {
-        "team": "Dallas Mavericks"
+        "team": "Sacramento Kings",
+        "code": "SAC"
     },
     {
-        "team": "LA Clippers"
+        "team": "San Antonio Spurs",
+        "code": "SAS"
     },
     {
-        "team": "Portland Trail Blazers"
+        "team": "Toronto Raptors",
+        "code": "TOR"
     },
     {
-        "team": "Milwaukee Bucks"
+        "team": "Utah Jazz",
+        "code": "UTA"
     },
     {
-        "team": "Philadelphia 76ers"
+        "team": "Washington Wizards",
+        "code": "WAS"
     }
 ]
