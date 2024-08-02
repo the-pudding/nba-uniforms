@@ -1,6 +1,5 @@
 <script>
 	import { getContext } from "svelte";
-	import Demo from "$components/demo/Demo.svelte";
 	import NBA from "$components/nba/NBA.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
 	import Header from "$components/Header.svelte";

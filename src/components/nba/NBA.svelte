@@ -1,5 +1,5 @@
 <script>
-	import DemoWaffle from "$components/nba/Demo.Waffle.svelte";
+	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import teamNames from "$data/nba2324/teamNames.json";
 
   	$: selectedTeam = 'ATL';
@@ -18,8 +18,13 @@
 	{/each}
 	</select>
 	
-	<DemoWaffle
+	<JerseyLayout
 		teamCode={selectedTeam}
+		location={'home'}
+	/>
+	<JerseyLayout
+		teamCode={selectedTeam}
+		location={'away'}
 	/>
 </div>
 
