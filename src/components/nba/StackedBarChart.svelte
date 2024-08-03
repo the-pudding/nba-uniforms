@@ -58,15 +58,16 @@
 		// Clear previous content
 		d3.select(svg).selectAll("*").remove();
 
-		const x = d3
-			.scaleLinear()
+		const x = d3.scaleLinear()
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
 			.range([0, width]);
 
-		const y = d3.scaleBand().domain([0, 1]).range([0, height]).padding(0.1);
+		const y = d3.scaleBand()
+			.domain([0, 1])
+			.range([0, height])
+			.padding(0.1);
 
-		const g = d3
-			.select(svg)
+		const g = d3.select(svg)
 			.attr("width", width)
 			.attr("height", height)
 			.append("g")
