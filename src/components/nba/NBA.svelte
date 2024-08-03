@@ -20,11 +20,15 @@
 	
 	<JerseyLayout
 		teamCode={selectedTeam}
-		location={'home'}
+		homeAwayFilter={'total'}
 	/>
 	<JerseyLayout
 		teamCode={selectedTeam}
-		location={'away'}
+		homeAwayFilter={'home'}
+	/>
+	<JerseyLayout
+		teamCode={selectedTeam}
+		homeAwayFilter={'away'}
 	/>
 </div>
 

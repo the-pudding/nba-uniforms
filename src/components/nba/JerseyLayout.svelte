@@ -11,11 +11,11 @@
 	import teamNames from "$data/nba2324/teamNames.json";
 
 
-	export let teamCode = "BOS";
-	export let location = "home";
+	export let teamCode = "ATL";
+	export let homeAwayFilter = "total";
 
 	let allGames;
-	let filteredGames = [];
+	let formattedGames = [];
 	onMount(async () => {
 		allGames = await loadCsv("./src/data/nba2324/output.csv");
 	});
@@ -24,15 +24,52 @@
 
 	$: {
 		if (allGames) {
-			if (location === 'home') {
-				filteredGames = allGames.filter((d) => d.homeTeam === team);
-			} else if (location === 'away') {
-				filteredGames = allGames.filter((d) => d.awayTeam === team);
+			if (homeAwayFilter === 'home') {
+				let filteredGames = allGames.filter((d) => d.homeTeam === team);
+				formattedGames = filteredGames.map((d) => {
+					return {
+						gameDate: d.gameDate,
+						team: d.homeTeam,
+						colorHex: d.homeTeamHex,
+						colorName: d.homeTeamColor,
+						edition: d.homeTeamEdition
+					}
+				});
+			} else if (homeAwayFilter === 'away') {
+				let filteredGames = allGames.filter((d) => d.awayTeam === team);
+				formattedGames = filteredGames.map((d) => {
+					return {
+						gameDate: d.gameDate,
+						team: d.awayTeam,
+						colorHex: d.awayTeamHex,
+						colorName: d.awayTeamColor,
+						edition: d.awayTeamEdition
+					}
+				});
 			} else {
-				filteredGames = allGames;
+				let filteredGames = allGames.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
+				formattedGames = filteredGames.map((d) => {
+					if (d.homeTeam === team) {
+						return {
+							gameDate: d.gameDate,
+							team: d.homeTeam,
+							colorHex: d.homeTeamHex,
+							colorName: d.homeTeamColor,
+							edition: d.homeTeamEdition
+						}
+					} else {
+						return {
+							gameDate: d.gameDate,
+							team: d.awayTeam,
+							colorHex: d.awayTeamHex,
+							colorName: d.awayTeamColor,
+							edition: d.awayTeamEdition
+						}
+					}
+				});
 			}
 		}
-		console.log(filteredGames);
+		console.log(formattedGames);
 	}
 
 	const x = "x";
@@ -48,18 +85,17 @@
 </script>
 
 <section>
-	<h2>{location}</h2>
+	<h2>{homeAwayFilter}</h2>
 	<StackedBarChart
-		data={filteredGames}
-		stackKey={location}
+		data={formattedGames}
 		width={600}
 		height={100}
 	/>
-	{#if filteredGames.length > 0}
-		{#each filteredGames as game}
+	{#if formattedGames.length > 0}
+		{#each formattedGames as game}
 			<BasketballJersey
-				fill={location === 'home' ? game.homeTeamHex : game.awayTeamHex}
-				city={location === 'home' ? (game.homeTeamEdition === "City Edition") : (game.awayTeamEdition === "City Edition")}
+				fill={game.colorHex}
+				city={game.edition === 'City Edition'}
 			/>
 		{/each}
 	{/if}
