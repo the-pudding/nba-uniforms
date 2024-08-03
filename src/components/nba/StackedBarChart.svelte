@@ -58,6 +58,7 @@
 		// Clear previous content
 		d3.select(svg).selectAll("*").remove();
 
+		// Set Scales
 		const x = d3.scaleLinear()
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
 			.range([0, width]);
@@ -67,26 +68,48 @@
 			.range([0, height])
 			.padding(0.1);
 
+		// Establish SVG group
 		const g = d3.select(svg)
 			.attr("width", width)
 			.attr("height", height)
 			.append("g")
 			.attr("transform", `translate(${left},${top})`);
 
+		
+
+		// Draw bars 
 		let cumulative = 0;
-		g.selectAll(".bar")
+		const dataSelect = g.selectAll(".bar")
 			.data(groupedData)
-			.enter()
-			.append("rect")
+			.enter();
+		
+		// Render d.edition labels above the bars
+		dataSelect.append("text")
+			.attr("x", (d) => {
+				const prev = cumulative;
+				cumulative += d.total;
+				return x(prev);
+			})
+			.attr("y", 12)
+			.attr("fill", "#000")
+			.attr("text-anchor", "left")
+			.attr("font-size", "12px")
+			.attr("font-family", "sans-serif")
+			.text((d) => d.edition.split(' Edition')[0]);
+		
+		cumulative = 0;
+		dataSelect.append("rect")
 			.attr("class", "bar")
 			.attr("x", (d) => {
 				const prev = cumulative;
 				cumulative += d.total;
 				return x(prev);
 			})
-			.attr("y", 1)
+			.attr("y", 18)
 			.attr("fill", (d) => d.colorHex)
 			.attr("width", (d) => x(d.total))
+			.attr("stroke", "#bca891")
+			.attr("stroke-width", 4)
 			.attr("height", y.bandwidth());
 	}
 </script>
