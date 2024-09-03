@@ -10,8 +10,6 @@
 
 	import teams from "$data/nba2324/teamNames.json";
 
-    selectedTeamStore.set('ATL');
-
 	locate(true).then(data => {
 		const [lat, lon] = data.loc.split(',').map(Number);
 		const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
