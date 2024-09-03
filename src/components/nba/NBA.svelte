@@ -1,8 +1,8 @@
 <script>
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
-	import teamNames from "$data/nba2324/teamNames.json";
+	import teams from "$data/nba2324/teamNames.json";
 
-  	$: selectedTeam = 'ATL';
+  	export let selectedTeam;
 
 	function handleChange(event) {
 		selectedTeam = event.target.value;
@@ -13,7 +13,7 @@
 	<h1>NBA</h1>
 	<label for="team-dropdown">Select a Team</label>
 	<select id="team-dropdown" bind:value={selectedTeam} on:change={handleChange}>
-	{#each teamNames as team}
+	{#each teams as team}
 		<option value={team.code}>{team.team}</option>
 	{/each}
 	</select>

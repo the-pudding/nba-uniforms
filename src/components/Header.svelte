@@ -1,16 +1,5 @@
 <script>
 	import wordmark from "$svg/wordmark.svg";
-	import locate from "$utils/locate";
-	import findClosestPoint from "$utils/findClosestPoint";
-
-	import teamLocations from "$data/nba2324/teamLocations.json";
-
-	locate(true).then(data => {
-		const [lat, lon] = data.loc.split(',').map(Number);
-		const closestTeam = findClosestPoint({ lat: lat, lon: lon }, teamLocations);
-	}).catch(err => {
-		console.error(err);
-	});
 </script>
 
 <header>
