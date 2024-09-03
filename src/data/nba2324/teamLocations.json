@@ -1,0 +1,182 @@
+[
+    {
+        "arena": "State Farm Arena",
+        "team": "Atlanta Hawks",
+        "lat": 33.7573,
+        "lon": -84.3963
+    },
+    {
+        "arena": "TD Garden",
+        "team": "Boston Celtics",
+        "lat": 42.3662,
+        "lon": -71.0621
+    },
+    {
+        "arena": "Barclays Center",
+        "team": "Brooklyn Nets",
+        "lat": 40.6826,
+        "lon": -73.9754
+    },
+    {
+        "arena": "Spectrum Center",
+        "team": "Charlotte Hornets",
+        "lat": 35.2251,
+        "lon": -80.8392
+    },
+    {
+        "arena": "United Center",
+        "team": "Chicago Bulls",
+        "lat": 41.8807,
+        "lon": -87.6742
+    },
+    {
+        "arena": "Rocket Mortgage FieldHouse",
+        "team": "Cleveland Cavaliers",
+        "lat": 41.4966,
+        "lon": -81.6880
+    },
+    {
+        "arena": "American Airlines Center",
+        "team": "Dallas Mavericks",
+        "lat": 32.7905,
+        "lon": -96.8103
+    },
+    {
+        "arena": "Ball Arena",
+        "team": "Denver Nuggets",
+        "lat": 39.7487,
+        "lon": -105.0077
+    },
+    {
+        "arena": "Little Caesars Arena",
+        "team": "Detroit Pistons",
+        "lat": 42.3410,
+        "lon": -83.0550
+    },
+    {
+        "arena": "Chase Center",
+        "team": "Golden State Warriors",
+        "lat": 37.7680,
+        "lon": -122.3877
+    },
+    {
+        "arena": "Toyota Center",
+        "team": "Houston Rockets",
+        "lat": 29.7508,
+        "lon": -95.3621
+    },
+    {
+        "arena": "Gainbridge Fieldhouse",
+        "team": "Indiana Pacers",
+        "lat": 39.7640,
+        "lon": -86.1555
+    },
+    {
+        "arena": "Intuit Dome",
+        "team": "LA Clippers",
+        "lat": 33.9582,
+        "lon": -118.3421
+    },
+    {
+        "arena": "Crypto.com Arena",
+        "team": "Los Angeles Lakers",
+        "lat": 34.0430,
+        "lon": -118.2673
+    },
+    {
+        "arena": "FedExForum",
+        "team": "Memphis Grizzlies",
+        "lat": 35.1382,
+        "lon": -90.0506
+    },
+    {
+        "arena": "Kaseya Center",
+        "team": "Miami Heat",
+        "lat": 25.7814,
+        "lon": -80.1870
+    },
+    {
+        "arena": "Fiserv Forum",
+        "team": "Milwaukee Bucks",
+        "lat": 43.0451,
+        "lon": -87.9173
+    },
+    {
+        "arena": "Target Center",
+        "team": "Minnesota Timberwolves",
+        "lat": 44.9795,
+        "lon": -93.2760
+    },
+    {
+        "arena": "Smoothie King Center",
+        "team": "New Orleans Pelicans",
+        "lat": 29.9490,
+        "lon": -90.0821
+    },
+    {
+        "arena": "Madison Square Garden",
+        "team": "New York Knicks",
+        "lat": 40.7505,
+        "lon": -73.9934
+    },
+    {
+        "arena": "Paycom Center",
+        "team": "Oklahoma City Thunder",
+        "lat": 35.4634,
+        "lon": -97.5151
+    },
+    {
+        "arena": "Amway Center",
+        "team": "Orlando Magic",
+        "lat": 28.5392,
+        "lon": -81.3839
+    },
+    {
+        "arena": "Wells Fargo Center",
+        "team": "Philadelphia 76ers",
+        "lat": 39.9012,
+        "lon": -75.1719
+    },
+    {
+        "arena": "Footprint Center",
+        "team": "Phoenix Suns",
+        "lat": 33.4458,
+        "lon": -112.0712
+    },
+    {
+        "arena": "Moda Center",
+        "team": "Portland Trail Blazers",
+        "lat": 45.5316,
+        "lon": -122.6668
+    },
+    {
+        "arena": "Golden 1 Center",
+        "team": "Sacramento Kings",
+        "lat": 38.5803,
+        "lon": -121.4990
+    },
+    {
+        "arena": "AT&T Center",
+        "team": "San Antonio Spurs",
+        "lat": 29.4269,
+        "lon": -98.4375
+    },
+    {
+        "arena": "Scotiabank Arena",
+        "team": "Toronto Raptors",
+        "lat": 43.6435,
+        "lon": -79.3791
+    },
+    {
+        "arena": "Vivint Arena",
+        "team": "Utah Jazz",
+        "lat": 40.7683,
+        "lon": -111.9011
+    },
+    {
+        "arena": "Capital One Arena",
+        "team": "Washington Wizards",
+        "lat": 38.8981,
+        "lon": -77.0209
+    }
+]
