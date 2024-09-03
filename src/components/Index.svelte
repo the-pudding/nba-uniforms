@@ -10,7 +10,7 @@
 
 	import teams from "$data/nba2324/teamNames.json";
 
-	$: selectedTeam = 'LAC';
+	$: selectedTeam = 'ATL';
 
 	locate(true).then(data => {
 		const [lat, lon] = data.loc.split(',').map(Number);
