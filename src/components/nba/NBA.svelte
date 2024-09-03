@@ -1,8 +1,9 @@
 <script>
+    import { selectedTeamStore } from '$stores/teamSelection';
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import teams from "$data/nba2324/teamNames.json";
 
-  	export let selectedTeam;
+  	$: selectedTeam = $selectedTeamStore;
 
 	function handleChange(event) {
 		selectedTeam = event.target.value;

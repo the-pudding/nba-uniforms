@@ -1,5 +1,5 @@
 <script>
-	import { getContext } from "svelte";
+    import { selectedTeamStore } from '$stores/teamSelection';
 	import NBA from "$components/nba/NBA.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
 	import Header from "$components/Header.svelte";
@@ -10,12 +10,12 @@
 
 	import teams from "$data/nba2324/teamNames.json";
 
-	$: selectedTeam = 'ATL';
+    selectedTeamStore.set('ATL');
 
 	locate(true).then(data => {
 		const [lat, lon] = data.loc.split(',').map(Number);
 		const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
-		selectedTeam = closestArena.code;
+        selectedTeamStore.set(closestArena.code);
 	}).catch(err => {
 		console.error(err);
 	});
@@ -27,5 +27,5 @@
 <WIP />
 <!-- <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY/> -->
 <Header />
-<NBA selectedTeam={selectedTeam} />
+<NBA />
 <Footer />
