@@ -1,4 +1,5 @@
 <script>
+		import { getContext } from 'svelte';
     import { selectedTeamStore } from '$stores/teamSelection';
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import teams from "$data/nba2324/teamNames.json";
@@ -8,6 +9,9 @@
 	function handleChange(event) {
 		selectedTeam = event.target.value;
 	}
+
+	const copy = getContext("copy").copy;
+	console.log(copy);
 </script>
 
 <div id="nba">
@@ -18,19 +22,32 @@
 		<option value={team.code}>{team.team}</option>
 	{/each}
 	</select>
+
+	{#if copy}
+		{#each copy as section}
+			{#if section.type === 'text'}
+					<p>{section.value}</p>
+			{:else if section.type === 'list'}
+				<ul>
+					{#each section.value as item}
+						<li>{item}</li>
+					{/each}
+				</ul>
+			{:else if section.type === 'graphic'}
+				{#if section.value[0] === 'waffle-home-away'}
+					<JerseyLayout
+						teamCode={selectedTeam}
+						homeAwayFilter={'home'}
+					/>
+					<JerseyLayout
+						teamCode={selectedTeam}
+						homeAwayFilter={'away'}
+					/>
+				{/if}
+			{/if}
+		{/each}
+	{/if}
 	
-	<JerseyLayout
-		teamCode={selectedTeam}
-		homeAwayFilter={'total'}
-	/>
-	<JerseyLayout
-		teamCode={selectedTeam}
-		homeAwayFilter={'home'}
-	/>
-	<JerseyLayout
-		teamCode={selectedTeam}
-		homeAwayFilter={'away'}
-	/>
 </div>
 
 <style>
