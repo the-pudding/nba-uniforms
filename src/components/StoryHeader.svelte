@@ -1,33 +1,38 @@
 <script>
-	import wordmark from "$svg/wordmark.svg";
+	import { getContext } from "svelte";
+
+	const teams = getContext("teams");
 </script>
 
 <header>
-	<div class="wordmark">
-		<a href="https://pudding.cool" aria-label="The Pudding" target="_self"
-			>{@html wordmark}</a
-		>
-	</div>
+  <div class="header-grid__container">
+    {#each teams as team}
+			<div class="header-grid__jersey">{team.team}</div>
+		{/each}
+    <div class="header-grid__title">Content Here</div>
+  </div>
 </header>
 
+
 <style>
-	.wordmark {
-		max-width: 10em;
-		margin: 0 auto;
-		padding: 1em 0;
-	}
+.header-grid__container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 5px; /* Optional gap between cells */
+}
 
-	.wordmark a {
-		border: none;
-		display: block;
-		color: var(--color-fg);
-	}
+.header-grid__jersey {
+  background-color: #f0f0f0; /* Example color */
+}
 
-	.wordmark a:hover {
-		background-color: transparent;
-	}
+.header-grid__title {
+  grid-area: 2 / 4 / 4 / 7;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #1e9943;
+}
 
-	:global(.wordmark svg path) {
-		fill: currentColor;
-	}
 </style>

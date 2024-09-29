@@ -3,7 +3,7 @@
   import { selectedTeamStore } from '$stores/teamSelection';
 	import NBA from "$components/nba/NBA.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
-	import Header from "$components/Header.svelte";
+	import StoryHeader from "$components/StoryHeader.svelte";
 	import Footer from "$components/Footer.svelte";
 	import SelectBar from "$components/nba/SelectBar.svelte";
 
@@ -27,6 +27,6 @@
 <WIP />
 <SelectBar />
 <!-- <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY/> -->
-<Header />
+<StoryHeader />
 <NBA />
 <Footer />
