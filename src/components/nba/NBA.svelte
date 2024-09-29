@@ -1,6 +1,7 @@
 <script>
 	import { browser } from "$app/environment";
 	import { getContext } from 'svelte';
+	import { LayerCake, Svg } from "layercake";
   import { selectedTeamStore } from '$stores/teamSelection';
 
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
@@ -81,8 +82,16 @@
 						teamCode={selectedTeam}
 						homeAwayFilter={'away'}
 					/>
-				{:else if section.value[0] === 'beeswarm-flair'}
-					
+				{:else if section.value[0] === 'beeswarm-flair-23'}
+					<!-- <LayerCake {data}>
+						<Beeswarm
+							r={3}
+							strokeWidth={0}
+							stroke={'#fff'}
+							spacing={1.5}
+							getTitle={d => d.team}
+						/>
+					</LayerCake> -->
 				{/if}
 			{/if}
 		{/each}
@@ -105,5 +114,14 @@
 	:global(#nba h2 span) {
 		background: var(--color-mark);
 		padding: 0 8px;
+	}
+
+	p, ul {
+		background-color: rgba(255, 255, 255, 0.75);
+		border-left: 8px solid black;
+		border-right: 8px solid black;
+		max-width: 900px;
+		padding: 5px 90px 15px;
+		margin: 0
 	}
 </style>
