@@ -5,6 +5,7 @@
 	import Index from "$components/Index.svelte";
 	import copy from "$data/copy.json";
 	import data from "$data/all-games.json";
+	import teams from "$data/nba2324/teamNames.json";
 	import version from "$utils/version.js";
 	import { csv } from 'd3-fetch';
 
@@ -20,6 +21,7 @@
 	const { title, description, url, keywords } = copy;
 	setContext("copy", copy);
 	setContext("data", data);
+	setContext("teams", teams);
 </script>
 
 <Meta {title} {description} {url} {preloadFont} {keywords} />

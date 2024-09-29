@@ -7,21 +7,16 @@
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
 
-	import allTeams from "$data/nba2324/teamNames.json";
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
 
   $: selectedTeam = $selectedTeamStore;
-	$: selectedTeamName = allTeams.find(d => d.code === selectedTeam).team;
+	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 	$: statFill(selectedTeam, copy);
 
 	const copy = getContext("copy").copy;
 	const data = getContext("data");
-	console.log(copy);
-
-	function handleChange(event) {
-		selectedTeam = event.target.value;
-	}
+	const teams = getContext("teams");
 	
 	function statFill(team, copy) {
 		if (browser) {
@@ -53,12 +48,6 @@
 
 <div id="nba">
 	<h1>NBA</h1>
-	<label for="team-dropdown">Select a Team</label>
-	<select id="team-dropdown" bind:value={selectedTeam} on:change={handleChange}>
-	{#each allTeams as team}
-		<option value={team.code}>{team.team}</option>
-	{/each}
-	</select>
 
 	{#if copy}
 		{#each copy as section}

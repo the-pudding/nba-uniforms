@@ -5,6 +5,7 @@
 	import WIP from "$components/helpers/WIP.svelte";
 	import Header from "$components/Header.svelte";
 	import Footer from "$components/Footer.svelte";
+	import SelectBar from "$components/nba/SelectBar.svelte";
 
 	import locate from "$utils/locate";
 	import findClosestPoint from "$utils/findClosestPoint";
@@ -24,6 +25,7 @@
 </script>
 
 <WIP />
+<SelectBar />
 <!-- <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY/> -->
 <Header />
 <NBA />
