@@ -41,8 +41,6 @@
 					colorHex: colorHex
 				}))
 		);
-
-		console.log(groupedData);
 		
 		groupedData.sort((a, b) => {
 			return editionsOrder[a.edition] - editionsOrder[b.edition];

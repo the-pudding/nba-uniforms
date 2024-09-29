@@ -35,7 +35,7 @@
 	function setDarkMode(value, store) {
 		darkMode = value;
 		if (store) localStorage.setItem("darkMode", darkMode);
-		document.documentElement.classList.toggle("dark", darkMode);
+		documentElement.classList.toggle("dark", darkMode);
 		document.documentElement.classList.toggle("light", !darkMode);
 	}
 

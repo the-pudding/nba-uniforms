@@ -1,5 +1,5 @@
 <script>
-	import { getContext } from 'svelte';
+	import { setContext, getContext } from 'svelte';
   import { selectedTeamStore } from '$stores/teamSelection';
 	import NBA from "$components/nba/NBA.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
@@ -20,7 +20,7 @@
 	});
 
 	const copy = getContext("copy");
-	// const data = getContext("data");
+	const data = getContext("data");
 </script>
 
 <WIP />

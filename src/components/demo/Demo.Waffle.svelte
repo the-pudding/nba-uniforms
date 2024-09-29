@@ -18,7 +18,6 @@
 			away = allGames.filter(d => d.awayTeam === team)
 		}
 	)
-	$: console.log(home)
 
 	const x = "x";
 	const y = "y";

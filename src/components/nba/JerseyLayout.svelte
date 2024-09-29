@@ -69,7 +69,6 @@
 				});
 			}
 		}
-		console.log(formattedGames);
 	}
 
 	const x = "x";
