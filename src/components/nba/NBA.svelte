@@ -2,8 +2,13 @@
 	import { browser } from "$app/environment";
 	import { getContext } from 'svelte';
   import { selectedTeamStore } from '$stores/teamSelection';
+
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
+	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
+
 	import allTeams from "$data/nba2324/teamNames.json";
+	import flair23 from "$data/nba2324/flairScore.json";
+	import flair13 from "$data/nba2324/flairScore13.json";
 
   $: selectedTeam = $selectedTeamStore;
 	$: selectedTeamName = allTeams.find(d => d.code === selectedTeam).team;
@@ -76,6 +81,8 @@
 						teamCode={selectedTeam}
 						homeAwayFilter={'away'}
 					/>
+				{:else if section.value[0] === 'beeswarm-flair'}
+					
 				{/if}
 			{/if}
 		{/each}

@@ -1,0 +1,122 @@
+[
+  {
+    "team": "Denver Nuggets",
+    "score": "124"
+  },
+  {
+    "team": "Los Angeles Lakers",
+    "score": "95"
+  },
+  {
+    "team": "Golden State Warriors",
+    "score": "141"
+  },
+  {
+    "team": "Phoenix Suns",
+    "score": "138"
+  },
+  {
+    "team": "Charlotte Hornets",
+    "score": "135"
+  },
+  {
+    "team": "Atlanta Hawks",
+    "score": "106"
+  },
+  {
+    "team": "Indiana Pacers",
+    "score": "119"
+  },
+  {
+    "team": "Washington Wizards",
+    "score": "141"
+  },
+  {
+    "team": "New York Knicks",
+    "score": "131"
+  },
+  {
+    "team": "Boston Celtics",
+    "score": "101"
+  },
+  {
+    "team": "Orlando Magic",
+    "score": "137"
+  },
+  {
+    "team": "Houston Rockets",
+    "score": "136"
+  },
+  {
+    "team": "Brooklyn Nets",
+    "score": "140"
+  },
+  {
+    "team": "Cleveland Cavaliers",
+    "score": "112"
+  },
+  {
+    "team": "Miami Heat",
+    "score": "135"
+  },
+  {
+    "team": "Detroit Pistons",
+    "score": "132"
+  },
+  {
+    "team": "Toronto Raptors",
+    "score": "107"
+  },
+  {
+    "team": "Minnesota Timberwolves",
+    "score": "149"
+  },
+  {
+    "team": "Chicago Bulls",
+    "score": "45"
+  },
+  {
+    "team": "Oklahoma City Thunder",
+    "score": "97"
+  },
+  {
+    "team": "Memphis Grizzlies",
+    "score": "127"
+  },
+  {
+    "team": "New Orleans Pelicans",
+    "score": "122"
+  },
+  {
+    "team": "Utah Jazz",
+    "score": "123"
+  },
+  {
+    "team": "Sacramento Kings",
+    "score": "140"
+  },
+  {
+    "team": "San Antonio Spurs",
+    "score": "141"
+  },
+  {
+    "team": "Dallas Mavericks",
+    "score": "136"
+  },
+  {
+    "team": "LA Clippers",
+    "score": "122"
+  },
+  {
+    "team": "Portland Trail Blazers",
+    "score": "120"
+  },
+  {
+    "team": "Milwaukee Bucks",
+    "score": "134"
+  },
+  {
+    "team": "Philadelphia 76ers",
+    "score": "143"
+  }
+]
