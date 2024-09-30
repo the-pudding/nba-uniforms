@@ -1,6 +1,7 @@
 <script>
 	import { getContext } from "svelte";
-  import { selectedTeamStore } from '$stores/teamSelection';
+  import { selectedTeamStore } from '$stores/teamSelection';	
+	import wordmark from "$svg/wordmark.svg";
 
 	const teams = getContext("teams");
 
@@ -20,7 +21,10 @@
 				</button>
 			</div>
 		{/each}
-    <div class="header-grid__title">Content Here</div>
+    <div class="header-grid__title">
+			{@html wordmark}
+			<h1>Rep Your Team</h1>
+		</div>
   </div>
 </header>
 
@@ -49,11 +53,10 @@
 
 .header-grid__title {
   grid-area: 2 / 4 / 4 / 7;
-  background-color: #ffffff;
   display: flex;
+	flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid #1e9943;
 }
 
 </style>
