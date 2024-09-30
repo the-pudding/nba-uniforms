@@ -7,7 +7,9 @@
 <header>
   <div class="header-grid__container">
     {#each teams as team}
-			<div class="header-grid__jersey">{team.team}</div>
+			<div class="header-grid__jersey">
+				<img src={`/assets/jerseys/${team.code}_icon.png`} alt={team.team} />
+			</div>
 		{/each}
     <div class="header-grid__title">Content Here</div>
   </div>
