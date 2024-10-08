@@ -52,17 +52,31 @@
       simulation.tick();
     }
   }
-
-	$: console.log($yScale.range());
 </script>
 
-
-<svg width="100%" height="2" style="position: absolute; top: {$height / 2}px;">
-	<line x1="0" y1="0" x2="100%" y2="0" stroke="black" stroke-width="2" />
-</svg>
-<div class="bee-container">
-	<!-- draw a full-width horizontal line halfway down the container -->
-  {#each simulation.nodes() as node}
+<div class="lollipop-container">
+    <div 
+      class="circle"
+      style="
+        left: {node.x}px;
+        top: {(node.y * 2) + ($height / 2)}px;
+        width: 10px;
+        height: 10px;
+        background-color: {fill};
+        border: {strokeWidth}px solid {stroke};
+        border-radius: 50%;
+      "
+    ></div>
+    <div
+      class="line"
+      style="
+        left: {node.x}px;
+        top: {(node.y * 2) + ($height / 2)}px;
+        width: 1px;
+        height: 10px;
+        background-color: {stroke};
+      "
+    ></div>
     <div
       class="jersey-container"
       style="
@@ -74,25 +88,19 @@
     >
 			<img src={`/assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
 		</div>
-		{#if node.team === 'Boston Celtics'}
-			<div
-				class="team-container"
-				style="
-					left: {node.x}px;
-					top: {(node.y * 2) + ($height / 2) - 50}px;
-					"
-			>
-				<span>Your team: <strong>Boston Celtics</strong>
-				</span>
-				<div class="caret"></div>
-			</div>
-		{/if}
-  {/each}
 </div>
 
 <style>
-  .bee-container {
+  .lollipop-container {
     position: relative;
+  }
+
+  .circle {
+    position: absolute;
+  }
+
+  .line {
+    position: absolute;
   }
 
   .jersey-container {

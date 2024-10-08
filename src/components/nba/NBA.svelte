@@ -3,12 +3,20 @@
 	import { getContext } from 'svelte';
 	import { LayerCake, Svg } from "layercake";
   import { selectedTeamStore } from '$stores/teamSelection';
+	import * as d3 from "d3";
 
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
+	import Lollipop from "$components/nba/Lollipop.svelte";
 
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
+
+	$: flairData = flair23.map(d => ({
+		...d,
+		"2023 Score": Number(d.score),
+		"2013 Score": Number(flair13.find(f => f.team === d.team).score)
+	}));
 
   $: selectedTeam = $selectedTeamStore;
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
@@ -72,15 +80,15 @@
 						homeAwayFilter={'away'}
 					/>
 				{:else if section.value[0] === 'beeswarm-flair-23'}
-					<!-- <LayerCake {data}>
-						<Beeswarm
-							r={3}
-							strokeWidth={0}
-							stroke={'#fff'}
-							spacing={1.5}
-							getTitle={d => d.team}
-						/>
-					</LayerCake> -->
+				<div class="beeswarm">
+					<LayerCake
+						data={flairData}
+						x={'2023 Score'}
+						height={400}
+					>
+						<Beeswarm />
+					</LayerCake>
+				</div>
 				{/if}
 			{/if}
 		{/each}
@@ -112,5 +120,14 @@
 		max-width: 900px;
 		padding: 5px 90px 15px;
 		margin: 0
+	}
+
+	.beeswarm {
+		max-width: 900px;
+		margin: 0 auto;
+		width: 100vh;
+		height: 300px;
+		padding: 10px;
+		border: 1px solid black;
 	}
 </style>
