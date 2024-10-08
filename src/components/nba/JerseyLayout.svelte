@@ -3,6 +3,7 @@
 	import * as d3 from "d3";
 	import { LayerCake, Svg } from "layercake";
 	import loadCsv from "$utils/loadCsv.js";
+	import getTeamCode from "$utils/getTeamCode.js";
 	import Scatter from "$components/layercake/Scatter.svg.svelte";
 	import AxisX from "$components/layercake/AxisX.svg.svelte";
 	import AxisY from "$components/layercake/AxisY.svg.svelte";
@@ -92,15 +93,17 @@
 	/>
 	{#if formattedGames.length > 0}
 		{#each formattedGames as game}
-			<BasketballJersey
-				fill={game.colorHex}
-				city={game.edition === 'City Edition'}
-			/>
+			<img src={`/assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
 		{/each}
 	{/if}
 </section>
 
 <style>
+	.jersey-illustration {
+		width: 50px;
+		height: 75px;
+		display: inline-block;
+	}
 	figure {
 		margin: 1rem auto;
 		width: 100%;
