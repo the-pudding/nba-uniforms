@@ -2,7 +2,8 @@
 	import { browser } from "$app/environment";
 	import { getContext } from 'svelte';
 	import { LayerCake, Svg } from "layercake";
-  import { selectedTeamStore } from '$stores/teamSelection';
+  	import { selectedTeamStore } from '$stores/teamSelection';
+	import Section from "$components/nba/Section.svelte";
 
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
@@ -14,9 +15,11 @@
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 	$: statFill(selectedTeam, copy);
 
-	const copy = getContext("copy").copy;
+	const copy = getContext("copy");
 	const data = getContext("data");
 	const teams = getContext("teams");
+
+	console.log(copy)
 	
 	function statFill(team, copy) {
 		if (browser) {
@@ -47,70 +50,11 @@
 </script>
 
 <div id="nba">
-	<h1>NBA</h1>
-
-	{#if copy}
-		{#each copy as section}
-			{#if section.type === 'text'}
-					<p>{@html section.value}</p>
-			{:else if section.type === 'heading'}
-					<h2>{@html section.value}</h2>
-			{:else if section.type === 'list'}
-				<ul>
-					{#each section.value as item}
-						<li>{@html item}</li>
-					{/each}
-				</ul>
-			{:else if section.type === 'graphic'}
-				{#if section.value[0] === 'waffle-home-away'}
-					<JerseyLayout
-						teamCode={selectedTeam}
-						homeAwayFilter={'home'}
-					/>
-					<JerseyLayout
-						teamCode={selectedTeam}
-						homeAwayFilter={'away'}
-					/>
-				{:else if section.value[0] === 'beeswarm-flair-23'}
-					<!-- <LayerCake {data}>
-						<Beeswarm
-							r={3}
-							strokeWidth={0}
-							stroke={'#fff'}
-							spacing={1.5}
-							getTitle={d => d.team}
-						/>
-					</LayerCake> -->
-				{/if}
-			{/if}
-		{/each}
-	{/if}
-	
+	{#each copy.copy as section, i}
+		<Section copy={section} />
+	{/each}
 </div>
 
 <style>
-	#nba {
-		max-width: 40rem;
-		padding: 16px;
-		margin: 0 auto;
-	}
 
-	:global(#nba section) {
-		margin: 32px auto;
-		padding-top: 32px;
-	}
-
-	:global(#nba h2 span) {
-		background: var(--color-mark);
-		padding: 0 8px;
-	}
-
-	p, ul {
-		background-color: rgba(255, 255, 255, 0.75);
-		border-left: 8px solid black;
-		border-right: 8px solid black;
-		max-width: 900px;
-		padding: 5px 90px 15px;
-		margin: 0
-	}
 </style>

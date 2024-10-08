@@ -59,7 +59,7 @@
 		// Set Scales
 		const x = d3.scaleLinear()
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
-			.range([0, width]);
+			.range([0, width-4]);
 
 		const y = d3.scaleBand()
 			.domain([0, 1])
@@ -71,7 +71,7 @@
 			.attr("width", width)
 			.attr("height", height)
 			.append("g")
-			.attr("transform", `translate(${left},${top})`);
+			.attr("transform", `translate(${left+1},${top})`);
 
 		
 
@@ -105,9 +105,9 @@
 			})
 			.attr("y", 18)
 			.attr("fill", (d) => d.colorHex)
-			.attr("width", (d) => x(d.total))
-			.attr("stroke", "#bca891")
-			.attr("stroke-width", 4)
+			.attr("width", (d) => (x(d.total)))
+			.attr("stroke", "#191919")
+			.attr("stroke-width", 2)
 			.attr("height", y.bandwidth());
 	}
 </script>

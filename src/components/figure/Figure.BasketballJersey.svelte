@@ -1,31 +1,51 @@
-<!--
-Usage:
-	<Figure>
-		<svg></svg>
-	</Figure>
-
-Pass style prop directives to set dimensions (defaults are all "auto")
---aspect-ratio
---width
---height
-
-example: <Figure --aspect-ratio="1"></Figure> 
-
-Props: 
-	debounce: number (default 250) - debounce resize event time in ms
-	exclude: string (default "height") - exclude width or height from triggering resize event
-	custom: object (default {}) - custom data store to pass to children components
--->
 <script>
+	import { selectedTeamStore } from '$stores/teamSelection';
+	import * as d3 from "d3";
+
 	export let fill = "#000";
 	export let city = false;
+	export let width;
+	export let edition;
+	export let gameDate;
+	export let opponent;
+	export let place;
 
-	let width = 38;
-	let height = 60;
+	let editionFormatted = edition.split(" ")[0].toLowerCase();
+
+	let height = width*1.5;
+
+	let tooltipVisible = false;
+
+	function onMouseOver() {
+		let el = this;
+		tooltipVisible = true;
+		d3.selectAll(".figure-jersey").style("opacity", 0.3);
+		d3.select(el).style("opacity", 1);
+	}
+
+	function onMouseLeave() {
+		tooltipVisible = false;
+		d3.selectAll(".figure-jersey").style("opacity", 1);
+	}
 </script>
 
-<figure>
-	<svg
+<figure
+	class="figure-jersey"
+	on:mouseover={onMouseOver}
+	on:mouseleave={onMouseLeave}
+>
+	<img src="/assets/jerseys/{$selectedTeamStore}_{editionFormatted}.png" />
+	{#if tooltipVisible}
+		<div class="tooltip">
+			<p>{gameDate}</p>
+			{#if place == "home"}
+				<p>vs. {opponent}</p>
+			{:else}
+				<p>@ {opponent}</p>
+			{/if}
+		</div>
+	{/if}
+	<!-- <svg
 		width={width}
 		height={height}
 		viewBox={`0 0 ${width} ${height}`}
@@ -43,13 +63,40 @@ Props:
                 <text x={width/2} y={height-10} fill="#7f7f7f" text-anchor="middle">CITY</text>
             {/if}
 		</g>
-	</svg>
+	</svg> -->
 </figure>
 
 <style>
 	figure {
-		display: inline;
-		margin-right: 5px;
+		width: 10.5%;
+		max-width: 50px;
+		position: relative;
+		transition: opacity 250ms linear;
+		cursor: pointer;
+	}
+
+	.tooltip {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		font-family: var(--sans);
+		font-size: var(--12px);
+		background-color: white;
+		padding: 0.25rem;
+		z-index: 999;
+		width: 120px;
+		border: 2px solid var(--color-gray-1000);
+		pointer-events: none;
+	}
+
+	.tooltip p {
+		padding: 0;
+		margin: 0;
+		line-height: 1.125;
+	}
+
+	img {
+		width: 100%;
 	}
 
 	text {

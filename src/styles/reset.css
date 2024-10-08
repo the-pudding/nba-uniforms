@@ -1,6 +1,9 @@
 
 body {
-	background-color: var(--color-bg, white);
+	background: url("/assets/imgs/court-bg.jpg");
+	background-size: 100% auto;
+	background-repeat: repeat;
+	background-position: center;
 	color: var(--color-fg, black);
 	line-height: 1.4;
 	font-family: var(--font-body, serif);

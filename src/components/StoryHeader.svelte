@@ -21,12 +21,14 @@
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  padding: 0.5rem;
   gap: 5px; /* Optional gap between cells */
+  margin-bottom: 4rem;
 }
 
-.header-grid__jersey {
-  background-color: #f0f0f0; /* Example color */
-}
+/* .header-grid__jersey {
+  background-color: #f0f0f;
+} */
 
 .header-grid__title {
   grid-area: 2 / 4 / 4 / 7;

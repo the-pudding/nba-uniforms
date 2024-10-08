@@ -30,6 +30,7 @@
 					return {
 						gameDate: d.gameDate,
 						team: d.homeTeam,
+						opponent: d.awayTeam,
 						colorHex: d.homeTeamHex,
 						colorName: d.homeTeamColor,
 						edition: d.homeTeamEdition
@@ -41,6 +42,7 @@
 					return {
 						gameDate: d.gameDate,
 						team: d.awayTeam,
+						opponent: d.homeTeam,
 						colorHex: d.awayTeamHex,
 						colorName: d.awayTeamColor,
 						edition: d.awayTeamEdition
@@ -53,6 +55,7 @@
 						return {
 							gameDate: d.gameDate,
 							team: d.homeTeam,
+							opponent: d.awayTeam,
 							colorHex: d.homeTeamHex,
 							colorName: d.homeTeamColor,
 							edition: d.homeTeamEdition
@@ -61,6 +64,7 @@
 						return {
 							gameDate: d.gameDate,
 							team: d.awayTeam,
+							opponent: d.homeTeam,
 							colorHex: d.awayTeamHex,
 							colorName: d.awayTeamColor,
 							edition: d.awayTeamEdition
@@ -81,29 +85,62 @@
 		right: p
 	};
 	const squarewidth = 6.5;
+
+	let clientWidth;
+	$: console.log(clientWidth)
 </script>
 
-<section>
+<figure bind:clientWidth>
 	<h2>{homeAwayFilter}</h2>
-	<StackedBarChart
-		data={formattedGames}
-		width={600}
-		height={100}
-	/>
-	{#if formattedGames.length > 0}
-		{#each formattedGames as game}
-			<BasketballJersey
-				fill={game.colorHex}
-				city={game.edition === 'City Edition'}
+	{#if clientWidth}
+		<div class="stacked-bar-wrapper">
+			<StackedBarChart
+				data={formattedGames}
+				width={clientWidth}
+				height={48}
 			/>
-		{/each}
+		</div>
 	{/if}
-</section>
+	{#if formattedGames.length > 0}
+		<div class="jersey-heatmap-wrapper">
+			{#each formattedGames as game}
+				<BasketballJersey
+					fill={game.colorHex}
+					city={game.edition === 'City Edition'}
+					edition={game.edition}
+					gameDate={game.gameDate}
+					opponent={game.opponent}
+					width={clientWidth/8}
+					place={homeAwayFilter}
+				/>
+			{/each}
+		</div>
+	{/if}
+</figure>
 
 <style>
 	figure {
 		margin: 1rem auto;
 		width: 100%;
-		height: 25vh;
+	}
+
+	.stacked-bar-wrapper {
+		width: 100%;
+		margin: 1rem 0;
+	}
+
+	.jersey-heatmap-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	h2 {
+		font-family: var(--sans);
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: var(--24px);
 	}
 </style>
