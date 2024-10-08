@@ -1,134 +1,79 @@
 <!--
   @component
-  Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
+  Generates an HTML Cleveland dot plot, also known as a lollipop-chart.
  -->
 <script>
   import { getContext } from 'svelte';
-  import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
-	import getTeamCode from '../../utils/getTeamCode';
+  import getTeamCode from '../../utils/getTeamCode';
 
-  const { data, xGet, height, zGet, xScale, yScale } = getContext('LayerCake');
+  const { data, xGet, yGet, zScale, yScale, config } = getContext('LayerCake');
 
-  $: nodes = $data.map(d => ({ ...d, code: getTeamCode(d.team) }));
+  /** @type {Number} [r=5] - The circle radius. */
+  export let r = 5;
 
-  /** @type {Number} [r=4] - The circle radius size in pixels. */
-  export let r = 4;
-
-  /** @type {String} [fill='#f95346'] - The circle's fill color. */
-  export let fill = '#f95346';
-
-  /** @type {String} [stroke='#000'] - The circle's stroke color. */
-  export let stroke = '#000';
-
-  /** @type {Number} [strokeWidth=1] - The circle's stroke width. */
-  export let strokeWidth = 1;
-
-  /** @type {Number} [xStrength=0.95] - The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
-  export let xStrength = 0.99;
-
-	// also adjust the Y using force
-  $: simulation = forceSimulation(nodes)
-    .force(
-      'x',
-      forceX()
-        .x(d => $xGet(d) + ($xScale.bandwidth ? $xScale.bandwidth() / 2 : 0))
-        .strength(0.99)
-    )
-		.force(
-			'y',
-			forceY()
-				.strength(1/1000)
-		)
-    .force('collide', forceCollide(r))
-    .stop();
-
-  $: {
-    for (
-      let i = 0,
-        n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
-      i < n;
-      ++i
-    ) {
-      simulation.tick();
-    }
-  }
+  $: midHeight = $yScale.bandwidth() / 2;
 </script>
 
-<div class="lollipop-container">
-    <div 
-      class="circle"
-      style="
-        left: {node.x}px;
-        top: {(node.y * 2) + ($height / 2)}px;
-        width: 10px;
-        height: 10px;
-        background-color: {fill};
-        border: {strokeWidth}px solid {stroke};
-        border-radius: 50%;
-      "
-    ></div>
-    <div
-      class="line"
-      style="
-        left: {node.x}px;
-        top: {(node.y * 2) + ($height / 2)}px;
-        width: 1px;
-        height: 10px;
-        background-color: {stroke};
-      "
-    ></div>
-    <div
-      class="jersey-container"
-      style="
-        left: {node.x}px;
-        top: {(node.y * 2) + ($height / 2)}px;
-        width: 25px;
-        height: 33px;
-      "
-    >
-			<img src={`/assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
-		</div>
+<div class="dot-plot">
+  {#each $data as row}
+    {@const scaledYValue = $yGet(row)}
+    {@const scaledXValues = $xGet(row)}
+    <div class="dot-row">
+      <div
+        class="line"
+        style="
+          left: {Math.min(...scaledXValues)}%;
+          top: {scaledYValue + midHeight}%;
+          right: {100 - Math.max(...scaledXValues)}%;
+        "
+      ></div>
+
+      {#each scaledXValues as circleX, i}
+        {#if i === 0}
+          <div
+          class="jersey-container"
+          style="
+            left: {circleX}%;
+            top: {scaledYValue + midHeight}%;
+            width: 25px;
+            height: 33px;
+          "
+        >
+          <img src={`/assets/jerseys/${getTeamCode(row.team)}_icon.png`} alt={(row.team)} class="jersey-illustration" />
+        </div>
+        {:else}
+          <div
+            class="circle"
+            style="
+              left: {circleX}%;
+              top: {scaledYValue + midHeight}%;
+              width: {r * 2}px;
+              height: {r * 2}px;
+              background: black;
+            "
+          ></div>
+        {/if}
+      {/each}
+    </div>
+  {/each}
 </div>
 
 <style>
-  .lollipop-container {
-    position: relative;
-  }
-
-  .circle {
-    position: absolute;
-  }
-
   .line {
     position: absolute;
+    border-bottom: 2px solid #000;
+    transform: translate(0, -50%);
+  }
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #000;
+    stroke: #000;
+    transform: translate(-50%, -50%);
   }
 
   .jersey-container {
     position: absolute;
     transform: translate(-50%, -50%);
   }
-
-	.team-container {
-		display: inline-block;
-		text-align: center;
-		padding: 2px 2px;
-		position: relative;
-		font-size: 13px;
-		line-height: 13px;
-		width: 100px;
-		position: absolute;
-    transform: translate(-50%, -50%);
-		background-color: rgba(255, 255, 255, 0.75);
-		border-radius: 5px;
-	}
-
-	.caret {
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-top: 5px solid #333;
-		margin: 5px auto 0;
-	}
-
 </style>

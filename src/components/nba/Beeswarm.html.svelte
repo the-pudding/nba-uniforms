@@ -52,8 +52,6 @@
       simulation.tick();
     }
   }
-
-	$: console.log($yScale.range());
 </script>
 
 
