@@ -18,8 +18,6 @@
 	const copy = getContext("copy");
 	const data = getContext("data");
 	const teams = getContext("teams");
-
-	console.log(copy)
 	
 	function statFill(team, copy) {
 		if (browser) {

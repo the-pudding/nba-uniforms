@@ -35,3 +35,30 @@
 	font-stretch: normal;
 	font-display: swap;
 }
+
+@font-face {
+	font-family: "Manuka";
+	src: url("https://pudding.cool/assets/fonts/manuka/manuka-light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Manuka";
+	src: url("https://pudding.cool/assets/fonts/manuka/manuka-bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Gravity";
+	src: url("https://pudding.cool/assets/fonts/abc/ABCGravity-ExtraCondensed.woff2") format("woff2");
+	font-weight: 400;
+	font-style: bold;
+	font-stretch: normal;
+	font-display: swap;
+}

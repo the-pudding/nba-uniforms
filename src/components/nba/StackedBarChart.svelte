@@ -4,10 +4,12 @@
 	import { Home } from "lucide-svelte";
 
 	export let data = [];
-	export let width = 600;
+	export let width;
 	export let height = 100;
 	export let margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
+
+	console.log({width})
 	let svg;
 	let groupedData = [];
 

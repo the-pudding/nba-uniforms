@@ -1,17 +1,51 @@
 <script>
+    import { browser } from "$app/environment";
+    import { getContext } from 'svelte';
     import { selectedTeamStore } from '$stores/teamSelection';
     import Graphic from "$components/nba/Graphic.svelte";
     export let copy;
 
+	const data = getContext("data");
+	const teams = getContext("teams");
+
     const jerseysList = ["association", "icon", "statement", "city"];
 
-    console.log($selectedTeamStore)
+    $: selectedTeam = $selectedTeamStore;
+	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
+	$: statFill(selectedTeam, copy);
+
+    function statFill(team, copy) {
+		if (browser) {
+			const homeCityGames = data.filter(d => d.homeTeam === selectedTeamName && d.homeTeamEdition === 'City Edition').length;
+			const awayCityGames = data.filter(d => d.awayTeam === selectedTeamName && d.awayTeamEdition === 'City Edition').length;
+
+			document.querySelectorAll('.geo-team').forEach(span => {
+					span.textContent = selectedTeamName;
+			});
+
+			document.querySelectorAll('.geo-white-at-home').forEach(span => {
+					span.textContent = data.filter(d => d.homeTeam === selectedTeamName && d.homeTeamEdition === 'Association Edition').length;
+			});
+
+			document.querySelectorAll('.geo-white-at-road').forEach(span => {
+					span.textContent = data.filter(d => d.awayTeam === selectedTeamName && d.awayTeamEdition === 'Association Edition').length;
+			});
+
+			document.querySelectorAll('.geo-city-instances').forEach(span => {
+					span.textContent = homeCityGames + awayCityGames;
+			});
+
+			document.querySelectorAll('.geo-city-avg').forEach(span => {
+					span.textContent = (homeCityGames + awayCityGames) > 13.833333333333334 ? 'above' : 'below';
+			});
+		}
+	}
 </script>
 
 {#if copy.contentType == "heading"}
     <div class="heading-wrapper">
         <div class="heading-circle"></div>
-        <h3>{copy.heading}</h3>
+            <h3>{@html copy.heading}</h3>
     </div>
     <div class="after-line"></div>
 {:else if copy.contentType == "prose"}
@@ -54,15 +88,19 @@
         position: relative;
         justify-content: center;
         align-items: center;
-        height: 10rem;
+        height: 9rem;
     }
 
     .heading-wrapper h3 {
-        font-family: var(--sans);
-        font-size: var(--48px);
+        font-family: var(--headline);
+        font-size: 150px;
         font-weight: 700;
+        line-height: 0.85;
         text-transform: uppercase;
         z-index: 999;
+        font-style: italic;
+        text-align: center;
+        margin: 2rem 0 0 -1rem;
     }
 
     .heading-circle {
@@ -70,8 +108,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 10rem;
-        height: 10rem;
+        width: 9rem;
+        height: 9rem;
         border: 5px solid var(--color-gray-1000);
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.75);

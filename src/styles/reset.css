@@ -4,6 +4,7 @@ body {
 	background-size: 100% auto;
 	background-repeat: repeat;
 	background-position: center;
+	background-attachment: fixed;
 	color: var(--color-fg, black);
 	line-height: 1.4;
 	font-family: var(--font-body, serif);

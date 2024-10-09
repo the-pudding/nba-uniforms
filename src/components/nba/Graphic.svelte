@@ -33,6 +33,7 @@
         flex-direction: row;
         padding: 2rem;
         gap: 4rem;
+        justify-content: center;
         position: relative;
    }
 
@@ -48,6 +49,7 @@
 
    .chart-wrapper {
         width: calc(50% - 2rem);
+        max-width: 400px;
         background-color: rgba(255, 255, 255, 0.75);
         padding: 1rem;
         border: 5px solid var(--color-gray-1000);
