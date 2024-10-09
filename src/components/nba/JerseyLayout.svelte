@@ -31,6 +31,7 @@
 					return {
 						gameDate: d.gameDate,
 						team: d.homeTeam,
+						opponent: d.awayTeam,
 						colorHex: d.homeTeamHex,
 						colorName: d.homeTeamColor,
 						edition: d.homeTeamEdition
@@ -42,6 +43,7 @@
 					return {
 						gameDate: d.gameDate,
 						team: d.awayTeam,
+						opponent: d.homeTeam,
 						colorHex: d.awayTeamHex,
 						colorName: d.awayTeamColor,
 						edition: d.awayTeamEdition
@@ -54,6 +56,7 @@
 						return {
 							gameDate: d.gameDate,
 							team: d.homeTeam,
+							opponent: d.awayTeam,
 							colorHex: d.homeTeamHex,
 							colorName: d.homeTeamColor,
 							edition: d.homeTeamEdition
@@ -62,6 +65,7 @@
 						return {
 							gameDate: d.gameDate,
 							team: d.awayTeam,
+							opponent: d.homeTeam,
 							colorHex: d.awayTeamHex,
 							colorName: d.awayTeamColor,
 							edition: d.awayTeamEdition
@@ -82,23 +86,29 @@
 		right: p
 	};
 	const squarewidth = 6.5;
+
+	let clientWidth;
+	$: console.log(clientWidth)
 </script>
 
-<section class="jersey-waffle">
-	{#if title}
-		<h2>{title}</h2>
+
+<figure bind:clientWidth>
+	<h2>{title}</h2>
+	{#if clientWidth}
+		<div class="stacked-bar-wrapper">
+			<StackedBarChart
+				data={formattedGames}
+				width={clientWidth}
+				height={48}
+			/>
+		</div>
 	{/if}
-	<StackedBarChart
-		data={formattedGames}
-		width={300}
-		height={60}
-	/>
 	{#if formattedGames.length > 0}
 		{#each formattedGames as game}
 			<img src={`/assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
 		{/each}
 	{/if}
-</section>
+</figure>
 
 <style>
 	.jersey-waffle {
@@ -115,6 +125,25 @@
 	figure {
 		margin: 1rem auto;
 		width: 100%;
-		height: 25vh;
+	}
+
+	.stacked-bar-wrapper {
+		width: 100%;
+		margin: 1rem 0;
+	}
+
+	.jersey-heatmap-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	h2 {
+		font-family: var(--sans);
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: var(--24px);
 	}
 </style>

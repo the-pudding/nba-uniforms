@@ -48,11 +48,15 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		padding: 1.25em;
+		padding: 0.5em;
 		background: var(--color-fg);
 		color: var(--color-input-bg);
 		font-family: var(--sans);
 		font-size: 16px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: 4rem;
 	}
 	svg {
 		cursor: pointer;
@@ -65,39 +69,45 @@
 		cursor: pointer;
 		color: var(--color-input-bg);
 	}
+	
+	label {
+		position: relative;
+		top: -1px;
+	}
 
 	select {
 		background-color: var(--color-fg);
 		color: var(--color-input-bg);
 		border: none;
 		border-bottom: 2px solid var(--color-input-bg);
-		padding: 8px;
+		padding: 4px 0;
 		appearance: none; /* Removes default arrow */
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		position: relative;
 		width: 100%;
 		font-weight: 700;
+		margin-left: 6px;
 	}
 
 	.select-container {
 		position: relative;
 		display: inline-block;
+		width: 220px;
 	}
 
 	.select-container::after {
-			content: '';
-			position: absolute;
-			top: 50%;
-			right: 10px;
-			width: 0.8em;
-			height: 0.8em;
-			pointer-events: none;
-			transform: translateY(-50%);
-			background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><polygon points="5,6 15,6 10,12"/></svg>');
-			background-size: contain;
-			background-repeat: no-repeat;
-			color: var(--color-input-bg);
-			}
+		width: 0; 
+		height: 0; 
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-top: 7px solid white;
+		position: absolute;
+		top: 30%;
+		right: 0;
+		content: "";
+		z-index: 98;
+		pointer-events: none;
+	}
 
 </style>

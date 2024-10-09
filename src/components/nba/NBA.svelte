@@ -2,7 +2,8 @@
 	import { browser } from "$app/environment";
 	import { getContext } from "svelte";
 	import { LayerCake, Svg } from "layercake";
-	import { selectedTeamStore } from "$stores/teamSelection";
+  import { selectedTeamStore } from '$stores/teamSelection';
+	import Section from "$components/nba/Section.svelte";
 	import * as d3 from "d3";
 
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
@@ -15,6 +16,10 @@
 	$: selectedTeam = $selectedTeamStore;
 	$: selectedTeamName = teams.find((d) => d.code === selectedTeam)?.team;
 	$: statFill(selectedTeam, copy);
+
+	const copy = getContext("copy");
+  const data = getContext("data");
+	const teams = getContext("teams");
 
 	$: flairData = flair23.map((d) => ({
 		team: d.team,
@@ -40,11 +45,6 @@
 	}
 
 	$: flairDataFiltered = filterFlairData(flairData, selectedTeamName);
-
-
-	const copy = getContext("copy").copy;
-	const data = getContext("data");
-	const teams = getContext("teams");
 
 	function statFill(team, copy) {
 		if (browser) {
@@ -224,5 +224,4 @@
 		display: flex;
 		justify-content: space-around;
 	}
-	
 </style>
