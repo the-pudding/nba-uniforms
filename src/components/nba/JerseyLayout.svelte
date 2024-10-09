@@ -3,6 +3,7 @@
 	import * as d3 from "d3";
 	import { LayerCake, Svg } from "layercake";
 	import loadCsv from "$utils/loadCsv.js";
+	import getTeamCode from "$utils/getTeamCode.js";
 	import Scatter from "$components/layercake/Scatter.svg.svelte";
 	import AxisX from "$components/layercake/AxisX.svg.svelte";
 	import AxisY from "$components/layercake/AxisY.svg.svelte";
@@ -10,22 +11,22 @@
 	import StackedBarChart from './StackedBarChart.svelte';
 	import teamNames from "$data/nba2324/teamNames.json";
 
-
+	export let data;
+	export let title;
 	export let teamCode = "ATL";
 	export let homeAwayFilter = "total";
 
 	let allGames;
 	let formattedGames = [];
-	onMount(async () => {
-		allGames = await loadCsv("./src/data/nba2324/output.csv");
-	});
+
+	$: console.log('data', data ? data : 'no data');
 
 	$: team = teamNames.find((d) => d.code === teamCode).team || "ATL";
 
 	$: {
-		if (allGames) {
+		if (data && data.length > 0) {
 			if (homeAwayFilter === 'home') {
-				let filteredGames = allGames.filter((d) => d.homeTeam === team);
+				let filteredGames = data.filter((d) => d.homeTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
 						gameDate: d.gameDate,
@@ -37,7 +38,7 @@
 					}
 				});
 			} else if (homeAwayFilter === 'away') {
-				let filteredGames = allGames.filter((d) => d.awayTeam === team);
+				let filteredGames = data.filter((d) => d.awayTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
 						gameDate: d.gameDate,
@@ -49,7 +50,7 @@
 					}
 				});
 			} else {
-				let filteredGames = allGames.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
+				let filteredGames = data.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
 				formattedGames = filteredGames.map((d) => {
 					if (d.homeTeam === team) {
 						return {
@@ -90,8 +91,9 @@
 	$: console.log(clientWidth)
 </script>
 
+
 <figure bind:clientWidth>
-	<h2>{homeAwayFilter}</h2>
+	<h2>{title}</h2>
 	{#if clientWidth}
 		<div class="stacked-bar-wrapper">
 			<StackedBarChart
@@ -102,23 +104,24 @@
 		</div>
 	{/if}
 	{#if formattedGames.length > 0}
-		<div class="jersey-heatmap-wrapper">
-			{#each formattedGames as game}
-				<BasketballJersey
-					fill={game.colorHex}
-					city={game.edition === 'City Edition'}
-					edition={game.edition}
-					gameDate={game.gameDate}
-					opponent={game.opponent}
-					width={clientWidth/8}
-					place={homeAwayFilter}
-				/>
-			{/each}
-		</div>
+		{#each formattedGames as game}
+			<img src={`/assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
+		{/each}
 	{/if}
 </figure>
 
 <style>
+	.jersey-waffle {
+		padding: 25px;
+		border: 8px solid black;
+		background-color: rgba(255, 255, 255, 0.75);
+		width: 400px;
+	}
+	.jersey-illustration {
+		width: 50px;
+		height: 75px;
+		display: inline-block;
+	}
 	figure {
 		margin: 1rem auto;
 		width: 100%;

@@ -87,7 +87,7 @@
 		dataSelect.append("text")
 			.attr("x", (d) => {
 				const prev = cumulative;
-				cumulative += d.total;
+				cumulative += d.total + 0.5;
 				return x(prev);
 			})
 			.attr("y", 12)
@@ -102,13 +102,13 @@
 			.attr("class", "bar")
 			.attr("x", (d) => {
 				const prev = cumulative;
-				cumulative += d.total;
+				cumulative += d.total + 0.5;
 				return x(prev);
 			})
 			.attr("y", 18)
 			.attr("fill", (d) => d.colorHex)
-			.attr("width", (d) => (x(d.total)))
-			.attr("stroke", "#191919")
+			.attr("width", (d) => x(d.total))
+      .attr("stroke", "#191919")
 			.attr("stroke-width", 2)
 			.attr("height", y.bandwidth());
 	}
