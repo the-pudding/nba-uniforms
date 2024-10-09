@@ -11,22 +11,22 @@
 	import StackedBarChart from './StackedBarChart.svelte';
 	import teamNames from "$data/nba2324/teamNames.json";
 
-
+	export let data;
+	export let title;
 	export let teamCode = "ATL";
 	export let homeAwayFilter = "total";
 
 	let allGames;
 	let formattedGames = [];
-	onMount(async () => {
-		allGames = await loadCsv("./src/data/nba2324/output.csv");
-	});
+
+	$: console.log('data', data ? data : 'no data');
 
 	$: team = teamNames.find((d) => d.code === teamCode).team || "ATL";
 
 	$: {
-		if (allGames) {
+		if (data && data.length > 0) {
 			if (homeAwayFilter === 'home') {
-				let filteredGames = allGames.filter((d) => d.homeTeam === team);
+				let filteredGames = data.filter((d) => d.homeTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
 						gameDate: d.gameDate,
@@ -37,7 +37,7 @@
 					}
 				});
 			} else if (homeAwayFilter === 'away') {
-				let filteredGames = allGames.filter((d) => d.awayTeam === team);
+				let filteredGames = data.filter((d) => d.awayTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
 						gameDate: d.gameDate,
@@ -48,7 +48,7 @@
 					}
 				});
 			} else {
-				let filteredGames = allGames.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
+				let filteredGames = data.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
 				formattedGames = filteredGames.map((d) => {
 					if (d.homeTeam === team) {
 						return {
@@ -85,11 +85,13 @@
 </script>
 
 <section>
-	<h2>{homeAwayFilter}</h2>
+	{#if title}
+		<h2>{title}</h2>
+	{/if}
 	<StackedBarChart
 		data={formattedGames}
-		width={600}
-		height={100}
+		width={300}
+		height={60}
 	/>
 	{#if formattedGames.length > 0}
 		{#each formattedGames as game}

@@ -120,6 +120,11 @@
 				</div>
 			{:else if section.type === "graphic"}
 				{#if section.value[0] === "waffle-home-away"}
+					<div class="jersey-layout__container graphic-wide graphic">
+						<JerseyLayout data={data} teamCode={selectedTeam} homeAwayFilter={"home"} />
+						<JerseyLayout data={data} teamCode={selectedTeam} homeAwayFilter={"away"} />
+					</div>
+				{:else if section.value[0] === "waffle-years"}
 					<div class="graphic">
 						<JerseyLayout teamCode={selectedTeam} homeAwayFilter={"home"} />
 						<JerseyLayout teamCode={selectedTeam} homeAwayFilter={"away"} />
@@ -163,11 +168,15 @@
 	#nba > .graphic-wide {
 		max-width: unset;
 		margin: 0 auto 25px;
-		height: 300px;
 		padding: 10px 75px;
 		border-top: 8px solid black;
 		border-bottom: 8px solid black;
 		background-color: rgba(255, 255, 255, 0.75);
+	}
+
+	.lollipop, .beeswarm {
+
+		height: 300px;
 	}
 
 	:global(#nba section) {
@@ -205,5 +214,9 @@
 		margin: 0 auto;
 	}
 
+	.jersey-layout__container {
+		display: flex;
+		justify-content: space-around;
+	}
 	
 </style>
