@@ -108,6 +108,16 @@
 						<li>{@html item}</li>
 					{/each}
 				</ul>
+			{:else if section.type === "jerseys"}
+				<div class="jersey-spread graphic graphic-wide">
+					{#each section.value as val}
+						<div class="jersey-spread__section">
+							<img src={`/assets/jerseys/${selectedTeam}_${val.editionname.toLowerCase()}.png`} alt={`${selectedTeam} ${val.editionname}`} />
+							<span class="jersey-spread__name">{val.editionname}</span>
+							<span class="jersey-spread__text">{val.editiontext}</span>
+						</div>
+					{/each}
+				</div>
 			{:else if section.type === "graphic"}
 				{#if section.value[0] === "waffle-home-away"}
 					<div class="graphic">
@@ -178,6 +188,21 @@
 		max-width: 900px;
 		padding: 5px 90px 15px;
 		margin: 0;
+	}
+
+	.jersey-spread {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.jersey-spread__section {
+		text-align: center;
+		width: 25%;
+	}
+
+	.jersey-spread__section img {
+		width: 100px;
+		margin: 0 auto;
 	}
 
 	

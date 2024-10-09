@@ -17,12 +17,24 @@
       "value": "In 2017 Nike took over the contract to produce NBA jerseys and ushered in the most extreme overhaul of aesthetic standards yet. The white-at-home standard was officially eliminated; teams were now free to wear the color of their choosing. In fact, the very notion of a “home” or “away” jersey was eliminated, with Nike now classifying each team’s wardrobe into four “editions”. Here’s what they look like for your local team, the <span class=geo-team></span>."
     },
     {
-      "type": "list",
+      "type": "jerseys",
       "value": [
-        "Association (roughly analogous to the old home whites)",
-        "Icon (same, but standard away colors)",
-        "Statement (a third jersey in a different team color, and maybe with an alternate logo)",
-        "City (a springboard for full departures from teams’ usual brands, inspired by local lore)"
+        {
+          "editionname": "Association",
+          "editiontext": "(roughly analogous to the old home whites)"
+        },
+        {
+          "editionname": "Icon",
+          "editiontext": "(same, but standard away colors)"
+        },
+        {
+          "editionname": "Statement",
+          "editiontext": "(a third jersey in a different team color, and maybe with an alternate logo)"
+        },
+        {
+          "editionname": "City",
+          "editiontext": "(a springboard for full departures from teams’ usual brands, inspired by local lore)"
+        }
       ]
     },
     {
