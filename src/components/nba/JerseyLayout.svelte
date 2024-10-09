@@ -84,7 +84,7 @@
 	const squarewidth = 6.5;
 </script>
 
-<section>
+<section class="jersey-waffle">
 	{#if title}
 		<h2>{title}</h2>
 	{/if}
@@ -101,6 +101,12 @@
 </section>
 
 <style>
+	.jersey-waffle {
+		padding: 25px;
+		border: 8px solid black;
+		background-color: rgba(255, 255, 255, 0.75);
+		width: 400px;
+	}
 	.jersey-illustration {
 		width: 50px;
 		height: 75px;
