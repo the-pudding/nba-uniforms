@@ -80,7 +80,7 @@
 					top: {(node.y * 2) + ($height / 2) - 50}px;
 					"
 			>
-				<span>Your team: <strong>Boston Celtics</strong>
+				<span>Your team <strong>Boston Celtics</strong>
 				</span>
 				<div class="caret"></div>
 			</div>
@@ -110,6 +110,7 @@
     transform: translate(-50%, -50%);
 		background-color: rgba(255, 255, 255, 0.75);
 		border-radius: 5px;
+    z-index: 2;
 	}
 
 	.caret {
