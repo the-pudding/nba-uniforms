@@ -106,6 +106,7 @@
 				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
 					(d) => !["team", "rank"].includes(d)
 				)}
+				xRange={[30, 90]}
 				y={"rank"}
 				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
 				yRange={[0, 80]}
@@ -171,7 +172,11 @@
 		background-color: unset;
 	}
 
-	.lollipop,
+	.lollipop{
+        height: 100vh;
+        padding-left: 10px;
+    }
+
 	.beeswarm {
 		height: 325px;
 	}

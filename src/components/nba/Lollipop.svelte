@@ -12,6 +12,8 @@
   export let r = 5;
 
   $: midHeight = $yScale.bandwidth() / 2;
+
+  $:console.log($data);
 </script>
 
 <div class="flair-explain">
@@ -24,6 +26,15 @@
       {@const scaledXValues = $xGet(row)}
       <div class="dot-row">
         <div
+          class="row-team"
+          style="
+            left: 0;
+            top: {scaledYValue + midHeight}%;
+            "
+        >
+          {row.team}
+        </div>
+        <div
           class="line"
           style="
             left: {Math.min(...scaledXValues)}%;
@@ -34,6 +45,14 @@
 
         {#each scaledXValues as circleX, i}
           {#if i === 0}
+            <div class="year-text"
+              style="
+                left: {circleX + 3}%;
+                top: {scaledYValue + (midHeight)/1.5}%;
+              "
+            >
+              {'2023-24'}
+            </div>
             <div
             class="jersey-container"
             style="
@@ -46,6 +65,14 @@
             <img src={`/assets/jerseys/${getTeamCode(row.team)}_icon.png`} alt={(row.team)} class="jersey-illustration" />
           </div>
           {:else}
+            <div class="year-text"
+              style="
+                left: {circleX - 9}%;
+                top: {scaledYValue + (midHeight)/1.5}%;
+              "
+            >
+              {'2013-14'}
+            </div>
             <div
               class="circle"
               style="
@@ -68,6 +95,17 @@
     width: 100%;
     height: 100%;
   }
+
+  .row-team{
+    position: absolute;
+    font-family: var(--sans);
+    font-size: 11px;
+    text-align: right;
+    width: 24%;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: translate(0, -50%);
+  }
   .line {
     position: absolute;
     border-bottom: 2px solid #000;
@@ -81,6 +119,12 @@
     transform: translate(-50%, -50%);
   }
 
+  .year-text {
+    position: absolute;
+    font-family: var(--sans);
+    font-size: 11px;
+  }
+
   .jersey-container {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -90,7 +134,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0 10px 0 25%;
     width: 100%;
     font-family: var(--sans);
     font-size: 12px;
