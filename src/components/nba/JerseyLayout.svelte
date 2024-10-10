@@ -15,6 +15,7 @@
 	export let title;
 	export let teamCode = "ATL";
 	export let homeAwayFilter = "total";
+	export let showJerseyWaffle = true;
 
 	let allGames;
 	let formattedGames = [];
@@ -92,7 +93,7 @@
 <figure bind:clientWidth>
 	<h2>{title}</h2>
 	{#if clientWidth}
-		<div class="stacked-bar-wrapper">
+		<div class="stacked-bar-wrapper" style="height:48px;">
 			<StackedBarChart
 				data={formattedGames}
 				width={clientWidth}
@@ -100,7 +101,7 @@
 			/>
 		</div>
 	{/if}
-	{#if formattedGames.length > 0}
+	{#if formattedGames.length > 0 && showJerseyWaffle}
 		{#each formattedGames as game}
 			<img src={`/assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
 		{/each}

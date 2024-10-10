@@ -19,6 +19,7 @@
 
 	const copy = getContext("copy");
   const data = getContext("data");
+  const data1314 = getContext("data1314");
 	const teams = getContext("teams");
 
 	$: flairData = flair23.map((d) => ({
@@ -97,67 +98,6 @@
 	{#each copy.copy as section, i}
 		<Section copy={section} />
 	{/each}
-
-	<!-- {#if copy}
-		{#each copy as section}
-			{#if section.type === "text"}
-				<p>{@html section.value}</p>
-			{:else if section.type === "heading"}
-				<h2>{@html section.value}</h2>
-			{:else if section.type === "list"}
-				<ul>
-					{#each section.value as item}
-						<li>{@html item}</li>
-					{/each}
-				</ul>
-			{:else if section.type === "jerseys"}
-				<div class="jersey-spread graphic graphic-wide">
-					{#each section.value as val}
-						<div class="jersey-spread__section">
-							<img src={`/assets/jerseys/${selectedTeam}_${val.editionname.toLowerCase()}.png`} alt={`${selectedTeam} ${val.editionname}`} />
-							<span class="jersey-spread__name">{val.editionname}</span>
-							<span class="jersey-spread__text">{val.editiontext}</span>
-						</div>
-					{/each}
-				</div>
-			{:else if section.type === "graphic"}
-				{#if section.value[0] === "waffle-home-away"}
-					<div class="jersey-layout__container graphic-wide graphic clear">
-						<JerseyLayout title={`${selectedTeamName} Home`} data={data} teamCode={selectedTeam} homeAwayFilter={"home"} />
-						<JerseyLayout title={`${selectedTeamName} Away`} data={data} teamCode={selectedTeam} homeAwayFilter={"away"} />
-					</div>
-				{:else if section.value[0] === "waffle-years"}
-					<div class="jersey-layout__container graphic-wide graphic clear">
-						<JerseyLayout title={`${selectedTeamName} Home`} data={data} teamCode={selectedTeam} homeAwayFilter={"home"} />
-						<JerseyLayout title={`${selectedTeamName} Away`} data={data} teamCode={selectedTeam} homeAwayFilter={"away"} />
-					</div>
-				{:else if section.value[0] === "beeswarm-flair-23"}
-					<div class="beeswarm graphic-wide graphic">
-						<LayerCake data={flairData} x={"2023 Score"} height={400}>
-							<Beeswarm />
-						</LayerCake>
-					</div>
-				{:else if section.value[0] === "beeswarm-flair-13"}
-					<div class="lollipop graphic-wide graphic">
-						<LayerCake
-							ssr
-							percentRange
-							padding={{ right: 10, bottom: 20, left: 30 }}
-							x={Object.keys(flairData[0]).filter(d => d !== 'team')}
-							y={'team'}
-							yScale={d3.scaleBand().paddingInner(0.05).round(true)}
-							xDomain={[0, null]}
-							xPadding={[2, 0]}
-							zScale={d3.scaleOrdinal()}
-							data={flairDataFiltered}
-						>
-								<Lollipop />
-						</LayerCake>
-					</div>
-				{/if}
-			{/if}
-		{/each}
-	{/if} -->
 </div>
 
 <style>

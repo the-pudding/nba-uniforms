@@ -6,13 +6,16 @@
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
 	import Lollipop from "$components/nba/Lollipop.svelte";
+	import StackedBarChart from './StackedBarChart.svelte';
 
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
 
-	export let id;
+	export let id;	
+    let clientWidth;
 
 	const data = getContext("data");
+    const data1314 = getContext("data1314");
 	const teams = getContext("teams");
 
 	$: selectedTeam = $selectedTeamStore;
@@ -63,6 +66,27 @@
 				homeAwayFilter={"away"}
 			/>
 		</div>
+    {:else if id == "bars-compare"}
+        <div class="compare-bars graphic-wide graphic">
+            <div class="chart-wrapper chart-wrapper__wide">
+                <JerseyLayout
+                    title={`2013-14 Season at Home`}
+                    data={data1314}
+                    teamCode={selectedTeam}
+                    homeAwayFilter={"home"}
+                    showJerseyWaffle={false}
+                />
+            </div>
+            <div class="chart-wrapper chart-wrapper__wide">
+                <JerseyLayout
+                    title={`2023-24 Season at Home`}
+                    {data}
+                    teamCode={selectedTeam}
+                    homeAwayFilter={"home"}
+                    showJerseyWaffle={false}
+                />
+            </div>
+        </div>
 	{:else if id == "beeswarm-flair-23"}
 		<div class="beeswarm graphic-wide graphic">
 			<LayerCake data={flairData} x={"2023 Score"} height={400}>
@@ -118,6 +142,12 @@
 		padding: 1rem;
 		border: 5px solid var(--color-gray-1000);
 	}
+
+    .chart-wrapper.chart-wrapper__wide {
+        width: 100%;
+        max-width: unset;
+        border: unset;
+    }
     .graphic-wide {
 		max-width: unset;
 		margin: 0 auto 25px;

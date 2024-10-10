@@ -105,6 +105,9 @@
 </svg>
 
 <style>
+	svg {
+		width: 100%;
+	}
 	.x-axis path,
 	.y-axis path {
 		display: none;
