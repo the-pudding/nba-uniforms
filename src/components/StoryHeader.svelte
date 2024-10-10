@@ -54,6 +54,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
 .header-grid__jersey img {
 	cursor: pointer;
@@ -68,8 +69,6 @@
 .header-grid__jersey button {
 	background-color: unset;
 }  
-
-}
 
 .wordmark {
     width: 100%;

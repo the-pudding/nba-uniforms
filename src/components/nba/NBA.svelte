@@ -94,9 +94,11 @@
 </script>
 
 <div id="nba">
-	<h1>NBA</h1>
+	{#each copy.copy as section, i}
+		<Section copy={section} />
+	{/each}
 
-	{#if copy}
+	<!-- {#if copy}
 		{#each copy as section}
 			{#if section.type === "text"}
 				<p>{@html section.value}</p>
@@ -155,7 +157,7 @@
 				{/if}
 			{/if}
 		{/each}
-	{/if}
+	{/if} -->
 </div>
 
 <style>
