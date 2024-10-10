@@ -28,9 +28,9 @@
         >
       </div>
       <h1>
-        <span>From</span>
-        <span>Tradition</span>
-        <span>To Trend</span>
+        <span>Colors</span>
+        <span>of the</span>
+        <span>Court</span>
       </h1>
     </div>
   </div>
