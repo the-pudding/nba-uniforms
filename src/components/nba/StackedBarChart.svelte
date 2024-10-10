@@ -1,17 +1,20 @@
 <script>
-	import { onMount } from "svelte";
+	import { getContext } from "svelte";
+	import convertToPercent from "../../utils/convertToPercent";
+
 	import * as d3 from "d3";
 	import { Home } from "lucide-svelte";
 
-	export let data = [];
 	export let width;
-	export let height = 100;
 	export let margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
-
-	console.log({width})
+	// const { xGet, height, zGet, xScale, yScale } = getContext('LayerCake');
+	export let data;
 	let svg;
 	let groupedData = [];
+
+	export let height;
+	let barStroke = 1.5;
 
 	const editions = [
 		'Association Edition',
@@ -28,93 +31,78 @@
 	}, {});
 
 	$: {
-		groupedData = Array.from(
-			d3.rollups(
-					data,
-					(v) => ({
-						total: v.length,
-						colorHex: v[0].colorHex
-					}),
-					(d) => d.edition
-				)
-				.map(([key, { total, colorHex }]) => ({
-					edition: key,
-					total: total,
-					colorHex: colorHex
-				}))
-		);
-		
-		groupedData.sort((a, b) => {
-			return editionsOrder[a.edition] - editionsOrder[b.edition];
-		});
-		drawChart();
+		let runningTotal = 0;
+
+	groupedData = Array.from(
+		d3.rollups(
+			data.sort((a, b) => {
+				return editionsOrder[a.edition] - editionsOrder[b.edition];
+			}),
+			(v) => ({
+				total: v.length,
+				colorHex: v[0].colorHex
+			}),
+			(d) => d.edition
+		)
+		.map(([key, { total, colorHex }]) => {
+			runningTotal += total;
+			return {
+				edition: key,
+				total: total,
+				colorHex: colorHex,
+				cumulative: runningTotal - total
+			};
+		})
+	);
 	}
 
-	function drawChart() {
-		const { top, right, bottom, left } = margin;
-		const innerWidth = width - left - right;
-		const innerHeight = height - top - bottom;
-
-		// Clear previous content
-		d3.select(svg).selectAll("*").remove();
-
-		// Set Scales
-		const x = d3.scaleLinear()
+	$: x = d3.scaleLinear()
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
-			.range([0, width-4]);
+			.range([0, width - (groupedData.length * (barStroke / 2))]);
 
-		const y = d3.scaleBand()
+			$: console.log(x.range())
+
+		$: y = d3.scaleBand()
 			.domain([0, 1])
 			.range([0, height])
 			.padding(0.1);
 
-		// Establish SVG group
-		const g = d3.select(svg)
-			.attr("width", width)
-			.attr("height", height)
-			.append("g")
-			.attr("transform", `translate(${left+1},${top})`);
+			const { top, right, bottom, left } = margin;
 
-		
-
-		// Draw bars 
-		let cumulative = 0;
-		const dataSelect = g.selectAll(".bar")
-			.data(groupedData)
-			.enter();
-		
-		// Render d.edition labels above the bars
-		dataSelect.append("text")
-			.attr("x", (d) => {
-				const prev = cumulative;
-				cumulative += d.total + 0.5;
-				return x(prev);
-			})
-			.attr("y", 12)
-			.attr("fill", "#000")
-			.attr("text-anchor", "left")
-			.attr("font-size", "12px")
-			.attr("font-family", "sans-serif")
-			.text((d) => d.edition.split(' Edition')[0]);
-		
-		cumulative = 0;
-		dataSelect.append("rect")
-			.attr("class", "bar")
-			.attr("x", (d) => {
-				const prev = cumulative;
-				cumulative += d.total + 0.5;
-				return x(prev);
-			})
-			.attr("y", 18)
-			.attr("fill", (d) => d.colorHex)
-			.attr("width", (d) => x(d.total))
-      .attr("stroke", "#191919")
-			.attr("stroke-width", 2)
-			.attr("height", y.bandwidth());
-	}
 </script>
 
-<svg bind:this={svg}></svg>
+<svg>
+	<g
+		{width}
+		{height}
+		transform={`translate(${left+1},${top})`}
+	>
+	  {#each groupedData as d, i}
+		<g>
+		<text
+			x={x(d.cumulative)}
+			y={12}
+			fill="#000"
+			text-anchor="left"
+			font-size="12px"
+			font-family="sans-serif"
+		>
+			{convertToPercent(d.total, 41, 1)}
+		</text>
+		<rect
+		  class="bar"
+			x={x(d.cumulative)}
+			y={18}
+			fill={d.colorHex}
+			width={x(d.total)}
+			stroke="#000"
+			stroke-width={barStroke}
+			height={y.bandwidth()}
+		/>
+	</g>
+		{/each}
+	</g>
+</svg>
 
 <style>
 	.x-axis path,

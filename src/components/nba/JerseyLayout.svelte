@@ -19,8 +19,6 @@
 	let allGames;
 	let formattedGames = [];
 
-	$: console.log('data', data ? data : 'no data');
-
 	$: team = teamNames.find((d) => d.code === teamCode).team || "ATL";
 
 	$: {
@@ -88,7 +86,6 @@
 	const squarewidth = 6.5;
 
 	let clientWidth;
-	$: console.log(clientWidth)
 </script>
 
 
