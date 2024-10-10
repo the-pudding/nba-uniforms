@@ -90,7 +90,7 @@
 	{:else if id == "beeswarm-flair-23"}
 		<div class="beeswarm graphic-wide graphic">
 			<LayerCake data={flairData} x={"2023 Score"} height={400}>
-				<Beeswarm />
+				<Beeswarm {selectedTeamName} />
 			</LayerCake>
 		</div>
 	{:else if id == "beeswarm-flair-13"}

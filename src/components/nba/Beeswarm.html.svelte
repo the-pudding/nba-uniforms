@@ -26,6 +26,8 @@
   /** @type {Number} [xStrength=0.95] - The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
   export let xStrength = 0.99;
 
+  export let selectedTeamName;
+
 	// also adjust the Y using force
   $: simulation = forceSimulation(nodes)
     .force(
@@ -72,7 +74,7 @@
     >
 			<img src={`/assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
 		</div>
-		{#if node.team === 'Boston Celtics'}
+		{#if node.team === selectedTeamName}
 			<div
 				class="team-container"
 				style="
@@ -80,7 +82,7 @@
 					top: {(node.y * 2) + ($height / 2) - 50}px;
 					"
 			>
-				<span>Your team <strong>Boston Celtics</strong>
+				<span>Your team: <strong>{selectedTeamName}</strong>
 				</span>
 				<div class="caret"></div>
 			</div>
@@ -105,12 +107,14 @@
 		position: relative;
 		font-size: 13px;
 		line-height: 13px;
-		width: 100px;
+		width: 80px;
 		position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
 		background-color: rgba(255, 255, 255, 0.75);
 		border-radius: 5px;
+    border: 1px solid black;
     z-index: 2;
+    font-family: var(--sans);
 	}
 
 	.caret {
