@@ -22,7 +22,10 @@
 		'Statement Edition',
 		'City Edition',
 		'Classic Edition',
-		'City 2 Edition'
+		'City 2 Edition',
+		'Home',
+		'Away',
+		'Alternate'
 	]
 	
 	const editionsOrder = editions.reduce((map, item, index) => {
