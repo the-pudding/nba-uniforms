@@ -61,6 +61,10 @@
 	<line x1="0" y1="0" x2="100%" y2="0" stroke="black" stroke-width="2" />
 </svg>
 <div class="bee-container">
+  <div class="flair-explain">
+    <span class="left"><span class="caret-left"></span> Less flair</span>
+    <span class="right">More flair <span class="caret-right"></span></span>
+  </div>
 	<!-- draw a full-width horizontal line halfway down the container -->
   {#each simulation.nodes() as node}
     <div
@@ -125,5 +129,39 @@
 		border-top: 5px solid #333;
 		margin: 5px auto 0;
 	}
+
+  .flair-explain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .left, .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .caret-left {
+    margin-right: 5px;
+		width: 0;
+		height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #333;
+  }
+
+  .caret-right {
+    margin-left: 5px;
+		width: 0;
+		height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #333;
+  }
 
 </style>

@@ -102,6 +102,7 @@
 				x={Object.keys(flairData[0]).filter((d) => d !== "team")}
 				y={"team"}
 				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
+                yRange={[0, 90]}
 				xDomain={[0, null]}
 				xPadding={[2, 0]}
 				zScale={d3.scaleOrdinal()}
