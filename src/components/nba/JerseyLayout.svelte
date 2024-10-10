@@ -103,7 +103,7 @@
 	{/if}
 	{#if formattedGames.length > 0 && showJerseyWaffle}
 		{#each formattedGames as game}
-			<img src={`/assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
+			<img src={`./assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
 		{/each}
 	{/if}
 </figure>

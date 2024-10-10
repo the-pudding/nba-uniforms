@@ -17,7 +17,7 @@
     {#each teams as team}
 			<div class="header-grid__jersey">
 				<button aria-label={`Select ${team.team}`} on:click={handleTeamSelect}>
-					<img src={`/assets/jerseys/${team.code}_icon.png`} alt={team.code} class={team.code === selectedTeam ? 'selected-team-jersey' : ''}/>
+					<img src={`./assets/jerseys/${team.code}_icon.png`} alt={team.code} class={team.code === selectedTeam ? 'selected-team-jersey' : ''}/>
 				</button>
 			</div>
 		{/each}

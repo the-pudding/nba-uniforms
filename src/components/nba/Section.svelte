@@ -66,7 +66,7 @@
                 {@const listDesc = item.split("(")[1].split(")")[0]}
                 <li>
                     <div class="img-wrapper">
-                        <img src="/assets/jerseys/{$selectedTeamStore}_{jerseysList[i]}.png" alt="{$selectedTeamStore} {jerseysList[i]} jersey"/>
+                        <img src="./assets/jerseys/{$selectedTeamStore}_{jerseysList[i]}.png" alt="{$selectedTeamStore} {jerseysList[i]} jersey"/>
                     </div>
                     <span class="list-title">{listTitle}</span>
                     <span class="list-desc">{listDesc}</span>

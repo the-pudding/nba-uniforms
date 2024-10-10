@@ -76,7 +76,7 @@
         height: 33px;
       "
     >
-			<img src={`/assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
+			<img src={`./assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
 		</div>
 		{#if node.team === selectedTeamName}
 			<div

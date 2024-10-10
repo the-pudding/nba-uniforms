@@ -62,7 +62,7 @@
               height: 33px;
             "
           >
-            <img src={`/assets/jerseys/${getTeamCode(row.team)}_icon.png`} alt={(row.team)} class="jersey-illustration" />
+            <img src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`} alt={(row.team)} class="jersey-illustration" />
           </div>
           {:else}
             <div class="year-text"
