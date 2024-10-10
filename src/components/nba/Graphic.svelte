@@ -30,21 +30,22 @@
 	});
 
 	function filterFlairData(arr, teamName) {
-		const index = arr.findIndex(obj => obj.team === teamName);
-		
-		if (index === -1) {
-			return [];
-		}
-		
-		// Calculate the start and end indices for slicing
-		const start = Math.min(arr.length - 5, Math.max(0, index - 2)); // Ensures it doesn't go below 0
-		const end = start + 5; // Ensures it doesn't exceed array length
-		
-		// Slice the array to get the 5 objects (or fewer if near the start/end)
-		return arr.slice(start, end);
+        let newArr = [...arr].sort((a, b) => {
+            if (a['2023 Score'] !== b['2023 Score']) {
+                return b['2023 Score'] - a['2023 Score'];
+            }
+            return b['2013 Score'] - a['2013 Score'];
+        });
+		const index = newArr.findIndex(obj => obj.team === teamName);
+		const [selectedTeamData] = newArr.splice(index, 1);
+        newArr.unshift(selectedTeamData);
+        newArr.forEach((item, index) => {
+            item.rank = index + 1; // Ranks start from 1
+        });
+        newArr = newArr.slice(0, 10);
+        console.log(newArr);
+        return newArr;
 	}
-
-	$: flairDataFiltered = filterFlairData(flairData, selectedTeamName);
 </script>
 
 <section>
@@ -99,14 +100,14 @@
 				ssr
 				percentRange
 				padding={{ right: 10, bottom: 20, left: 30 }}
-				x={Object.keys(flairData[0]).filter((d) => d !== "team")}
-				y={"team"}
+				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter((d) => !["team", "rank"].includes(d))}
+				y={"rank"}
 				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
-                yRange={[0, 90]}
+                yRange={[0, 80]}
 				xDomain={[0, null]}
 				xPadding={[2, 0]}
 				zScale={d3.scaleOrdinal()}
-				data={flairDataFiltered}
+				data={filterFlairData(flairData, selectedTeamName)}
 			>
 				<Lollipop />
 			</LayerCake>
@@ -167,6 +168,6 @@
 
 	.lollipop, .beeswarm {
 
-		height: 300px;
+		height: 325px;
 	}
 </style>
