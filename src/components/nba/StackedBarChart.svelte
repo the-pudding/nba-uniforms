@@ -79,20 +79,32 @@
 	>
 	  {#each groupedData as d, i}
 		<g>
-		<text
-			x={x(d.cumulative)}
-			y={12}
-			fill="#000"
-			text-anchor="left"
-			font-size="12px"
-			font-family="sans-serif"
-		>
-			{convertToPercent(d.total, 41, 1)}
-		</text>
+		{#if d.total / 41 >= .05}
+			<text
+				x={x(d.cumulative)}
+				y={8}
+				fill="#000"
+				text-anchor="left"
+				font-size="10px"
+				font-family="sans-serif"
+			>
+				{`${d.edition.replace(' Edition', '')}`}
+			</text>
+			<text
+				x={x(d.cumulative)}
+				y={20}
+				fill="#000"
+				text-anchor="left"
+				font-size="10px"
+				font-family="sans-serif"
+			>
+				{`${convertToPercent(d.total, 41)}`}
+			</text>
+		{/if}
 		<rect
 		  class="bar"
 			x={x(d.cumulative)}
-			y={18}
+			y={25}
 			fill={d.colorHex}
 			width={x(d.total)}
 			stroke="#000"
@@ -107,6 +119,10 @@
 <style>
 	svg {
 		width: 100%;
+	}
+
+	svg text {
+		font-family: var(--sans);
 	}
 	.x-axis path,
 	.y-axis path {

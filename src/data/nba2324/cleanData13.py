@@ -40,6 +40,13 @@ for event in data:
         awayTeamEdition = event["awayTeamEdition"]
         awayTeamColor = get_color_name(event["awayTeamBGColor"])
         awayTeamHex = event["awayTeamBGColor"]
+
+        if homeTeam == "Los Angeles Clippers":
+            homeTeam = "LA Clippers"
+            
+        if awayTeam == "Los Angeles Clippers":
+            awayTeam = "LA Clippers"
+
         csv_data.append([gameDate, weekDay, homeTeam, homeTeamEdition, homeTeamColor, homeTeamHex, awayTeam, awayTeamEdition, awayTeamColor, awayTeamHex])
     except KeyError as e:
         print(f"Key {e} not found in the data.")

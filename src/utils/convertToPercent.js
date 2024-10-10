@@ -1,7 +1,7 @@
-export default function convertToPercent(num, dom, dec = 0) {
+export default function convertToPercent(num, dom) {
 	return new Intl.NumberFormat('en-US', {
     style: 'percent',
-    minimumFractionDigits: dec,
-    maximumFractionDigits: dec,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(num / dom);
 }
