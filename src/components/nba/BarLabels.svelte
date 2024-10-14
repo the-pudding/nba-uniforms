@@ -10,7 +10,7 @@
 		{@const y = $yGet(d)}
 		{@const width = $xGet(d)}
 		{@const height = $yScale.bandwidth()}
-		<div class="bar-label" style="left: {x + width + 3.5}%; top: {y * .97}%;">
+		<div class="bar-label" style="left: {width + 4}%; top: {y * .97}%;">
 			{d.team}
 		</div>
 	{/each}
@@ -23,6 +23,6 @@
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
-		display:block;
+		transform: translate(0, 0);
 	}
 </style>
