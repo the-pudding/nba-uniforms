@@ -51,10 +51,10 @@
 	}
 </script>
 
-<section>
+<section class="graphic-wrapper">
 	{#if id == "waffle-home-away"}
 		<div class="middle-line"></div>
-		<div class="chart-wrapper">
+		<div class="chart-wrapper with-bg">
 			<JerseyLayout
 				title={`Home`}
 				{data}
@@ -62,7 +62,7 @@
 				homeAwayFilter={"home"}
 			/>
 		</div>
-		<div class="chart-wrapper">
+		<div class="chart-wrapper with-bg">
 			<JerseyLayout
 				title={`Away`}
 				{data}
@@ -146,7 +146,6 @@
 	.chart-wrapper {
 		width: calc(50% - 2rem);
 		max-width: 400px;
-		background-color: rgba(255, 255, 255, 0.75);
 		padding: 1rem;
 		border: 5px solid var(--color-gray-1000);
 	}
@@ -156,9 +155,12 @@
 		max-width: unset;
 		border: unset;
 	}
+    .graphic-wrapper {
+        margin: 0 auto;
+        padding: 0;
+    }
 	.graphic-wide {
 		max-width: unset;
-		margin: 0 auto 25px;
 		padding: 10px 75px;
 		border-top: 8px solid black;
 		border-bottom: 8px solid black;
@@ -180,4 +182,8 @@
 	.beeswarm {
 		height: 325px;
 	}
+
+    .with-bg {
+		background-color: rgba(255, 255, 255, 0.75);
+    }
 </style>

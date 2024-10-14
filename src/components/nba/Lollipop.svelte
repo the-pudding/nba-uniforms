@@ -99,7 +99,7 @@
   .row-team{
     position: absolute;
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 14px;
     text-align: right;
     width: 24%;
     font-weight: bold;
@@ -122,7 +122,7 @@
   .year-text {
     position: absolute;
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .jersey-container {
