@@ -132,25 +132,19 @@
 				<Lollipop />
 			</LayerCake>
 		</div>
-	{:else if id == "bars-city"}
+	{:else if id == "city-bars"}
 		<div class="barchart graphic">
 			<LayerCake
-				data={data}
-				x={"date"}
-				y={"count"}
-				yScale={d3.scaleLinear()}
-				yDomain={[0, null]}
-				yTicks={5}
-				yFormat={d3.format(".2s")}
-				yLabel={"Games"}
-				xScale={d3.scaleTime()}
-				xDomain={[new Date(2023, 0, 1), new Date(2023, 11, 31)]}
-				xTicks={12}
-				xTickFormat={d3.timeFormat("%b")}
-				xLabel={"Month"}
-				padding={{ top: 10, right: 10, bottom: 30, left: 40 }}
+				padding={{ bottom: 20, left: 35 }}
+				x={'City Edition'}
+				y={'team'}
+				yScale={d3.scaleBand().paddingInner(0.05)}
+				xDomain={[0, null]}
+				data={teamTotals}
 			>
-				<Bar />
+				<Svg>
+					<Bar />
+				</Svg>
 			</LayerCake>
 		</div>
 	{/if}
