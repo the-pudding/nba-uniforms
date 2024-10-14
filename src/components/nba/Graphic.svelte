@@ -148,10 +148,10 @@
 				yRange={[0, 100]}
 				data={teamTotals}
 			>
-				<BarLabels />
 				<ScaledSvg>
 					<Bar />
 				</ScaledSvg>
+				<BarLabels />
 			</LayerCake>
 		</div>
 	{/if}
@@ -161,12 +161,15 @@
 <style>
 	section {
 		width: 100%;
-		display: flex;
-		flex-direction: row;
 		padding: 2rem;
-		gap: 4rem;
 		justify-content: center;
 		position: relative;
+
+		@media screen and (min-width: 768px) {
+			display: flex;
+			flex-direction: row;
+			gap: 4rem;
+		}
 	}
 
 	.middle-line {
@@ -180,10 +183,14 @@
 	}
 
 	.chart-wrapper {
-		width: calc(50% - 2rem);
-		max-width: 400px;
+		width: 100%;
 		padding: 1rem;
 		border: 5px solid var(--color-gray-1000);
+
+		@media screen and (min-width: 768px) {
+			width: calc(50% - 2rem);
+			max-width: 400px;
+		}
 	}
 
 	.chart-wrapper.chart-wrapper__wide {
@@ -197,11 +204,15 @@
     }
 	.graphic-wide {
 		max-width: unset;
-		padding: 10px 75px;
+		padding: 10px 10px;
 		border-top: 8px solid black;
 		border-bottom: 8px solid black;
 		background-color: rgba(255, 255, 255, 0.75);
 		width: 100%;
+
+		@media screen and (min-width: 768px) {
+			padding: 10px 75px;
+		}	
 	}
 
 	.graphic-wide.clear {

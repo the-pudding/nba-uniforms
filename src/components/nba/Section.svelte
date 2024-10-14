@@ -152,6 +152,7 @@
         justify-content: center;
         align-items: center;
         font-family: var(--sans);
+        overflow: hidden;
     }
 
     .left-circle, .right-circle {
