@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from "svelte";
-	import { LayerCake, Svg } from "layercake";
+	import { LayerCake, Svg, ScaledSvg } from "layercake";
 
 	import * as d3 from "d3";
 	import { selectedTeamStore } from "$stores/teamSelection";
@@ -8,6 +8,10 @@
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
 	import Lollipop from "$components/nba/Lollipop.svelte";
 	import StackedBarChart from "./StackedBarChart.svelte";
+	import Bar from "$components/nba/Bar.svelte";
+	import BarLabels from "$components/nba/BarLabels.svelte";
+  import AxisX from '$components/layercake/AxisX.html.svelte';
+  import AxisY from '$components/layercake/AxisY.html.svelte';
 
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
@@ -133,18 +137,21 @@
 			</LayerCake>
 		</div>
 	{:else if id == "city-bars"}
-		<div class="barchart graphic">
+		<div class="barchart graphic-wide graphic">
 			<LayerCake
 				padding={{ bottom: 20, left: 35 }}
 				x={'City Edition'}
+				xDomain={[0, 41]}
+				xRange={[0, 100]}
 				y={'team'}
 				yScale={d3.scaleBand().paddingInner(0.05)}
-				xDomain={[0, null]}
+				yRange={[0, 100]}
 				data={teamTotals}
 			>
-				<Svg>
+				<BarLabels />
+				<ScaledSvg>
 					<Bar />
-				</Svg>
+				</ScaledSvg>
 			</LayerCake>
 		</div>
 	{/if}
@@ -204,15 +211,20 @@
 	}
 
 	.lollipop{
-        height: 100vh;
-        padding-left: 10px;
+			height: 90vh;
+			padding-left: 10px;
     }
 
 	.beeswarm {
 		height: 325px;
 	}
 
-    .with-bg {
-		background-color: rgba(255, 255, 255, 0.75);
-    }
+	.with-bg {
+	background-color: rgba(255, 255, 255, 0.75);
+	}
+
+	.barchart {
+		width: 100%;
+		height: 90vh;
+	}
 </style>
