@@ -127,11 +127,6 @@
 		height: 300px;
 	}
 
-	:global(#nba section) {
-		/* margin: 32px auto;
-		padding-top: 32px; */
-	}
-
 	:global(#nba h2 span) {
 		background: var(--color-mark);
 		padding: 0 8px;

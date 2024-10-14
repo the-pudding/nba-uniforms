@@ -32,6 +32,20 @@
 			return a.team.localeCompare(b.team);
 		});
 
+	$: teamTotals = teams
+			.map((t) => ({
+				team: t.team,
+				'Association Edition': data.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'Association Edition') || d.homeTeam === t.team && d.homeTeamEdition === 'Association Edition').length,
+				'Icon Edition': data.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'Icon Edition') || d.homeTeam === t.team && d.homeTeamEdition === 'Icon Edition').length,
+				'Statement Edition': data.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'Statement Edition') || d.homeTeam === t.team && d.homeTeamEdition === 'Statement Edition').length,
+				'City Edition': data.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'City Edition') || d.homeTeam === t.team && d.homeTeamEdition === 'City Edition').length,
+				'Classic Edition': data.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'Classic Edition') || d.homeTeam === t.team && d.homeTeamEdition === 'Classic Edition').length,
+				'City Edition 2': data1314.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'City Edition 2') || d.homeTeam === t.team && d.homeTeamEdition === 'City Edition 2').length,
+			})
+		);
+	
+	$: console.log(teamTotals);
+
 	function filterFlairData(arr, teamName) {
 		let newArr = [...arr].sort((a, b) => {
 			if (a["2023 Score"] !== b["2023 Score"]) {
@@ -116,6 +130,27 @@
 				data={filterFlairData(flairData, selectedTeamName)}
 			>
 				<Lollipop />
+			</LayerCake>
+		</div>
+	{:else if id == "bars-city"}
+		<div class="barchart graphic">
+			<LayerCake
+				data={data}
+				x={"date"}
+				y={"count"}
+				yScale={d3.scaleLinear()}
+				yDomain={[0, null]}
+				yTicks={5}
+				yFormat={d3.format(".2s")}
+				yLabel={"Games"}
+				xScale={d3.scaleTime()}
+				xDomain={[new Date(2023, 0, 1), new Date(2023, 11, 31)]}
+				xTicks={12}
+				xTickFormat={d3.timeFormat("%b")}
+				xLabel={"Month"}
+				padding={{ top: 10, right: 10, bottom: 30, left: 40 }}
+			>
+				<Bar />
 			</LayerCake>
 		</div>
 	{/if}
