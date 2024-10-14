@@ -4,16 +4,22 @@
  -->
 <script>
   import { getContext } from 'svelte';
+    import { selectedTeamStore } from '$stores/teamSelection';
   import getTeamCode from '../../utils/getTeamCode';
 
+  const teams = getContext('teams');
+
   const { data, xGet, yGet, zScale, yScale, config } = getContext('LayerCake');
+
+  $: selectedTeam = $selectedTeamStore;
+	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 
   /** @type {Number} [r=5] - The circle radius. */
   export let r = 5;
 
   $: midHeight = $yScale.bandwidth() / 2;
+  
 
-  $:console.log($data);
 </script>
 
 <div class="flair-explain">
@@ -24,7 +30,7 @@
     {#each $data as row}
       {@const scaledYValue = $yGet(row)}
       {@const scaledXValues = $xGet(row)}
-      <div class="dot-row">
+      <div class="dot-row {row.team === selectedTeamName ? 'row-selected' : ''}">
         <div
           class="row-team"
           style="
@@ -47,8 +53,8 @@
           {#if i === 0}
             <div class="year-text"
               style="
-                left: {circleX + 3}%;
-                top: {scaledYValue + (midHeight)/1.5}%;
+                left: {circleX + 2}%;
+                top: {scaledYValue + (midHeight * .7)}%;
               "
             >
               {'2023-24'}
@@ -67,8 +73,8 @@
           {:else}
             <div class="year-text"
               style="
-                left: {circleX - 9}%;
-                top: {scaledYValue + (midHeight)/1.5}%;
+                left: {circleX - 7}%;
+                top: {scaledYValue + (midHeight * .7)}%;
               "
             >
               {'2013-14'}
@@ -99,13 +105,14 @@
   .row-team{
     position: absolute;
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 16px;
     text-align: right;
     width: 24%;
     font-weight: bold;
     text-transform: uppercase;
     transform: translate(0, -50%);
   }
+
   .line {
     position: absolute;
     border-bottom: 2px solid #000;
@@ -137,7 +144,7 @@
     padding: 0 10px 0 25%;
     width: 100%;
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
   }
 

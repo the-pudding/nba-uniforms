@@ -137,7 +137,7 @@
     padding: 10px;
     width: 100%;
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
   }
 
