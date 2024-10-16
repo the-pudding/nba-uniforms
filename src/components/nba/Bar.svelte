@@ -10,12 +10,6 @@
 			(d) => (d.homeTeam === team && d.homeTeamEdition === edition)
 		)[0].homeTeamHex;
 	}
-
-	$: console.log(
-		gamesData?.filter(
-			(d) => (d.homeTeam === 'New York Knicks' && d.homeTeamEdition === 'City Edition')
-		)
-	)
 </script>
 
 <g>

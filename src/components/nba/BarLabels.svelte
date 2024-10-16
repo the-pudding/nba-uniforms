@@ -2,6 +2,8 @@
 	import { getContext } from "svelte";
 
 	const { data, xGet, yGet, xScale, yScale } = getContext("LayerCake");
+
+	console.log($yScale.range());
 </script>
 
 <div class="bar-label-wrapper">
@@ -10,7 +12,7 @@
 		{@const y = $yGet(d)}
 		{@const width = $xGet(d)}
 		{@const height = $yScale.bandwidth()}
-		<div class="bar-label" style="left: {width + 4}%; top: {y * .96}%; height: {height}px">
+		<div class="bar-label" style="left: calc({width}% + 4px); top: {y}%; height: {height}px">
 			{d.team}
 		</div>
 	{/each}

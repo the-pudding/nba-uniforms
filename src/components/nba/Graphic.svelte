@@ -140,7 +140,7 @@
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic">
 			<LayerCake
-				padding={{ bottom: 20, left: 35 }}
+				padding={{ bottom: 0, left: 0 }}
 				x={'City Edition'}
 				xDomain={[0, 41]}
 				xRange={[0, 100]}
