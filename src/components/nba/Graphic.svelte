@@ -109,7 +109,7 @@
 		</div>
 	{:else if id == "beeswarm-flair-23"}
 		<div class="beeswarm graphic-wide graphic">
-			<LayerCake data={flairData} x={"2023 Score"} height={400}>
+			<LayerCake let:width data={flairData} x={"2023 Score"} height={({width}) => width >= 500 ? 400 : 600}>
 				<Beeswarm {selectedTeamName} />
 			</LayerCake>
 		</div>
@@ -226,7 +226,11 @@
     }
 
 	.beeswarm {
-		height: 325px;
+		height: 600px;
+
+		@media screen and (min-width: 500px) {
+			height: 325px;
+		}
 	}
 
 	.with-bg {

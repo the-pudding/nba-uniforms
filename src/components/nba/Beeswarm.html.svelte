@@ -7,7 +7,7 @@
   import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 	import getTeamCode from '../../utils/getTeamCode';
 
-  const { data, xGet, height, zGet, xScale, yScale } = getContext('LayerCake');
+  const { data, xGet, height, width, zGet, xScale, yScale } = getContext('LayerCake');
 
   $: nodes = $data.map(d => ({ ...d, code: getTeamCode(d.team) }));
 
@@ -56,9 +56,46 @@
   }
 </script>
 
-
-<svg width="100%" height="2" style="position: absolute; top: {$height / 2}px;">
-	<line x1="0" y1="0" x2="100%" y2="0" stroke="black" stroke-width="2" />
+{#if $width > 500}
+  <svg width="100%" height="2" style="position: absolute; top: {$height / 2}px;">
+    <line x1="0" y1="0" x2="100%" y2="0" stroke="black" stroke-width="2" />
+  </svg>
+  <div class="bee-container">
+    <div class="flair-explain">
+      <span class="left"><span class="caret-left"></span> Less flair</span>
+      <span class="right">More flair <span class="caret-right"></span></span>
+    </div>
+    <!-- draw a full-width horizontal line halfway down the container -->
+    {#each simulation.nodes() as node}
+      <div
+        class="jersey-container"
+        style="
+          left: {node.x}px;
+          top: {(node.y * 2) + ($height / 2)}px;
+          width: 25px;
+          height: 33px;
+        "
+      >
+        <img src={`./assets/jerseys/${node.code}_icon.png`} alt={getTeamCode(node.team)} class="jersey-illustration" />
+      </div>
+      {#if node.team === selectedTeamName}
+        <div
+          class="team-container"
+          style="
+            left: {node.x}px;
+            top: {(node.y * 2) + ($height / 2) - 50}px;
+            "
+        >
+          <span>Your team: <strong>{selectedTeamName}</strong>
+          </span>
+          <div class="caret"></div>
+        </div>
+      {/if}
+    {/each}
+  </div>
+{:else}
+<svg width="2" height={$height} style="position: absolute; left: {$width / 2}px;">
+	<line y1="0" x1="0" y2={$height} x2="0" stroke="black" stroke-width="2" />
 </svg>
 <div class="bee-container">
   <div class="flair-explain">
@@ -70,8 +107,8 @@
     <div
       class="jersey-container"
       style="
-        left: {node.x}px;
-        top: {(node.y * 2) + ($height / 2)}px;
+        top: {$height - node.x - 50}px;
+        left: {(node.y * 2) + ($width / 2)}px;
         width: 25px;
         height: 33px;
       "
@@ -82,8 +119,8 @@
 			<div
 				class="team-container"
 				style="
-					left: {node.x}px;
-					top: {(node.y * 2) + ($height / 2) - 50}px;
+					top: {$height - node.x - 100}px;
+					left: {(node.y * 2) + ($width / 2)}px;
 					"
 			>
 				<span>Your team: <strong>{selectedTeamName}</strong>
@@ -93,10 +130,12 @@
 		{/if}
   {/each}
 </div>
+{/if}
 
 <style>
   .bee-container {
     position: relative;
+    height: 100%;
   }
 
   .jersey-container {
@@ -132,6 +171,7 @@
 
   .flair-explain {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
@@ -139,6 +179,10 @@
     font-family: var(--sans);
     font-size: 14px;
     font-weight: bold;
+
+    @media screen and (min-width: 500px) {
+      flex-direction: row;
+    }
   }
 
   .left, .right {
@@ -146,22 +190,34 @@
     align-items: center;
   }
 
+  .left {
+    position: absolute;
+    bottom: 15px;
+  }
+
   .caret-left {
+    @media screen and (min-width: 500px) {
     margin-right: 5px;
 		width: 0;
 		height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-right: 5px solid #333;
+      
+    
+      
+    }
   }
 
-  .caret-right {
+  .caret-right { 
+    @media screen and (min-width: 500px) {
     margin-left: 5px;
 		width: 0;
 		height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 5px solid #333;
+    }
   }
 
 </style>
