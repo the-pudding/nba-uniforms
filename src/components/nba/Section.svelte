@@ -60,7 +60,7 @@
 {:else if copy.contentType == "list"}
     <div class="full-court-wrapper">
         <div class="left-circle"></div>
-        <ul>
+        <ul class="edition-list-wrapper">
             {#each copy.list as item, i}
                 {@const listTitle = item.split(" ")[0]}
                 {@const listDesc = item.split("(")[1].split(")")[0]}
@@ -146,21 +146,29 @@
         border-bottom: 5px solid var(--color-gray-1000);
         background-color: rgba(255, 255, 255, 0.75);
         position: relative;
-        height: 20rem;
+        height: fit-content;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         font-family: var(--sans);
         overflow: hidden;
+
+         @media screen and (min-width: 768px) {
+            height: 20rem;
+         }
     }
 
     .left-circle, .right-circle {
-        height: 100%;
-        position: absolute;
-        aspect-ratio: 1;
-        border: 5px solid var(--color-gray-1000);
-        border-radius: 50%;
+        visibility: hidden;
+
+        @media screen and (min-width: 768px) {
+            height: 100%;
+            position: absolute;
+            aspect-ratio: 1;
+            border: 5px solid var(--color-gray-1000);
+            border-radius: 50%;
+        }
     }
 
     .left-circle {
@@ -175,20 +183,30 @@
         transform: translate(50%, 0); 
     }
 
-    ul {
-        display: flex;
-        width: calc(100% - 24rem);
-        flex-direction: row;
-        list-style: none;
-        gap: 1rem;
-        padding: 1rem 0;
+    ul.edition-list-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+            width: calc(100% - 24rem);
+            flex-direction: row;
+            list-style: none;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
     }
 
     li {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 25%;
+        width: 100%;
+        padding-bottom: 2rem;
+        @media screen and (min-width: 768px) {
+            width: 25%;
+        }
     }
 
     .img-wrapper {
