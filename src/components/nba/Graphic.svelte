@@ -47,8 +47,6 @@
 				'City Edition 2': data1314.filter((d) => (d.awayTeam === t.team && d.awayTeamEdition === 'City Edition 2') || d.homeTeam === t.team && d.homeTeamEdition === 'City Edition 2').length,
 			})
 		);
-	
-	$: console.log(teamTotals);
 
 	function filterFlairData(arr, teamName) {
 		let newArr = [...arr].sort((a, b) => {
@@ -118,13 +116,14 @@
 	{:else if id == "beeswarm-flair-13"}
 		<div class="lollipop graphic-wide graphic">
 			<LayerCake
+				let:width
 				ssr
 				percentRange
 				padding={{ right: 10, bottom: 20, left: 30 }}
 				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
 					(d) => !["team", "rank"].includes(d)
 				)}
-				xRange={[30, 90]}
+				xRange={({width}) => width > 500 ? [30, 90] : [15, 90]}
 				y={"rank"}
 				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
 				yRange={[0, 80]}

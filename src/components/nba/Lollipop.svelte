@@ -9,7 +9,7 @@
 
   const teams = getContext('teams');
 
-  const { data, xGet, yGet, zScale, yScale, config } = getContext('LayerCake');
+  const { data, xGet, yGet, zScale, yScale, config, width } = getContext('LayerCake');
 
   $: selectedTeam = $selectedTeamStore;
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
@@ -38,7 +38,7 @@
             top: {scaledYValue + midHeight}%;
             "
         >
-          {row.team}
+          {$width > 500 ? row.team : getTeamCode(row.team)}
         </div>
         <div
           class="line"
@@ -53,7 +53,7 @@
           {#if i === 0}
             <div class="year-text"
               style="
-                left: {circleX + 2}%;
+                left: {circleX + 3}%;
                 top: {scaledYValue + (midHeight * .7)}%;
               "
             >
@@ -73,7 +73,7 @@
           {:else}
             <div class="year-text"
               style="
-                left: {circleX - 7}%;
+                left: {$width > 750 ? circleX - 8 : circleX - 13}%;
                 top: {scaledYValue + (midHeight * .7)}%;
               "
             >
@@ -107,10 +107,13 @@
     font-family: var(--sans);
     font-size: 16px;
     text-align: right;
-    width: 24%;
     font-weight: bold;
     text-transform: uppercase;
     transform: translate(0, -50%);
+
+    @media screen and (min-width: 500px) {
+      width: 24%;
+    }
   }
 
   .line {
