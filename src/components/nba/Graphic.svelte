@@ -145,7 +145,7 @@
 				xDomain={[0, 41]}
 				xRange={[0, 100]}
 				y={'team'}
-				yScale={d3.scaleBand().paddingInner(0.05)}
+				yScale={d3.scaleBand().paddingInner(0.2)}
 				yRange={[0, 100]}
 				data={teamTotals}
 			>
@@ -241,6 +241,6 @@
 
 	.barchart {
 		width: 100%;
-		height: 90vh;
+		height: 100vh;
 	}
 </style>
