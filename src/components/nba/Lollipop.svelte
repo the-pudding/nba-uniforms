@@ -53,7 +53,7 @@
           {#if i === 0}
             <div class="year-text"
               style="
-                left: {circleX + 3}%;
+                left: calc({circleX}% + 15px);
                 top: {scaledYValue + (midHeight * .7)}%;
               "
             >
@@ -73,7 +73,7 @@
           {:else}
             <div class="year-text"
               style="
-                left: {$width > 750 ? circleX - 8 : circleX - 13}%;
+                left: calc({circleX}% - 60px);
                 top: {scaledYValue + (midHeight * .7)}%;
               "
             >
@@ -104,6 +104,7 @@
 
   .row-team{
     position: absolute;
+    line-height: 16px;
     font-family: var(--sans);
     font-size: 16px;
     text-align: right;

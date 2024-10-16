@@ -123,7 +123,9 @@
 				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
 					(d) => !["team", "rank"].includes(d)
 				)}
-				xRange={({width}) => width > 500 ? [30, 90] : [15, 90]}
+				xRange={({width}) => width >= 500 
+					? [30, 90] 
+					: [25, 80]}
 				y={"rank"}
 				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
 				yRange={[0, 80]}
