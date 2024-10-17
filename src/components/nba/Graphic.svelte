@@ -10,8 +10,9 @@
 	import StackedBarChart from "./StackedBarChart.svelte";
 	import Bar from "$components/nba/Bar.svelte";
 	import BarLabels from "$components/nba/BarLabels.svelte";
-  import AxisX from '$components/layercake/AxisX.html.svelte';
-  import AxisY from '$components/layercake/AxisY.html.svelte';
+  	import AxisX from '$components/layercake/AxisX.html.svelte';
+  	import AxisY from '$components/layercake/AxisY.html.svelte';
+	import TeamCompare from "$components/nba/TeamCompare.svelte";
 
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
@@ -137,8 +138,10 @@
 		</div>
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic">
+			<TeamCompare data={teamTotals} />
 			<LayerCake
 				padding={{ bottom: 0, left: 0 }}
+
 				x={'City Edition'}
 				xDomain={[0, 41]}
 				xRange={[0, 100]}
@@ -203,15 +206,11 @@
     }
 	.graphic-wide {
 		max-width: unset;
-		padding: 10px 10px;
-		border-top: 8px solid black;
-		border-bottom: 8px solid black;
+		padding: 0 0 4rem 0;
+		border-top: 5px solid black;
+		border-bottom: 5px solid black;
 		background-color: rgba(255, 255, 255, 0.75);
 		width: 100%;
-
-		@media screen and (min-width: 768px) {
-			padding: 10px 75px;
-		}	
 	}
 
 	.graphic-wide.clear {

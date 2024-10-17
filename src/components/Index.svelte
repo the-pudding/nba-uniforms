@@ -24,7 +24,6 @@
 	const data = getContext("data");
 </script>
 
-<WIP />
 <SelectBar />
 <!-- <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY/> -->
 <StoryHeader />
