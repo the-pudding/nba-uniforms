@@ -63,8 +63,6 @@
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
 			.range([0, width - (groupedData.length * (barStroke / 2))]);
 
-			$: console.log(x.range())
-
 		$: y = d3.scaleBand()
 			.domain([0, 1])
 			.range([0, height])
