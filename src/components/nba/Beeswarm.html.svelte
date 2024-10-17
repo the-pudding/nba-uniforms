@@ -76,8 +76,7 @@
 				style="
           left: {node.x}px;
           top: {node.y * 2 + $height / 2}px;
-          width: 25px;
-          height: 33px;
+          width: 35px;
         "
 			>
 				<img
@@ -120,8 +119,7 @@
 				style="
         top: {$height - node.x - 50}px;
         left: {node.y * 2 + $width / 2}px;
-        width: 25px;
-        height: 33px;
+        width: 35px;
       "
 			>
 				<img

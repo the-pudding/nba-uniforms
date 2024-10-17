@@ -206,7 +206,7 @@
     }
 	.graphic-wide {
 		max-width: unset;
-		padding: 0 0 4rem 0;
+		padding: 0 2rem 4rem;
 		border-top: 5px solid black;
 		border-bottom: 5px solid black;
 		background-color: rgba(255, 255, 255, 0.75);
@@ -221,7 +221,7 @@
 
 	:global(.graphic-wide .layercake-container) {
 		max-width: 1000px;
-		margin:0 auto;
+		margin: 0 auto;
 	}
 
 	.lollipop{
