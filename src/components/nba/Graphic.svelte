@@ -62,8 +62,6 @@
 		newArr.forEach((item, index) => {
 			item.rank = index + 1; // Ranks start from 1
 		});
-		newArr = newArr.slice(0, 10);
-		console.log(newArr);
 		return newArr;
 	}
 </script>
@@ -124,12 +122,14 @@
 				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
 					(d) => !["team", "rank"].includes(d)
 				)}
-				xRange={({width}) => width > 500 ? [30, 90] : [15, 90]}
-				y={"rank"}
-				yScale={d3.scaleBand().paddingInner(0.05).round(true)}
-				yRange={[0, 80]}
 				xDomain={[0, null]}
-				xPadding={[2, 0]}
+				xPadding={[0, 0]}
+				xRange={({width}) => width >= 500 
+					? [30, 90] 
+					: [25, 80]}
+				y={"rank"}
+				yScale={d3.scaleBand().paddingInner(0.2).round(true)}
+				yRange={[0, 100]}
 				zScale={d3.scaleOrdinal()}
 				data={filterFlairData(flairData, selectedTeamName)}
 			>
@@ -139,13 +139,14 @@
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic">
 			<TeamCompare data={teamTotals} />
-			<!-- <LayerCake
-				padding={{ bottom: 20, left: 35 }}
+			<LayerCake
+				padding={{ bottom: 0, left: 0 }}
+
 				x={'City Edition'}
 				xDomain={[0, 41]}
 				xRange={[0, 100]}
 				y={'team'}
-				yScale={d3.scaleBand().paddingInner(0.05)}
+				yScale={d3.scaleBand().paddingInner(0.2)}
 				yRange={[0, 100]}
 				data={teamTotals}
 			>
@@ -153,7 +154,7 @@
 					<Bar />
 				</ScaledSvg>
 				<BarLabels />
-			</LayerCake> -->
+			</LayerCake>
 		</div>
 	{/if}
 </section>
@@ -219,7 +220,7 @@
 	}
 
 	.lollipop{
-			height: 90vh;
+			height: 1500px;
 			padding-left: 10px;
     }
 
@@ -237,5 +238,6 @@
 
 	.barchart {
 		width: 100%;
+		height: 100vh;
 	}
 </style>

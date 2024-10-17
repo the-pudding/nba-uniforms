@@ -93,7 +93,7 @@
 
     .heading-wrapper h3 {
         font-family: var(--headline);
-        font-size: 150px;
+        font-size: 120px;
         font-weight: 700;
         line-height: 0.85;
         text-transform: uppercase;
@@ -101,6 +101,10 @@
         font-style: italic;
         text-align: center;
         margin: 2rem 0 0 -1rem;
+
+        @media screen and (min-width: 768px) {
+            font-size: 150px;
+        }
     }
 
     .heading-circle {

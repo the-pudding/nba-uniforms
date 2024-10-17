@@ -40,20 +40,29 @@
 <style>
 .header-grid__container {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr);
   padding: 0.5rem;
   gap: 5px; /* Optional gap between cells */
   margin: 0 auto 4rem auto;
   max-width: 1200px;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
 }
 
 .header-grid__title {
-    grid-area: 2 / 4 / 4 / 7;
+    grid-area: 3 / 1 / 5 / 7;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media screen and (min-width: 768px) {
+      grid-area: 2 / 4 / 4 / 7;
+    }
 }
 
 .header-grid__jersey img {
