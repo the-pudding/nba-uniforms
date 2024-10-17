@@ -71,7 +71,7 @@
 		<div class="middle-line"></div>
 		<div class="chart-wrapper with-bg">
 			<JerseyLayout
-				title={`Home`}
+				title={`2023-24 Home`}
 				{data}
 				teamCode={selectedTeam}
 				homeAwayFilter={"home"}
@@ -79,7 +79,7 @@
 		</div>
 		<div class="chart-wrapper with-bg">
 			<JerseyLayout
-				title={`Away`}
+				title={`2023-24 Away`}
 				{data}
 				teamCode={selectedTeam}
 				homeAwayFilter={"away"}
@@ -217,6 +217,11 @@
 		border-top: none;
 		border-bottom: none;
 		background-color: unset;
+	}
+
+	:global(.graphic-wide .layercake-container) {
+		max-width: 1000px;
+		margin:0 auto;
 	}
 
 	.lollipop{
