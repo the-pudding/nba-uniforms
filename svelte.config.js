@@ -5,7 +5,7 @@ import autoprefixer from "autoprefixer";
 const preprocess = sveltePreprocess({
 	postcss: {
 		plugins: [autoprefixer]
-	}
+	},
 });
 
 const config = {

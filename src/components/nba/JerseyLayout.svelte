@@ -7,8 +7,8 @@
 	import Scatter from "$components/layercake/Scatter.svg.svelte";
 	import AxisX from "$components/layercake/AxisX.svg.svelte";
 	import AxisY from "$components/layercake/AxisY.svg.svelte";
-	import BasketballJersey from "$components/figure/Figure.BasketballJersey.svelte";  
-	import StackedBarChart from './StackedBarChart.svelte';
+	import BasketballJersey from "$components/figure/Figure.BasketballJersey.svelte";
+	import StackedBarChart from "./StackedBarChart.svelte";
 	import teamNames from "$data/nba2324/teamNames.json";
 
 	export let data;
@@ -24,7 +24,7 @@
 
 	$: {
 		if (data && data.length > 0) {
-			if (homeAwayFilter === 'home') {
+			if (homeAwayFilter === "home") {
 				let filteredGames = data.filter((d) => d.homeTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
@@ -34,9 +34,9 @@
 						colorHex: d.homeTeamHex,
 						colorName: d.homeTeamColor,
 						edition: d.homeTeamEdition
-					}
+					};
 				});
-			} else if (homeAwayFilter === 'away') {
+			} else if (homeAwayFilter === "away") {
 				let filteredGames = data.filter((d) => d.awayTeam === team);
 				formattedGames = filteredGames.map((d) => {
 					return {
@@ -46,10 +46,12 @@
 						colorHex: d.awayTeamHex,
 						colorName: d.awayTeamColor,
 						edition: d.awayTeamEdition
-					}
+					};
 				});
 			} else {
-				let filteredGames = data.filter((d) => ((d.homeTeam === team) || (d.awayTeam === team)));
+				let filteredGames = data.filter(
+					(d) => d.homeTeam === team || d.awayTeam === team
+				);
 				formattedGames = filteredGames.map((d) => {
 					if (d.homeTeam === team) {
 						return {
@@ -59,7 +61,7 @@
 							colorHex: d.homeTeamHex,
 							colorName: d.homeTeamColor,
 							edition: d.homeTeamEdition
-						}
+						};
 					} else {
 						return {
 							gameDate: d.gameDate,
@@ -68,7 +70,7 @@
 							colorHex: d.awayTeamHex,
 							colorName: d.awayTeamColor,
 							edition: d.awayTeamEdition
-						}
+						};
 					}
 				});
 			}
@@ -89,40 +91,60 @@
 	let clientWidth;
 </script>
 
-
-<figure bind:clientWidth>
+<div class="jersey-waffle" bind:clientWidth>
 	<h2>{title}</h2>
 	{#if clientWidth}
 		<div class="stacked-bar-wrapper" style="height:48px;">
-			<StackedBarChart
-				data={formattedGames}
-				width={clientWidth}
-				height={48}
-			/>
+			<StackedBarChart data={formattedGames} width={clientWidth} height={48} />
 		</div>
 	{/if}
 	{#if formattedGames.length > 0 && showJerseyWaffle}
-		{#each formattedGames as game}
-			<img src={`./assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(' ')[0].toLowerCase()}.png`} alt={getTeamCode(game.team)} class="jersey-illustration" />
-		{/each}
+		<div class="jersey-waffle_wrapper">
+			{#each formattedGames as game}
+				<div class="jersey-waffle_game">
+					<div class="jersey-waffle_game-date">
+						{`${game.gameDate.substring(0, 5)} v ${getTeamCode(game.opponent)}`}
+					</div>
+					<img
+						src={`./assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(" ")[0].toLowerCase()}.png`}
+						alt={getTeamCode(game.team)}
+						class="jersey-waffle_illustration"
+					/>
+				</div>
+			{/each}
+		</div>
 	{/if}
-</figure>
+</div>
 
-<style>
-	.jersey-waffle {
-		padding: 25px;
-		border: 8px solid black;
-		background-color: rgba(255, 255, 255, 0.75);
-		width: 400px;
+<style lang="postcss">
+	.jersey-waffle_wrapper {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.25rem;
 	}
-	.jersey-illustration {
-		width: 50px;
-		height: 75px;
-		display: inline-block;
+
+	.jersey-waffle_game {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 3px;
+		width: calc(20% - 0.25rem);
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
 	}
-	figure {
-		margin: 1rem auto;
-		width: 100%;
+
+	.jersey-waffle_game:hover .jersey-waffle_game-date {
+			visibility: visible;
+		}
+
+	.jersey-waffle_game-date {
+		font-family: var(--sans);
+		font-size: var(--12px);
+		height: 0.75rem;
+		visibility: hidden;
 	}
 
 	.stacked-bar-wrapper {

@@ -139,7 +139,7 @@
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic">
 			<TeamCompare data={teamTotals} />
-			<LayerCake
+			<!-- <LayerCake
 				padding={{ bottom: 0, left: 0 }}
 
 				x={'City Edition'}
@@ -154,7 +154,7 @@
 					<Bar />
 				</ScaledSvg>
 				<BarLabels />
-			</LayerCake>
+			</LayerCake> -->
 		</div>
 	{/if}
 </section>
@@ -238,6 +238,5 @@
 
 	.barchart {
 		width: 100%;
-		height: 100vh;
 	}
 </style>
