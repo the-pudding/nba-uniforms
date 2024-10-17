@@ -89,8 +89,8 @@
 		<div class="compare-bars graphic-wide graphic">
 			<div class="chart-wrapper chart-wrapper__wide">
 				<JerseyLayout
-					title={`2013-14 Season at Home`}
-					data={data1314}
+					title={`2023-24 Season at Home`}
+					{data}
 					teamCode={selectedTeam}
 					homeAwayFilter={"home"}
 					showJerseyWaffle={false}
@@ -98,8 +98,8 @@
 			</div>
 			<div class="chart-wrapper chart-wrapper__wide">
 				<JerseyLayout
-					title={`2023-24 Season at Home`}
-					{data}
+					title={`2013-14 Season at Home`}
+					data={data1314}
 					teamCode={selectedTeam}
 					homeAwayFilter={"home"}
 					showJerseyWaffle={false}
@@ -108,12 +108,14 @@
 		</div>
 	{:else if id == "beeswarm-flair-23"}
 		<div class="beeswarm graphic-wide graphic">
+			<h3>All Teams By 2023-24 Flair</h3>
 			<LayerCake let:width data={flairData} x={"2023 Score"} height={({width}) => width >= 500 ? 400 : 600}>
 				<Beeswarm {selectedTeamName} />
 			</LayerCake>
 		</div>
 	{:else if id == "beeswarm-flair-13"}
 		<div class="lollipop graphic-wide graphic">
+			<h3>Change in Flair from 2013-14 to 2023-24</h3>
 			<LayerCake
 				let:width
 				ssr

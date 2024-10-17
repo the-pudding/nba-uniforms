@@ -14,6 +14,8 @@
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 	$: statFill(selectedTeam, copy);
 
+    $: console.log(copy);
+
     function statFill(team, copy) {
 		if (browser) {
 			const homeCityGames = data.filter(d => d.homeTeam === selectedTeamName && d.homeTeamEdition === 'City Edition').length;
@@ -45,14 +47,26 @@
 {#if copy.contentType == "heading"}
     <div class="heading-wrapper">
         <div class="heading-circle"></div>
-            <h3>{@html copy.heading}</h3>
+            <h2>{@html copy.heading}</h2>
     </div>
     <div class="after-line"></div>
-{:else if copy.contentType == "prose"}
+{:else if copy.contentType == "intro"}
     <div class="prose">
         <div class="line-inset">
+            <span class="intro_subhead">{@html copy.subhead}</span>
+            <span class="intro_byline">{@html copy.byline}</span>
+            <span class="intro_subbyline">{@html copy.subbyline}</span>
+        </div>    
+    </div>
+{:else if copy.contentType == "prose"}
+ <div class="prose">
+        <div class="line-inset">
             {#each copy.text as graf, i}
-                <p>{@html graf.value}</p>
+                {#if ['subhead', 'byline', 'subbyline'].includes(graf.type)}
+                    <span class={`intro_${graf.type}`}>{@html graf.value}</span>
+                {:else}
+                    <p>{@html graf.value}</p>
+                {/if}
             {/each}
         </div>    
     </div>
@@ -91,7 +105,7 @@
         height: 9rem;
     }
 
-    .heading-wrapper h3 {
+    .heading-wrapper h2 {
         font-family: var(--headline);
         font-size: 120px;
         font-weight: 700;
@@ -127,6 +141,25 @@
         width: calc(100% - 2rem);
         margin: 0 auto;
 	}
+
+    .intro_subhead, .intro_byline, .intro_subbyline {
+        display: block;
+        font-family: var(--sans);
+    }
+
+    :global(.intro_byline a, .intro_subbyline a) {
+        font-weight: 600;
+    }
+
+    .intro_subhead {
+        font-size: var(--24px);
+        font-weight: 700;
+        margin: 0 0 1rem;
+    }
+
+    .intro_byline {
+        font-size: var(--20px);
+    }
 
     :global(.after-line) {
         height: 8rem;

@@ -29,6 +29,8 @@
 
 	export let selectedTeamName;
 
+	export let jerseySize = 38;
+
 	// also adjust the Y using force
 	$: simulation = forceSimulation(nodes)
 		.force(
@@ -76,7 +78,7 @@
 				style="
           left: {node.x}px;
           top: {node.y * 2 + $height / 2}px;
-          width: 35px;
+        	width: {jerseySize}px;
         "
 			>
 				<img
@@ -119,7 +121,7 @@
 				style="
         top: {$height - node.x - 50}px;
         left: {node.y * 2 + $width / 2}px;
-        width: 35px;
+        width: {jerseySize}px;
       "
 			>
 				<img

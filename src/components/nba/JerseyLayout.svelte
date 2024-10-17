@@ -92,7 +92,7 @@
 </script>
 
 <div class="jersey-waffle" bind:clientWidth>
-	<h2>{title}</h2>
+	<h3>{title}</h3>
 	{#if clientWidth}
 		<div class="stacked-bar-wrapper" style="height:48px;">
 			<StackedBarChart data={formattedGames} width={clientWidth} height={48} />
@@ -160,7 +160,7 @@
 		gap: 0.5rem;
 	}
 
-	h2 {
+	:global(h3) {
 		font-family: var(--sans);
 		font-weight: 700;
 		text-transform: uppercase;
