@@ -14,7 +14,6 @@
   $: selectedTeam = $selectedTeamStore;
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 
-  /** @type {Number} [r=5] - The circle radius. */
   export let r = 5;
 
   $: midHeight = $yScale.bandwidth() / 2;
@@ -38,7 +37,7 @@
             top: {scaledYValue + midHeight}%;
             "
         >
-          {$width > 500 ? row.team : getTeamCode(row.team)}
+          {$width >= 500 ? row.team : getTeamCode(row.team)}
         </div>
         <div
           class="line"
@@ -54,7 +53,7 @@
             <div class="year-text"
               style="
                 left: calc({circleX}% + 15px);
-                top: {scaledYValue + (midHeight * .7)}%;
+                top: calc({scaledYValue}% + 5px);
               "
             >
               {'2023-24'}
@@ -74,7 +73,7 @@
             <div class="year-text"
               style="
                 left: calc({circleX}% - 60px);
-                top: {scaledYValue + (midHeight * .7)}%;
+                top: calc({scaledYValue}% + 5px);
               "
             >
               {'2013-14'}
