@@ -79,9 +79,13 @@
 			)}%;
     "
 		>
-      <img class="intro-panel-image intro-panel-image-2013" src="./assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
+			<img
+				class="intro-panel-image intro-panel-image-2013"
+				src="./assets/imgs/steph-2013.png"
+				alt="Stephen Curry 2013-2014"
+			/>
 			<span class="intro-panel-text">Home 2013-2014</span>
-    </div>
+		</div>
 		<div
 			class="intro-panel"
 			style="
@@ -91,38 +95,60 @@
 			)}%;
     "
 		>
-      <div class="current-spread">
-        <div class="current-spread-association" style="background-color:#ffffffee">
-          <img class="intro-panel-image" src="./assets/imgs/steph-association.png" alt="Stephen Curry in the 2023-2024 Association Edition jersey" />
-        </div>
-        <div class="current-spread-icon" style="background-color:#1a428aee">
-          <img class="intro-panel-image" src="./assets/imgs/steph-icon.png" alt="Stephen Curry in the 2023-2024 Icon Edition jersey" />
-        </div>
-        <div class="current-spread-statement" style="background-color:#272e53ee">
-          <img class="intro-panel-image" src="./assets/imgs/steph-statement.png" alt="Stephen Curry in the 2023-2024 Statement Edition jersey" />
-        </div>
-        <div class="current-spread-city" style="background-color:#000000ee">
-          <img class="intro-panel-image" src="./assets/imgs/steph-city.png" alt="Stephen Curry in the 2023-2024 City Edition jersey" />
-        </div>
-      </div>
-        <span class="intro-panel-text current-spread-text">Home 2014-2015</span>
-    </div>
+			<div class="current-spread">
+				<div
+					class="current-spread-association"
+					style="background-color:#ffffffee"
+				>
+					<img
+						class="intro-panel-image"
+						src="./assets/imgs/steph-association.png"
+						alt="Stephen Curry in the 2023-2024 Association Edition jersey"
+					/>
+				</div>
+				<div class="current-spread-icon" style="background-color:#1a428aee">
+					<img
+						class="intro-panel-image"
+						src="./assets/imgs/steph-icon.png"
+						alt="Stephen Curry in the 2023-2024 Icon Edition jersey"
+					/>
+				</div>
+				<div
+					class="current-spread-statement"
+					style="background-color:#272e53ee"
+				>
+					<img
+						class="intro-panel-image"
+						src="./assets/imgs/steph-statement.png"
+						alt="Stephen Curry in the 2023-2024 Statement Edition jersey"
+					/>
+				</div>
+				<div class="current-spread-city" style="background-color:#000000ee">
+					<img
+						class="intro-panel-image"
+						src="./assets/imgs/steph-city.png"
+						alt="Stephen Curry in the 2023-2024 City Edition jersey"
+					/>
+				</div>
+			</div>
+			<span class="intro-panel-text current-spread-text">Home 2014-2015</span>
+		</div>
 	</div>
 	<Scrolly bind:value={scrollIndex}>
 		{#each introCopy.text as graf, i}
 			{#if i == 0}
-      <div class="intro-video-wrapper">
-						<iframe
-							width="560"
-							height="315"
-							src="https://www.youtube.com/embed/ODN_L2ke-d4?si=Lz09zUCdEPbIGdxL"
-							title="YouTube video player"
-							frameborder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							referrerpolicy="strict-origin-when-cross-origin"
-							allowfullscreen
-						></iframe>
-					</div>
+				<div class="intro-video-wrapper">
+					<iframe
+						width="560"
+						height="315"
+						src="https://www.youtube.com/embed/ODN_L2ke-d4?si=Lz09zUCdEPbIGdxL"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				</div>
 				<div class="intro-top">
 					<p>{@html graf.value}</p>
 				</div>
@@ -161,10 +187,10 @@
 		text-align: center;
 		margin: 0 auto 50vh;
 
-    @media screen and (min-width: 768px) {
-      font-size: 58px;
-      line-height: 64px;
-    }
+		@media screen and (min-width: 768px) {
+			font-size: 58px;
+			line-height: 64px;
+		}
 	}
 
 	.intro-panel {
@@ -174,23 +200,23 @@
 		top: 0;
 		display: block;
 		z-index: -1;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: end;
-    padding-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+		justify-content: end;
+		padding-bottom: 3rem;
 	}
 
-  .intro-panel-image {
-    width: 100%;
-    margin: 0 auto;
-    object-fit: cover;
-  }
+	.intro-panel-image {
+		width: 100%;
+		margin: 0 auto;
+		object-fit: cover;
+	}
 
-  .intro-panel-image-2013 {
-    width: 75%;
-    max-width: 450px;
-  }
+	.intro-panel-image-2013 {
+		width: 75%;
+		max-width: 450px;
+	}
 
 	.intro-panel-text {
 		display: flex;
@@ -208,39 +234,39 @@
 		margin: 0 auto;
 	}
 
-  .current-spread {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    height: 100vh;
-    margin: 0 auto;
-    position: relative;
-    margin-bottom: -3rem;
+	.current-spread {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 0;
+		width: 100%;
+		height: 100vh;
+		margin: 0 auto;
+		position: relative;
+		margin-bottom: -3rem;
 
-    & div {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      align-items: center;
-      padding-bottom: 6rem;
-    }
-  }
+		& div {
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: end;
+			align-items: center;
+			padding-bottom: 6rem;
+		}
+	}
 
-  .current-spread-text {
-    position: absolute;
-    bottom: 5rem;
-    color: #fff;
-    height: 0;
-    text-shadow: 
-    -1px -1px 0 #000,  
-     1px -1px 0  #000,
-    -1px  1px 0  #000,
-     1px  1px 0  #000;
-  }
+	.current-spread-text {
+		position: absolute;
+		bottom: 5rem;
+		color: #fff;
+		height: 0;
+		text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000;
+	}
 
 	.intro-block {
 		font-family: var(--sans);
