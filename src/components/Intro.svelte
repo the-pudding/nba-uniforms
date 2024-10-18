@@ -79,7 +79,7 @@
 			)}%;
     "
 		>
-      <img class="intro-panel-image" src="/assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
+      <img class="intro-panel-image intro-panel-image-2013" src="./assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
 			<span class="intro-panel-text">Home 2013-2014</span>
     </div>
 		<div
@@ -93,16 +93,16 @@
 		>
       <div class="current-spread">
         <div class="current-spread-association" style="background-color:#ffffffee">
-          <img class="intro-panel-image" src="/assets/imgs/steph-association.png" alt="Stephen Curry in the 2023-2024 Association Edition jersey" />
+          <img class="intro-panel-image" src="./assets/imgs/steph-association.png" alt="Stephen Curry in the 2023-2024 Association Edition jersey" />
         </div>
         <div class="current-spread-icon" style="background-color:#1a428aee">
-          <img class="intro-panel-image" src="/assets/imgs/steph-icon.png" alt="Stephen Curry in the 2023-2024 Icon Edition jersey" />
+          <img class="intro-panel-image" src="./assets/imgs/steph-icon.png" alt="Stephen Curry in the 2023-2024 Icon Edition jersey" />
         </div>
         <div class="current-spread-statement" style="background-color:#272e53ee">
-          <img class="intro-panel-image" src="/assets/imgs/steph-statement.png" alt="Stephen Curry in the 2023-2024 Statement Edition jersey" />
+          <img class="intro-panel-image" src="./assets/imgs/steph-statement.png" alt="Stephen Curry in the 2023-2024 Statement Edition jersey" />
         </div>
         <div class="current-spread-city" style="background-color:#000000ee">
-          <img class="intro-panel-image" src="/assets/imgs/steph-city.png" alt="Stephen Curry in the 2023-2024 City Edition jersey" />
+          <img class="intro-panel-image" src="./assets/imgs/steph-city.png" alt="Stephen Curry in the 2023-2024 City Edition jersey" />
         </div>
       </div>
         <span class="intro-panel-text current-spread-text">Home 2014-2015</span>
@@ -177,10 +177,14 @@
 	}
 
   .intro-panel-image {
-    width: 75%;
-    max-width: 450px;
+    width: 100%;
     margin: 0 auto;
     object-fit: cover;
+  }
+
+  .intro-panel-image-2013 {
+    width: 75%;
+    max-width: 450px;
   }
 
 	.intro-panel-text {
@@ -226,6 +230,11 @@
     bottom: 5rem;
     color: #fff;
     height: 0;
+    text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0  #000,
+    -1px  1px 0  #000,
+     1px  1px 0  #000;
   }
 
 	.intro-block {

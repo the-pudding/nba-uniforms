@@ -41,7 +41,7 @@
 .header-grid__container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: auto;
   padding: 0.5rem;
   gap: 5px; /* Optional gap between cells */
   margin: 0 auto 4rem auto;
