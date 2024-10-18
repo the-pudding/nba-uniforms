@@ -154,12 +154,17 @@
 		font-family: var(--sans);
 		font-weight: 900;
 		font-style: italic;
-		font-size: 58px;
-		line-height: 64px;
+		font-size: 32px;
+		line-height: 40px;
 		width: 80%;
 		max-width: 900px;
 		text-align: center;
 		margin: 0 auto 50vh;
+
+    @media screen and (min-width: 768px) {
+      font-size: 58px;
+      line-height: 64px;
+    }
 	}
 
 	.intro-panel {
