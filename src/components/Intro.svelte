@@ -111,8 +111,7 @@
 	<Scrolly bind:value={scrollIndex}>
 		{#each introCopy.text as graf, i}
 			{#if i == 0}
-				<div class="intro-top">
-					<div class="intro-video-wrapper">
+      <div class="intro-video-wrapper">
 						<iframe
 							width="560"
 							height="315"
@@ -124,6 +123,7 @@
 							allowfullscreen
 						></iframe>
 					</div>
+				<div class="intro-top">
 					<p>{@html graf.value}</p>
 				</div>
 			{:else}
