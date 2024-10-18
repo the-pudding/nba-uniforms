@@ -57,8 +57,8 @@
 			)}%;
     "
 		>
-      <span class="intro-homeaway">Home</span>
-    </div>
+			<span class="intro-homeaway">Home</span>
+		</div>
 		<div
 			class="intro-panel"
 			style="
@@ -70,8 +70,8 @@
 			)}%;
     "
 		>
-      <span class="intro-homeaway" style="color:#fff;">Away</span>
-    </div>
+			<span class="intro-homeaway" style="color:#fff;">Away</span>
+		</div>
 		<div
 			class="intro-panel"
 			style="
@@ -117,7 +117,7 @@
 						<iframe
 							width="560"
 							height="315"
-							src="https://www.youtube.com/embed/eLx9CVbj32c?si=Z28SF2UvfRknL5v-&amp;start=60"
+							src="https://www.youtube.com/embed/MJ2ROjE_O7I?si=RtNwznxsc5-joeFW&amp;start=60"
 							title="YouTube video player"
 							frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -156,17 +156,17 @@
 		z-index: -1;
 	}
 
-  .intro-homeaway {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 4rem;
-    width: 100%;
-    font-size: 30px;
+	.intro-homeaway {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		bottom: 4rem;
+		width: 100%;
+		font-size: 30px;
 		font-family: var(--sans);
-    text-transform: uppercase;
-    font-weight: 900;
-  }
+		text-transform: uppercase;
+		font-weight: 900;
+	}
 
 	.intro-video-wrapper {
 		display: flex;
@@ -189,11 +189,11 @@
 		margin-bottom: 2rem;
 	}
 
-  :global(.select-prompt) {
-    display: block;
-    font-family: var(--sans);
-    font-weight: 900;
-    text-transform: uppercase;
-    margin: 1rem 0;
-  }
+	:global(.select-prompt) {
+		display: block;
+		font-family: var(--sans);
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 1rem 0;
+	}
 </style>
