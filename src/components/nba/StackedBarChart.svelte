@@ -16,6 +16,9 @@
 	export let height;
 	let barStroke = 1.5;
 
+	let fontSize = 12;
+	if (width >= 500) fontSize = 14;
+
 	const editions = [
 		'Association Edition',
 		'Icon Edition',
@@ -83,20 +86,20 @@
 		{#if d.total / 41 >= .05}
 			<text
 				x={x(d.cumulative)}
-				y={8}
+				y={10}
 				fill="#000"
 				text-anchor="left"
-				font-size="10px"
+				font-size={`${fontSize}px`}
 				font-family="sans-serif"
 			>
 				{`${d.edition.replace(' Edition', '')}`}
 			</text>
 			<text
 				x={x(d.cumulative)}
-				y={20}
+				y={24}
 				fill="#000"
 				text-anchor="left"
-				font-size="10px"
+				font-size={`${fontSize}px`}
 				font-family="sans-serif"
 			>
 				{`${convertToPercent(d.total, 41)}`}
@@ -105,7 +108,7 @@
 		<rect
 		  class="bar"
 			x={x(d.cumulative)}
-			y={25}
+			y={28}
 			fill={d.colorHex}
 			width={x(d.total)}
 			stroke="#000"
