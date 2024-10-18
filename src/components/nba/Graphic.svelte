@@ -66,9 +66,11 @@
 	}
 </script>
 
-<section class="graphic-wrapper">
+<section class="graphic-wrapper"  bind:clientWidth>
 	{#if id == "waffle-home-away"}
-		<div class="middle-line"></div>
+		{#if clientWidth >= 768}
+			<div class="middle-line"></div>
+		{/if}
 		<div class="chart-wrapper with-bg">
 			<JerseyLayout
 				title={`2023-24 Home`}
