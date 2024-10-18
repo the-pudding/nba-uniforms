@@ -229,7 +229,6 @@
 	}
 
 	.lollipop{
-			height: 1500px;
 			padding-left: 10px;
     }
 

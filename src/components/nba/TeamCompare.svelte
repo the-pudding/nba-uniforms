@@ -243,6 +243,8 @@
         padding: 0;
         border-bottom: 1px solid var(--color-fg);
         opacity: 0.5;
+        width: 100%;
+        hyphens: auto;
     }
     .activeSort {
         opacity: 1;
@@ -259,7 +261,7 @@
             gap: 0.5rem;
         }
         .your-team-row .jersey-wrapper {
-            width: calc(20% - 0.25rem);
+            width: calc(20% - 0.5rem);
         }
         .your-team-row .name::after {
             top: -1.75rem;

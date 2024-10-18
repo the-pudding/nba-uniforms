@@ -14,14 +14,12 @@
 	let progress = 0;
 	let introContainer;
 
-	// This function will be called on scroll to update the scroll position
 	const handleScroll = () => {
 		const scrollTop = window.scrollY;
 		const containerHeight = introContainer.offsetHeight;
 		const containerTop = introContainer.getBoundingClientRect().top + scrollTop;
 		const containerBottom = containerTop + containerHeight;
 
-		// Ensure that we are only calculating the progress when scrolling within the component's div
 		if (scrollTop >= containerTop && scrollTop <= containerBottom) {
 			scrollY = scrollTop - containerTop;
 			progress = scrollY / containerHeight;
@@ -35,7 +33,6 @@
 	onMount(() => {
 		window.addEventListener("scroll", handleScroll);
 
-		// Clean up the event listener on component destroy
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
@@ -49,7 +46,7 @@
 		<div
 			class="intro-panel"
 			style="
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(255, 255, 255, 0.75);
       width: 50%;
       left: {Math.min(
 				Math.min(1250 * progress - 200, -1250 * progress + 300),
@@ -57,12 +54,12 @@
 			)}%;
     "
 		>
-			<span class="intro-homeaway">Home</span>
+			<span class="intro-panel-text">Home</span>
 		</div>
 		<div
 			class="intro-panel"
 			style="
-      background-color: rgba(0, 62, 165, 0.8);
+      background-color: rgba(0, 62, 165, 0.75);
       width: 50%;
       right: {Math.min(
 				Math.min(1250 * progress - 200, -1250 * progress + 300),
@@ -70,28 +67,46 @@
 			)}%;
     "
 		>
-			<span class="intro-homeaway" style="color:#fff;">Away</span>
+			<span class="intro-panel-text" style="color:#fff;">Away</span>
 		</div>
 		<div
 			class="intro-panel"
 			style="
-      background-color: rgba(255, 255, 255, 1);
+      background-color: rgba(255, 255, 255, 0.75);
       left: {Math.min(
 				Math.min(2500 * progress - 800, -2500 * progress + 1000),
 				0
 			)}%;
     "
-		></div>
+		>
+      <img class="intro-panel-image" src="/assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
+			<span class="intro-panel-text">Home 2013-2014</span>
+    </div>
 		<div
 			class="intro-panel"
 			style="
-      background-color: rgba(0, 0, 0, 0.5);
       left: {Math.min(
 				Math.min(1250 * progress - 800, -1250 * progress + 900),
 				0
 			)}%;
     "
-		></div>
+		>
+      <div class="current-spread">
+        <div class="current-spread-association" style="background-color:#ffffffee">
+          <img class="intro-panel-image" src="/assets/imgs/steph-association.png" alt="Stephen Curry in the 2023-2024 Association Edition jersey" />
+        </div>
+        <div class="current-spread-icon" style="background-color:#1a428aee">
+          <img class="intro-panel-image" src="/assets/imgs/steph-icon.png" alt="Stephen Curry in the 2023-2024 Icon Edition jersey" />
+        </div>
+        <div class="current-spread-statement" style="background-color:#272e53ee">
+          <img class="intro-panel-image" src="/assets/imgs/steph-statement.png" alt="Stephen Curry in the 2023-2024 Statement Edition jersey" />
+        </div>
+        <div class="current-spread-city" style="background-color:#000000ee">
+          <img class="intro-panel-image" src="/assets/imgs/steph-city.png" alt="Stephen Curry in the 2023-2024 City Edition jersey" />
+        </div>
+      </div>
+        <span class="intro-panel-text current-spread-text">Home 2014-2015</span>
+    </div>
 	</div>
 	<Scrolly bind:value={scrollIndex}>
 		{#each introCopy.text as graf, i}
@@ -113,7 +128,7 @@
 				</div>
 			{:else}
 				{#if i == 5}
-					<div class="intro-video-wrapper" style="margin-bottom: 25vh;">
+					<div class="intro-video-wrapper" style="margin-bottom: 5vh;">
 						<iframe
 							width="560"
 							height="315"
@@ -154,13 +169,23 @@
 		top: 0;
 		display: block;
 		z-index: -1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+    padding-bottom: 3rem;
 	}
 
-	.intro-homeaway {
+  .intro-panel-image {
+    width: 75%;
+    max-width: 450px;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+
+	.intro-panel-text {
 		display: flex;
 		justify-content: center;
-		position: absolute;
-		bottom: 4rem;
 		width: 100%;
 		font-size: 30px;
 		font-family: var(--sans);
@@ -174,11 +199,40 @@
 		margin: 0 auto;
 	}
 
+  .current-spread {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: -3rem;
+
+    & div {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .current-spread-text {
+    position: absolute;
+    bottom: 5rem;
+    color: #fff;
+    height: 0;
+  }
+
 	.intro-block {
 		font-family: var(--sans);
 		width: 75%;
 		max-width: 500px;
-		margin: 0 auto 50vh;
+		margin: 0 auto 75vh;
 		padding: 0 20px;
 		background-color: rgba(255, 255, 255, 0.75);
 		padding: 20px;
