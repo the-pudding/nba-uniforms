@@ -22,6 +22,10 @@
   const data1314 = getContext("data1314");
 	const teams = getContext("teams");
 
+
+
+    $: console.log(copy);
+
 	$: flairData = flair23.map((d) => ({
 		team: d.team,
 		"2023 Score": Number(d.score),

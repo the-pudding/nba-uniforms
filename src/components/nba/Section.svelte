@@ -14,8 +14,6 @@
 	$: selectedTeamName = teams.find(d => d.code === selectedTeam)?.team;
 	$: statFill(selectedTeam, copy);
 
-    $: console.log(copy);
-
     function statFill(team, copy) {
 		if (browser) {
 			const homeCityGames = data.filter(d => d.homeTeam === selectedTeamName && d.homeTeamEdition === 'City Edition').length;
@@ -50,14 +48,6 @@
             <h2>{@html copy.heading}</h2>
     </div>
     <div class="after-line"></div>
-{:else if copy.contentType == "intro"}
-    <div class="prose">
-        <div class="line-inset">
-            <span class="intro_subhead">{@html copy.subhead}</span>
-            <span class="intro_byline">{@html copy.byline}</span>
-            <span class="intro_subbyline">{@html copy.subbyline}</span>
-        </div>    
-    </div>
 {:else if copy.contentType == "prose"}
  <div class="prose">
         <div class="line-inset">
