@@ -1,11 +1,11 @@
 <script>
 	import { setContext, getContext } from 'svelte';
   import { selectedTeamStore } from '$stores/teamSelection';
-	import NBA from "$components/nba/NBA.svelte";
+	import StoryBody from "$components/StoryBody.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
 	import Header from "$components/Header.svelte";
-	import Intro from "$components/Intro.svelte";
-	import StoryHeader from "$components/StoryHeader.svelte";
+	import StoryIntro from "$components/StoryIntro.svelte";
+	import StoryHeaderGrid from "$components/StoryHeaderGrid.svelte";
 	import Footer from "$components/Footer.svelte";
 	import SelectBar from "$components/nba/SelectBar.svelte";
 
@@ -27,9 +27,8 @@
 </script>
 
 <Header />
-<Intro />
+<StoryIntro />
 <SelectBar />
-<!-- <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY/> -->
-<StoryHeader />
-<NBA />
+<StoryHeaderGrid />
+<StoryBody />
 <Footer />
