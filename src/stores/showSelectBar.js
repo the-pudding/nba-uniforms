@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const showSelectBar = writable(false);
+export const showSelectBarStore = writable(false);

@@ -1,9 +1,6 @@
 <script>
 	import { getContext, setContext, onMount } from "svelte";
-	import { selectedTeamStore } from "$stores/teamSelection";
   import { showSelectBarStore } from '$stores/showSelectBar';
-	import wordmark from "$svg/wordmark-shadow.svg";
-	import Section from "$components/nba/Section.svelte";
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 
 	const introCopy = getContext("copy")?.copy.filter(
@@ -27,7 +24,6 @@
 			if (showSelectBarStore) {
 				showSelectBarStore.set(false);
 			}
-			setContext('showSelectBarStore', false);
 		} else if (scrollTop < containerTop) {
 			scrollProgress = 0;
 			if (showSelectBarStore) {
@@ -240,6 +236,11 @@
 		justify-content: center;
 		margin: 0 auto;
 		width: 75%;
+
+		& iframe {
+			aspect-ratio: 16 / 9;
+			width: 100%;
+		}
 	}
 
 	.current-spread {
@@ -278,6 +279,7 @@
 
 	.intro-block {
 		font-family: var(--sans);
+		font-size: var(--20px);
 		width: 75%;
 		max-width: 500px;
 		margin: 0 auto 75vh;

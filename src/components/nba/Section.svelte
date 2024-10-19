@@ -195,6 +195,7 @@
             aspect-ratio: 1;
             border: 5px solid var(--color-gray-1000);
             border-radius: 50%;
+            visibility: visible;
         }
     }
 

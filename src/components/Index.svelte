@@ -28,7 +28,7 @@
 	const data = getContext("data");
 </script>
 
-<Header />
+<WIP />
 <StoryIntro bind:scrollProgress={scrollProgress} />
 <SelectBar />
 <StoryHeaderGrid />

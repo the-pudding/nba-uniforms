@@ -28,7 +28,7 @@
 </script>
 
 
-<div class={`select-bar ${$showSelectBar ? '' : 'hidden'}`}>
+<div class={`select-bar ${showSelectBar ? '' : 'hidden'}`}>
 	<button aria-label="Find nearest team to me" on:click={handleGeolocate}>
 		{@html geolocateTarget}
 	</button>

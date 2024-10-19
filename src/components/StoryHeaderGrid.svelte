@@ -12,7 +12,6 @@
 	}
 </script>
 
-<header>
   <div class="header-grid__container">
     {#each teams as team}
 			<div class="header-grid__jersey">
@@ -34,7 +33,7 @@
       </h1>
     </div>
   </div>
-</header>
+
 
 
 <style>

@@ -134,6 +134,14 @@
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.2);
 		}
+
+		@media screen and (min-width: 500px) and (max-width: 624px) {
+			width: calc(12.5% - 0.25rem);
+		}
+
+		@media screen and (min-width: 625px) and (max-width: 767px) {
+			width: calc(10% - 0.25rem);
+		}
 	}
 
 	.jersey-waffle_game:hover .jersey-waffle_game-date {
