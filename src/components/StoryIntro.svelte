@@ -1,6 +1,7 @@
 <script>
-	import { getContext, onMount } from "svelte";
+	import { getContext, setContext, onMount } from "svelte";
 	import { selectedTeamStore } from "$stores/teamSelection";
+  import { showSelectBarStore } from '$stores/showSelectBar';
 	import wordmark from "$svg/wordmark-shadow.svg";
 	import Section from "$components/nba/Section.svelte";
 	import Scrolly from "$components/helpers/Scrolly.svelte";
@@ -11,7 +12,7 @@
 
 	let scrollIndex;
 	let scrollY = 0;
-	let progress = 0;
+	let scrollProgress = 0;
 	let introContainer;
 
 	const handleScroll = () => {
@@ -22,11 +23,19 @@
 
 		if (scrollTop >= containerTop && scrollTop <= containerBottom) {
 			scrollY = scrollTop - containerTop;
-			progress = scrollY / containerHeight;
+			scrollProgress = scrollY / containerHeight;
+			if (showSelectBarStore) {
+				showSelectBarStore.set(false);
+			}
+			setContext('showSelectBarStore', false);
 		} else if (scrollTop < containerTop) {
-			progress = 0;
+			scrollProgress = 0;
+			if (showSelectBarStore) {
+				showSelectBarStore.set(false);
+			}
 		} else if (scrollTop > containerBottom) {
-			progress = 1;
+			scrollProgress = 1;
+			showSelectBarStore.set(true);
 		}
 	};
 
@@ -37,8 +46,6 @@
 			window.removeEventListener("scroll", handleScroll);
 		};
 	});
-
-	$: console.log("Scroll progress:", progress);
 </script>
 
 <div class="intro" bind:this={introContainer}>
@@ -49,7 +56,7 @@
       background-color: rgba(255, 255, 255, 0.75);
       width: 50%;
       left: {Math.min(
-				Math.min(1250 * progress - 200, -1250 * progress + 300),
+				Math.min(1250 * scrollProgress - 200, -1250 * scrollProgress + 300),
 				0
 			)}%;
     "
@@ -62,7 +69,7 @@
       background-color: rgba(0, 62, 165, 0.75);
       width: 50%;
       right: {Math.min(
-				Math.min(1250 * progress - 200, -1250 * progress + 300),
+				Math.min(1250 * scrollProgress - 200, -1250 * scrollProgress + 300),
 				0
 			)}%;
     "
@@ -74,7 +81,7 @@
 			style="
       background-color: rgba(255, 255, 255, 0.75);
       left: {Math.min(
-				Math.min(2500 * progress - 800, -2500 * progress + 1000),
+				Math.min(2500 * scrollProgress - 800, -2500 * scrollProgress + 1000),
 				0
 			)}%;
     "
@@ -90,7 +97,7 @@
 			class="intro-panel"
 			style="
       right: {Math.min(
-				Math.min(1250 * progress - 800, -1250 * progress + 900),
+				Math.min(1250 * scrollProgress - 800, -1250 * scrollProgress + 900),
 				0
 			)}%;
     "

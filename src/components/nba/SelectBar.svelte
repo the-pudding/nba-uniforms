@@ -1,14 +1,15 @@
 <script>	
 	import { getContext } from 'svelte';
   import { selectedTeamStore } from '$stores/teamSelection';
+  import { showSelectBarStore } from '$stores/showSelectBar';
 	import geolocateTarget from '$svg/geolocate.svg';
-
 
 	import locate from "$utils/locate";
 	import findClosestPoint from "$utils/findClosestPoint";
 	
 	const teams = getContext("teams");
 
+	$: showSelectBar = $showSelectBarStore;
   $: selectedTeam = $selectedTeamStore;
 
 	function handleChange(event) {
@@ -27,7 +28,7 @@
 </script>
 
 
-<div class="select-bar">
+<div class={`select-bar ${$showSelectBar ? '' : 'hidden'}`}>
 	<button aria-label="Find nearest team to me" on:click={handleGeolocate}>
 		{@html geolocateTarget}
 	</button>
@@ -57,10 +58,10 @@
 		flex-direction: row;
 		align-items: center;
 		height: 4rem;
+		transition: opacity 0.5s;
 	}
-	svg {
-		cursor: pointer;
-		fill: var(--color-input-bg);
+	.hidden {
+		opacity: 0;
 	}
 
 	button {

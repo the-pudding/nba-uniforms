@@ -14,6 +14,8 @@
 
 	import teams from "$data/nba2324/teamNames.json";
 
+	export let scrollProgress;
+
 	locate(true).then(data => {
 		const [lat, lon] = data.loc.split(',').map(Number);
 		const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
@@ -27,7 +29,7 @@
 </script>
 
 <Header />
-<StoryIntro />
+<StoryIntro bind:scrollProgress={scrollProgress} />
 <SelectBar />
 <StoryHeaderGrid />
 <StoryBody />
