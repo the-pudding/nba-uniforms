@@ -89,7 +89,7 @@
 		<div
 			class="intro-panel"
 			style="
-      left: {Math.min(
+      right: {Math.min(
 				Math.min(1250 * progress - 800, -1250 * progress + 900),
 				0
 			)}%;
@@ -131,7 +131,7 @@
 					/>
 				</div>
 			</div>
-			<span class="intro-panel-text current-spread-text">Home 2014-2015</span>
+			<span class="intro-panel-text current-spread-text">Home 2023-2024</span>
 		</div>
 	</div>
 	<Scrolly bind:value={scrollIndex}>
