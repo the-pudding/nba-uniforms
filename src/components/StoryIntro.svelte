@@ -139,8 +139,8 @@
 			{#if i == 0}
 				<div class="intro-video-wrapper">
 					<iframe
-						width="560"
-						height="315"
+						width="840"
+						height="472"
 						src="https://www.youtube.com/embed/ODN_L2ke-d4?si=Lz09zUCdEPbIGdxL"
 						title="YouTube video player"
 						frameborder="0"
@@ -156,8 +156,8 @@
 				{#if i == 5}
 					<div class="intro-video-wrapper" style="margin-bottom: 5vh;">
 						<iframe
-							width="560"
-							height="315"
+							width="840"
+							height="472"
 							src="https://www.youtube.com/embed/ZpHbZ0qGwQI?si=VbnGWy3APVJxd1H_&amp;start=60"
 							title="YouTube video player"
 							frameborder="0"
@@ -232,6 +232,7 @@
 		display: flex;
 		justify-content: center;
 		margin: 0 auto;
+		width: 75%;
 	}
 
 	.current-spread {
