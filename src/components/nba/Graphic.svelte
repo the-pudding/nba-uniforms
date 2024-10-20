@@ -19,6 +19,7 @@
 
 	export let id;
 	let clientWidth;
+	let unfurlFlair = false;
 
 	const data = getContext("data");
 	const data1314 = getContext("data1314");
@@ -116,8 +117,9 @@
 			</LayerCake>
 		</div>
 	{:else if id == "beeswarm-flair-13"}
-		<div class="lollipop graphic-wide graphic">
+		<div class={`lollipop graphic-wide graphic ${unfurlFlair ? 'lollipop-unfurled' : ''}`}>
 			<h3>Change in Flair from 2013-14 to 2023-24</h3>
+			<button class={`lollipop-button ${unfurlFlair ? 'lollipop-button-unfurled' : ''}`} on:click={() => unfurlFlair = true}>View All Teams</button>
 			<LayerCake
 				let:width
 				ssr
@@ -129,7 +131,7 @@
 				xDomain={[0, null]}
 				xPadding={[0, 0]}
 				xRange={({width}) => width >= 500 
-					? [30, 90] 
+					? [32, 90] 
 					: [25, 80]}
 				y={"rank"}
 				yScale={d3.scaleBand().paddingInner(0.2).round(true)}
@@ -143,22 +145,6 @@
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic">
 			<TeamCompare data={teamTotals} />
-			<!-- <LayerCake
-				padding={{ bottom: 0, left: 0 }}
-
-				x={'City Edition'}
-				xDomain={[0, 41]}
-				xRange={[0, 100]}
-				y={'team'}
-				yScale={d3.scaleBand().paddingInner(0.2)}
-				yRange={[0, 100]}
-				data={teamTotals}
-			>
-				<ScaledSvg>
-					<Bar />
-				</ScaledSvg>
-				<BarLabels />
-			</LayerCake> -->
 		</div>
 	{/if}
 </section>
@@ -230,7 +216,33 @@
 
 	.lollipop{
 			padding-left: 10px;
+			height: 50vh;
+			overflow: hidden;
+			transition: height 0.5s ease;
+
+			&.lollipop-unfurled {
+				height: unset;
+				overflow: unset;
+			}
+
+			& .lollipop-button {
+				width: calc(100% + 4rem);
+				font-weight: 900;
+				font-size: var(--20px);
+				text-transform: uppercase;
+				color: white;
+				position: absolute;
+				bottom: 0.25rem;
+				z-index: 10;
+				padding: 2rem 0 0.75rem;
+				margin: 0 0 0 -2rem;
+				background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+			}
+
+			& .lollipop-button-unfurled {
+				display: none;
     }
+	}
 
 	.beeswarm {
 		height: 600px;
