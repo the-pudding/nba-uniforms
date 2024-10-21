@@ -247,15 +247,22 @@
 
     :global(.inline-image) {
         float: right;
-        width: 15rem;
-        margin-left: 1rem;
+        width: 100%;
+        margin: 0 0 2rem 1rem;
 
+        @media screen and (min-width: 501px) { 
+            width: 15rem;
+        }
     }
 
     :global(.inline-image-left) {
         float: left;
-        width: 15rem;
-        margin-right: 1rem;
+        width: 100%;
+        margin: 0 1rem 2rem 0;
+        
+        @media screen and (min-width: 501px) {  
+            width: 15rem;
+        }
     }
 
     li span {
