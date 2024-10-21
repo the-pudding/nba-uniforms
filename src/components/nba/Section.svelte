@@ -245,6 +245,19 @@
         max-width: 100px;
     }
 
+    :global(.inline-image) {
+        float: right;
+        width: 15rem;
+        margin-left: 1rem;
+
+    }
+
+    :global(.inline-image-left) {
+        float: left;
+        width: 15rem;
+        margin-right: 1rem;
+    }
+
     li span {
         text-align: center;
     }
