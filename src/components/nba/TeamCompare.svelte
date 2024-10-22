@@ -4,6 +4,7 @@
     import getTeamCode from '../../utils/getTeamCode';
     import { flip } from 'svelte/animate';
     import * as d3 from "d3";
+    import viewport from "$stores/viewport.js";
 
     export let data;
 
@@ -77,6 +78,16 @@
             allOtherTeams = allOtherTeams.sort((a, b) => d3.descending(a.jerseys[0].percentage, b.jerseys[0].percentage));
         }
     }
+
+    function editionShorten(edition) {
+        if (edition == "association") {
+            return "assoc."
+        } else if (edition == "statement") {
+            return "state."
+        } else if (edition == "classic") {
+            return "class."
+        } else return edition
+    }
 </script>
 
 <svelte:window bind:innerWidth />
@@ -90,16 +101,18 @@
             {#each yourTeam[0].jerseys as edition, i}
                 <div class="jersey-wrapper">
                     <button on:click={() => dataSort(edition.type)} class:activeSort={sortedBy == edition.type}>
-                        {edition.type}
+                        {$viewport.width >= 500 ? edition.type : editionShorten(edition.type)}
                         <span>
                             {sortedBy == edition.type ? "▼" : "▲"}
                         </span>
                     </button>
                     <div class="jersey-img">
                         {#if editionExists[edition.type]}
-                            <img src="assets/jerseys/{$selectedTeamStore}_{edition.type}.png">
+                            <img src="assets/jerseys/{$selectedTeamStore}_{edition.type}.png"
+                                alt="{$selectedTeamStore} {edition.type} jersey">
                         {:else}
-                            <img src="assets/jerseys/blank.png">
+                            <img src="assets/jerseys/blank.png"
+                                alt="blank jersey">
                         {/if}
                     </div>
                     <div class="jersey-type">

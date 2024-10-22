@@ -107,7 +107,7 @@
 					</div>
 					<img
 						src={`./assets/jerseys/${getTeamCode(game.team)}_${game.edition.split(" ")[0].toLowerCase()}.png`}
-						alt={getTeamCode(game.team)}
+						alt={`${getTeamCode(game.team)} ${game.edition.split(" ")[0].toLowerCase()} jersey`}
 						class="jersey-waffle_illustration"
 					/>
 				</div>

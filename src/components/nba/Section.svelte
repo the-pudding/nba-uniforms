@@ -367,4 +367,10 @@
             font-size: 80px;
         }
     }
+
+    @media(max-width: 400px) {
+        .heading-wrapper h2 {
+            font-size: 70px;
+        }
+    }
 </style>
