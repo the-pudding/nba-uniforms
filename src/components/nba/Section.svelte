@@ -130,10 +130,6 @@
         font-style: italic;
         text-align: center;
         margin: 2rem 0 0 -1rem;
-
-        @media screen and (min-width: 750px) {
-            font-size: 150px;
-        }
     }
 
     .heading-circle {
@@ -316,6 +312,18 @@
             width: 100%;
         }
     }
+    @media(max-width: 750px) {
+        .heading-wrapper {
+            height: 6rem;
+        }
+        .heading-wrapper h2 {
+            font-size: 100px;
+        }
+        .heading-circle {
+            width: 6rem;
+            height: 6rem;
+        }
+    }
 
     @media(max-width: 600px) {
         .line-inset {
@@ -333,6 +341,10 @@
 
         li {
             width: calc(50% - 1rem);
+        }
+
+        .heading-wrapper h2 {
+            font-size: 80px;
         }
     }
 </style>

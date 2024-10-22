@@ -263,7 +263,7 @@
             gap: 0.5rem;
         }
         .your-team-row .jersey-wrapper {
-            width: calc(20% - 0.5rem);
+            width: 20%;
         }
         .your-team-row .name::after {
             top: -1.75rem;

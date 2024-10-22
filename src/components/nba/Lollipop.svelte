@@ -6,6 +6,7 @@
 	import { getContext } from "svelte";
 	import { selectedTeamStore } from "$stores/teamSelection";
 	import getTeamCode from "../../utils/getTeamCode";
+	import viewport from "$stores/viewport.js";
 
 	const teams = getContext("teams");
 
@@ -16,75 +17,87 @@
 	$: selectedTeamName = teams.find((d) => d.code === selectedTeam)?.team;
 
 	export let r = 5;
+	export let unfurlFlair = false;
 
-	$: midHeight = $yScale.bandwidth() / 2;
+	$: yourTeamData = $data.filter((d) => getTeamCode(d.team) == $selectedTeamStore);
+	$: otherTeamData = $data.filter((d) => getTeamCode(d.team) !== $selectedTeamStore);
+
 </script>
 
 <div class="flair-explain">
 	<span class="left"><span class="caret-left"></span> Less flair</span>
 	<span class="right">More flair <span class="caret-right"></span></span>
 </div>
-<div class="dot-plot">
-	{#each $data as row}
-		{@const scaledYValue = $yGet(row)}
-		{@const scaledXValues = $xGet(row)}
-		<div class="dot-row {row.team === selectedTeamName ? 'row-selected' : ''}">
+{#if yourTeamData !== undefined}
+<div class="dot-plot your-team">
+	<div class="dot-row {yourTeamData[0].team === selectedTeamName ? 'row-selected' : ''}">
+		<div class="dot-row-inner">
 			<div class="row-team">
-				{$width >= 500 ? row.team : getTeamCode(row.team)}
+				{#if yourTeamData[0].team === selectedTeamName}
+				<span>Your team</span>
+				{/if}
+				{$viewport.width  >= 800 ? yourTeamData[0].team : getTeamCode(yourTeamData[0].team)}
 			</div>
 			<div class="row-data">
-				<div
-					class="line"
-					style="
-            left: {Math.min(...scaledXValues)}%;
-            right: {100 - Math.max(...scaledXValues)}%;
-          "
-				></div>
-
-				{#each scaledXValues as circleX, i}
+				<div class="line" style="left: calc({Math.min(...$xGet(yourTeamData[0]))}% + 50px); right: calc({100 - Math.max(...$xGet(yourTeamData[0]))}% + 50px);"></div>
+				{#each $xGet(yourTeamData[0]) as circleX, i}
 					{#if i === 0}
-						<div
-							class="year-text"
-							style="
-                left: calc({circleX}% + 20px);
-              "
-						>
+						<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
 							{"2023-24"}
 						</div>
-						<div
-							class="jersey-container"
-							style="
-              left: {circleX}%;
-              width: 36px;
-              height: 54px;
-            "
-						>
+						<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
 							<img
-								src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
-								alt={row.team}
+								src={`./assets/jerseys/${getTeamCode(yourTeamData[0].team)}_icon.png`}
+								alt={yourTeamData[0].team}
 								class="jersey-illustration"
 							/>
 						</div>
 					{:else}
-						<div
-							class="year-text"
-							style="
-                left: calc({circleX}% - 60px);
-              "
-						>
+						<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 5px);">
 							{"2013-14"}
 						</div>
-						<div
-							class="circle"
-							style="
-                left: {circleX}%;
-                width: {r * 2}px;
-                height: {r * 2}px;
-                background: black;
-              "
-						></div>
+						<div class="circle" style="top: calc(50% - 1px); left: calc({circleX}% + 50px); width: {r * 2}px; height: {r * 2}px; background: black;"></div>
 					{/if}
 				{/each}
+			</div>
+		</div>
+	</div>
+</div>
+{/if}
+<div class={`${unfurlFlair ? 'dot-plot-unfurled' : 'dot-plot'}`}>
+	{#each otherTeamData as row}
+		{@const scaledYValue = $yGet(row)}
+		{@const scaledXValues = $xGet(row)}
+		<div class="dot-row {row.team === selectedTeamName ? 'row-selected' : ''}">
+			<div class="dot-row-inner">
+				<div class="row-team">
+					{#if row.team === selectedTeamName}
+					<span>Your team</span>
+					{/if}
+					{$viewport.width >= 800 ? row.team : getTeamCode(row.team)}
+				</div>
+				<div class="row-data">
+					<div class="line" style="left: calc({Math.min(...scaledXValues)}% + 50px); right: calc({100 - Math.max(...scaledXValues)}% + 50px);"></div>
+					{#each scaledXValues as circleX, i}
+						{#if i === 0}
+							<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
+								{"2023-24"}
+							</div>
+							<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
+								<img
+									src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
+									alt={row.team}
+									class="jersey-illustration"
+								/>
+							</div>
+						{:else}
+							<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 5px);">
+								{"2013-14"}
+							</div>
+							<div class="circle" style="top: calc(50% - 1px); left: calc({circleX}% + 50px); width: {r * 2}px; height: {r * 2}px; background: black;"></div>
+						{/if}
+					{/each}
+				</div>
 			</div>
 		</div>
 	{/each}
@@ -94,7 +107,19 @@
 	.dot-plot {
 		position: relative;
 		width: 100%;
-		height: 100%;
+		height: 700px;
+		overflow-y: hidden;
+	}
+
+	.dot-plot.your-team {
+		overflow: visible;
+		position: sticky;
+		background: rgba(255, 255, 255, 0.95);
+		border-bottom: 3px solid var(--color-fg);
+		position: sticky;
+		top: 4rem;
+		z-index: 1000;
+		height: 70px;
 	}
 
 	.dot-row {
@@ -103,38 +128,56 @@
 		height: 70px;
 		margin: 0.5rem 0;
 	}
+	.dot-row-inner {
+		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		padding: 0 0.5rem;
+		gap: 0.5rem;
+	}
 	.row-selected {
 		background: rgba(255, 255, 255, 0.95);
 		border-bottom: 3px solid var(--color-fg);
-		position: relative;
+		position: sticky;
+		top: 4rem;
+		z-index: 1000;
 	}
 
-	.row-selected .row-team:before {
-		content: "Your team";
-		text-transform: none;
+	.row-selected span {
+		font-size: 12px;
 		font-weight: 500;
-		text-align: right;
-		font-size: var(--14px);
-		position: relative;
-		top: -1rem;
-		right: 0;
-		transform: translate(100%, 0);
 	}
 
 	.row-team {
 		display: flex;
 		justify-content: flex-end;
-		align-items: center;
 		line-height: 16px;
 		font-family: var(--sans);
-		font-size: 16px;
+		font-size: 14px;
 		text-align: right;
 		font-weight: bold;
-		text-transform: uppercase;
+		width: 160px;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 2px;
+	}
 
-		@media screen and (min-width: 500px) {
-			width: 24%;
-		}
+	.row-data {
+		width: calc(100% - 160px);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		position: relative;
+	}
+
+	.row-data p {
+		font-family: var(--sans);
+		font-size: var(--14px);
 	}
 
 	.line {
@@ -166,8 +209,10 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 10px 0 25%;
+		padding: 0 1rem 0 200px;
 		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
 		font-family: var(--sans);
 		font-size: 14px;
 		font-weight: bold;
@@ -195,5 +240,14 @@
 		border-top: 5px solid transparent;
 		border-bottom: 5px solid transparent;
 		border-left: 5px solid #333;
+	}
+
+	@media(max-width: 800px) {
+		.row-team {
+			width: 30px;
+		}
+		.row-data {
+			width: calc(100% - 30px);
+		}
 	}
 </style>

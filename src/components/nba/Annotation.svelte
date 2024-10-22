@@ -26,7 +26,7 @@
     $: setAnnoPos($annotationVisible, $viewport.width)
 </script>
 
-<div id="annotation-block" style="left: {$viewport.width >= 800 ? annoPos : annoPos-190}px">
+<div id="annotation-block" style="left: {$viewport.width >= 800 ? annoPos-125 : annoPos-225}px">
     <div class="img-wrapper" in:fly={!$reducedMotion ? { delay: 0, duration: 300, y: 100} : undefined} out:fade={!$reducedMotion ? {duration: fadeDuration} : undefined}>
         <img src="./assets/imgs/{imgMatch($annotationVisible[1])}.png" alt="character" />
     </div>

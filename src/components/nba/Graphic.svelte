@@ -120,7 +120,7 @@
 			</div>
 		</div>
 	{:else if id == "beeswarm-flair-13"}
-		<div class={`lollipop graphic-wide graphic ${unfurlFlair ? 'lollipop-unfurled' : ''}`}>
+		<div class={`lollipop graphic-wide graphic`}>
 			<h3>Change in Flair from 2013-14 to 2023-24</h3>
 			<button class={`lollipop-button ${unfurlFlair ? 'lollipop-button-unfurled' : ''}`} on:click={() => unfurlFlair = true}>View All Teams</button>
 			<div class="graphic-inner">
@@ -134,16 +134,14 @@
 					)}
 					xDomain={[0, null]}
 					xPadding={[0, 0]}
-					xRange={({width}) => width >= 500 
-						? [32, 90] 
-						: [25, 80]}
+					xRange={[0, 90]}
 					y={"rank"}
 					yScale={d3.scaleBand().paddingInner(0.2).round(true)}
 					yRange={[0, 100]}
 					zScale={d3.scaleOrdinal()}
 					data={filterFlairData(flairData, selectedTeamName)}
 				>
-					<Lollipop />
+					<Lollipop  unfurlFlair={unfurlFlair}/>
 				</LayerCake>
 			</div>
 		</div>
@@ -242,16 +240,13 @@
 		padding: 0 0 3rem 0;
 	}
 
+	.graphic-wide.lollipop {
+		padding: 2rem 0;
+	}
+
 	.lollipop{
 			padding-left: 10px;
-			height: 700px;
-			overflow: hidden;
-			transition: height 0.5s ease;
-
-			&.lollipop-unfurled {
-				height: unset;
-				overflow: unset;
-			}
+			height: auto;
 
 			& .lollipop-button {
 				width: calc(100% + 4rem);
@@ -280,6 +275,10 @@
 		margin: 0 auto 1rem auto;
 	}
 
+	.lollipop h3 {
+		padding: 0 1rem;
+	}
+
 	@media(max-width: 700px) {
 		.beeswarm {
 			height: 800px;
@@ -299,6 +298,10 @@
 		height: calc(100% - 2rem);
 		max-width: 1000px;
 		margin: 0 auto;
+	}
+
+	:global(.graphic-wide.lollipop .graphic-inner, .graphic-wide.lollipop .layercake-container) {
+		max-width: none;
 	}
 
 	@media(max-width: 750px) {

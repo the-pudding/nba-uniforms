@@ -9,6 +9,7 @@
 
     let scrollIndex;
     let innerWidth;
+    let innerHeight;
     let leftProps;
     let rightProps;
 
@@ -16,40 +17,62 @@
 		(section) => section.contentType === "intro"
 	)[0];
 
-    function setProps(scrollIndex) {
+    const leftPropsDesktop = ["width:calc(50% - 2.5px); transform: translateX(-110%); opacity: 0", 
+                                "width:calc(50% - 2.5px); transform: translateX(0%); opacity: 1", 
+                                "width:100%; transform: translateX(0%); opacity: 1",
+                                "width:20%; transform: translateX(0%); opacity: 1", 
+                                "width:20%; transform: translateX(0%); opacity: 1", 
+                                "width:20%; transform: translateX(-110%); opacity: 1"
+                            ];
+    const leftPropsMobile = ["height:calc(50% - 2.5px); transform: translateY(-110%); opacity: 0", 
+                                "height:calc(50% - 2.5px); transform: translateY(0%); opacity: 1", 
+                                "height:100%; transform: translateY(0%); opacity: 1",
+                                "height:20%; transform: translateY(0%); opacity: 1", 
+                                "height:20%; transform: translateY(0%); opacity: 1", 
+                                "height:20%; transform: translateY(-110%); opacity: 1"
+                            ];
+    const rightPropsDesktop = ["width:calc(50% - 2.5px); transform: translateX(110%); background-color: rgba(26, 66, 138, 0.9); opacity: 0",
+                                "width:calc(50% - 2.5px); transform: translateX(0%); opacity: 1; background-color: rgba(26, 66, 138, 0.9)", 
+                                "width:0%; transform: translateX(110%); opacity: 0; background-color: transparent", 
+                                "width:calc(80% - 5px); transform: translateX(110%); opacity: 0; background-color: transparent", 
+                                "width:calc(80% - 5px); transform: translateX(0%); opacity: 1; background-color: transparent",
+                                "width:calc(80% - 5px); transform: translateX(110%); background-color: transparent; opacity: 1"
+                            ];
+    const rightPropsMobile = ["height:calc(50% - 2.5px); transform: translateY(110%); background-color: rgba(26, 66, 138, 0.9); opacity: 0",
+                            "height:calc(50% - 2.5px); transform: translateY(0%); opacity: 1; background-color: rgba(26, 66, 138, 0.9)", 
+                            "height:0%; transform: translateY(0%); opacity: 0; background-color: transparent", 
+                            "height:calc(80% - 5px); transform: translateY(110%); opacity: 0; background-color: transparent", 
+                            "height:calc(80% - 5px); transform: translateY(0%); opacity: 1; background-color: transparent",
+                            "height:calc(80% - 5px); transform: translateY(110%); background-color: transparent; opacity: 1"
+                        ]
+    $: imgMax = mobile ? `max-height: ${innerHeight/5}px` : `max-width: ${innerWidth/5}px`
+
+    function setProps(scrollIndex, mobile) {
+        console.log(scrollIndex, mobile)
         if (scrollIndex == undefined) {
-            leftProps = "width:50%; transform: translateX(-100%)"
-            rightProps = "width:50%; transform: translateX(100%); background-color: rgba(26, 66, 138, 0.9)";
+            leftProps = mobile ? leftPropsMobile[0] : leftPropsDesktop[0];
+            rightProps = mobile ? rightPropsMobile[0] : rightPropsDesktop[0];
             showSelectBarStore.set(false);
-        } else if (scrollIndex == 0) {
-            leftProps = "width:50%; transform: translateX(0%)"
-            rightProps = "width:50%; transform: translateX(0%); opacity: 1; background-color: rgba(26, 66, 138, 0.9)";
-            showSelectBarStore.set(false);
-        } else if (scrollIndex == 1) {
-            leftProps = "width:100%"
-            rightProps = "width:0%; transform: translateX(100%); opacity: 0; background-color: transparent";
-            showSelectBarStore.set(false);
-        } else if (scrollIndex == 2) {
-            leftProps = "width:calc(20% - 0.5rem)"
-            rightProps = "width:calc(80% - 1rem); transform: translateX(100%); opacity: 0; background-color: transparent";
-            showSelectBarStore.set(false);
-        }
-        else if (scrollIndex == 3) {
-            leftProps = "width:calc(20% - 0.5rem)"
-            rightProps = "width:calc(80% - 0.5rem); transform: translateX(0%); opacity: 1; background-color: transparent";
-            showSelectBarStore.set(false);
-        } else if (scrollIndex == 4 || scrollIndex == "exit") {
-            leftProps = "width:calc(20% - 0.5rem); transform: translateX(-100%); opacity: 1;"
-            rightProps = "width:calc(80% - 0.5rem); transform: translateX(100%); background-color: transparent; opacity: 1;";
+        } else if (scrollIndex == "exit") {
+            leftProps = mobile ? leftPropsMobile[leftPropsMobile.length - 1] : leftPropsDesktop[leftPropsDesktop.length - 1];
+            rightProps = mobile ? rightPropsMobile[rightPropsMobile.length - 1] : rightPropsDesktop[rightPropsDesktop.length - 1];
             showSelectBarStore.set(true);
+        } else {
+            leftProps = mobile ? leftPropsMobile[scrollIndex+1] : leftPropsDesktop[scrollIndex+1];
+            rightProps = mobile ? rightPropsMobile[scrollIndex+1] : rightPropsDesktop[scrollIndex+1];
+            showSelectBarStore.set(false);
+
+            if (scrollIndex == 4) {
+                showSelectBarStore.set(true);
+            }
         }
     }
 
-    $: setProps(scrollIndex);
     $: mobile = $viewport.width < 700;
+    $: setProps(scrollIndex, mobile);
 </script>
 
-<svelte:window bind:innerWidth={innerWidth} />
+<svelte:window bind:innerWidth={innerWidth} bind:innerHeight={innerHeight}/>
 
 <section id="scrolly">
 	<div class="sticky">
@@ -80,7 +103,7 @@
                 </div>
             </div>
         {/if}
-        <div class="slides" in:fade={{duration: 300}} style="{scrollIndex >=3 ? "gap:1rem" : "gap:0"}">
+        <div class="slides" in:fade={{duration: 300}}>
             <div class="left" style={leftProps}>
                 <div class="text">
                     {#if scrollIndex > 0}
@@ -89,22 +112,25 @@
                     <p>Home</p>
                 </div>
                 {#if scrollIndex >= 1}
-                    <img in:fade={{ delay: 300, duration: 300}} style="max-width: {innerWidth/5}px" src="assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
+                    <img in:fade={{ delay: 300, duration: 300}} style="{imgMax}" src="assets/imgs/steph-2013.png" alt="Stephen Curry 2013-2014" />
                 {/if}
             </div>
+            {#if scrollIndex >= 0 && scrollIndex < 4 && scrollIndex !== "exit" }
+                <div class="middle-line"></div>
+            {/if}
             <div class="right" style={rightProps}>
                 {#if scrollIndex >= 3}
-                    <div transition:fly={{delay: 0, duration: 300, x: innerWidth}} class="right-edition" style="background-color: rgba(255,255,255,0.9)">
-                        <img in:fade={{ delay: 300, duration: 300}} style="width: 100%" src="assets/imgs/steph-association.png" alt="Stephen Curry association jersey" />
+                    <div transition:fly={{delay: 0, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(255,255,255,0.9)">
+                        <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-association.png" alt="Stephen Curry association jersey" />
                     </div>
-                    <div transition:fly={{delay: 250, duration: 300, x: innerWidth}} class="right-edition" style="background-color: rgba(26, 66, 138, 0.9)">
-                        <img in:fade={{ delay: 300, duration: 300}} style="width: 100%" src="assets/imgs/steph-icon.png" alt="Stephen Curry icon jersey" />
+                    <div transition:fly={{delay: 250, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(26, 66, 138, 0.9)">
+                        <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-icon.png" alt="Stephen Curry icon jersey" />
                     </div>
-                    <div transition:fly={{delay: 500, duration: 300, x: innerWidth}} class="right-edition" style="background-color: rgba(39, 46, 83, 0.9)">
-                        <img in:fade={{ delay: 300, duration: 300}} style="width: 100%" src="assets/imgs/steph-statement.png" alt="Stephen Curry statement jersey" />
+                    <div transition:fly={{delay: 500, duration: 300,x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(39, 46, 83, 0.9)">
+                        <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-statement.png" alt="Stephen Curry statement jersey" />
                     </div>
-                    <div transition:fly={{delay: 750, duration: 300, x: innerWidth}} class="right-edition" style="background-color: rgba(0, 0, 0, 0.9)">
-                        <img in:fade={{ delay: 300, duration: 300}} style="width: 100%" src="assets/imgs/steph-city.png" alt="Stephen Curry city jersey" />
+                    <div transition:fly={{delay: 750, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(0, 0, 0, 0.9)">
+                        <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-city.png" alt="Stephen Curry city jersey" />
                     </div>
                 {/if}
                 <div class="text">
@@ -167,6 +193,10 @@
         pointer-events: none;
 	}
 
+    .step-inner {
+        padding: 0 1rem;
+    }
+
     .step p {
         background: rgba(255,255,255,0.95);
         padding: 2rem 2rem;
@@ -218,6 +248,10 @@
         border-bottom: none;
     }
 
+    :global(.intro-top a:hover) {
+        color: var(--color-orange);
+    }
+
     .icon-wrapper {
 		display: flex;
 		align-items: center;
@@ -237,6 +271,12 @@
         overflow-x: hidden;
     }
 
+    .middle-line {
+        background: var(--color-fg);
+        width: 5px;
+        height: 100vh;
+    }
+
     .left {
         background: rgba(255, 255, 255, 0.9);
         height: 100vh;
@@ -245,7 +285,8 @@
         align-items: center;
         justify-content: flex-end;
         padding: 2rem 0;
-        transition: all calc(var(--1s) * 0.2) ease-out;
+        transform: translateX(-110%);
+        transition: all calc(var(--1s) * 0.3) ease-out;
     }
 
     .right {
@@ -253,7 +294,8 @@
         display: flex;
         flex-direction: row;
         padding: 0;
-        transition: all calc(var(--1s) * 0.2) ease-out;
+        transform: translateX(110%);
+        transition: all calc(var(--1s) * 0.3) ease-out;
     }
 
     .right-edition {
@@ -264,10 +306,14 @@
         align-items: end;
     }
 
+    .right-edition img {
+        width: 100%;
+        height: auto;
+    }
+
     .text {
         font-family: var(--headline);
         font-weight: 700;
-        font-style: italic;
         text-transform: uppercase;
         font-size: var(--48px);
         color: var(--color-fg);
@@ -284,8 +330,6 @@
     }
     .text p.year {
         font-size: var(--24px);
-        padding-left: 0.75rem;
-        margin: 0 0 0 -1rem;
         line-height: 1;
         text-align: center;
     }
@@ -311,6 +355,67 @@
 			transform: translateY(0);
 		}
 	}
+
+    @media(max-width: 700px){
+        .slides {
+            flex-direction: column;
+        }
+
+        .left, .right {
+            width: 100%;
+            align-items: flex-start;
+        }
+        .left {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0.5rem 0.5rem 0.5rem 2rem;
+        }
+        .left {
+            transform: translateY(-110%);
+        }
+        .right {
+            transform: translateY(110%);
+        }
+        .text {
+            align-items: flex-start;
+        }
+        .text p, .text p.year {
+            text-align: left;
+        }
+        .text p.year {
+            padding: 0;
+        }
+        .left img {
+            height: 100%;
+            width: auto;
+            order: 2;
+        }
+        .middle-line {
+            width: 100%;
+            height: 5px;
+        }
+        .right {
+            flex-direction: column;
+        }
+        .right-edition {
+            width: 100%;
+            height: 25%;
+            padding: 0.5rem 0;
+            justify-content: flex-end;
+        }
+        .right-edition img {
+            height: 100%;
+            width: auto;
+        }
+        .right .text {
+            color: white;
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            transform: translate(0,0);
+        }
+    }
  </style>
 
 
