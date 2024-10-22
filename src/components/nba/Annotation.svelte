@@ -8,8 +8,8 @@
 	let fadeDuration = 500;
     let annoPos;
 
-    let imageIDs = ["lebron-sleeves", "butler-vice", "wemby"];
-    let altIDs = ["lebron james in the cleveland cavalier's black sleeved jersey", "jimmy butler in miami heat's vice jersey", "victor wembanyama is the san antonio spurs' hemisfair jersey"];
+    let imageIDs = ["lebron-sleeves", "tatum", "jordan", "butler-vice", "wemby"];
+    let altIDs = ["lebron james in the cleveland cavalier's black sleeved jersey", "jason tatum in the boston celtics' off-white city jersey", "michael jordan in the chicago bulls' classic red jersey", "jimmy butler in miami heat's vice jersey", "victor wembanyama is the san antonio spurs' hemisfair jersey"];
 
     function imgMatch(annoID) {
 		const img = imageIDs[annoID];

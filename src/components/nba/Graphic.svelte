@@ -121,7 +121,9 @@
 		</div>
 	{:else if id == "beeswarm-flair-13"}
 		<div class={`lollipop graphic-wide graphic`}>
-			<h3>Change in Flair from 2013-14 to 2023-24</h3>
+			<div class="header-wrapper">
+				<h3>Change in Flair from 2013-14 to 2023-24</h3>
+			</div>
 			<button class={`lollipop-button ${unfurlFlair ? 'lollipop-button-unfurled' : ''}`} on:click={() => unfurlFlair = true}>View All Teams</button>
 			<div class="graphic-inner">
 				<LayerCake
@@ -147,7 +149,9 @@
 		</div>
 	{:else if id == "city-bars"}
 		<div class="barchart graphic-wide graphic city-bars">
-			<h3>All teams by edition usage</h3>
+			<div class="header-wrapper">
+				<h3>All teams by edition usage</h3>
+			</div>
 			<TeamCompare data={teamTotals} />
 		</div>
 	{/if}
@@ -289,7 +293,13 @@
 
 	.city-bars h3 {
 		padding: 2rem 1rem 1rem 1rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.header-wrapper {
 		background-color: rgba(255, 255, 255, 0.75);
+		width: 100%;
 	}
 
 	@media(max-width: 700px) {

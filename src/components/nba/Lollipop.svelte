@@ -25,8 +25,10 @@
 </script>
 
 <div class="flair-explain">
-	<span class="left"><span class="caret-left"></span> Less flair</span>
-	<span class="right">More flair <span class="caret-right"></span></span>
+	<div class="flair-inner">
+		<span class="left"><span class="caret-left"></span> Less flair</span>
+		<span class="right">More flair <span class="caret-right"></span></span>
+	</div>
 </div>
 {#if yourTeamData !== undefined}
 <div class="dot-plot your-team">
@@ -210,14 +212,23 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 1rem 0 210px;
+		padding: 0;
 		width: 100%;
-		max-width: 1000px;
 		margin: 0 auto;
 		font-family: var(--sans);
 		font-size: 14px;
 		font-weight: bold;
 		background-color: rgba(255, 255, 255, 0.75);
+	}
+
+	.flair-inner {
+		max-width: 1000px;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1rem 0 210px;
 	}
 
 	.left,
