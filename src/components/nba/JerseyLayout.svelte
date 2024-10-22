@@ -129,19 +129,16 @@
 		flex-direction: column;
 		align-items: center;
 		border-radius: 3px;
-		width: calc(20% - 0.25rem);
+		width: calc(16.5% - 0.25rem);
+		padding: 0.125rem;
+		cursor: pointer;
 
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.2);
 		}
-
-		@media screen and (min-width: 500px) and (max-width: 624px) {
-			width: calc(12.5% - 0.25rem);
-		}
-
-		@media screen and (min-width: 625px) and (max-width: 767px) {
-			width: calc(10% - 0.25rem);
-		}
+	}
+	.jersey-waffle_illustration {
+		width: 100%;
 	}
 
 	.jersey-waffle_game:hover .jersey-waffle_game-date {
@@ -150,14 +147,16 @@
 
 	.jersey-waffle_game-date {
 		font-family: var(--sans);
-		font-size: var(--12px);
-		height: 0.75rem;
+		font-size: 10px;
+		font-weight: 700;
+		height: 1rem;
 		visibility: hidden;
+		letter-spacing: -0.5px;
 	}
 
 	.stacked-bar-wrapper {
 		width: 100%;
-		margin: 1rem 0;
+		margin: 0.5rem 0;
 	}
 
 	.jersey-heatmap-wrapper {
@@ -169,9 +168,41 @@
 	}
 
 	:global(h3) {
-		font-family: var(--sans);
+		font-family: var(--headline);
+		color: var(--color-fg);
 		font-weight: 700;
 		text-transform: uppercase;
-		font-size: var(--24px);
+		font-size: var(--28px);
+		margin: 0;
+	}
+
+	@media(max-width: 900px) {
+		.jersey-waffle_game {
+			width: calc(20% - 0.25rem);
+		}
+	}
+
+	@media(max-width: 750px) {
+		.jersey-waffle_game {
+			width: calc(11.125% - 0.25rem);
+		}
+	}
+
+	@media(max-width: 600px) {
+		.jersey-waffle_game {
+			width: calc(16.75% - 0.25rem);
+		}
+	}
+
+	@media(max-width: 450px) {
+		.jersey-waffle_game {
+			width: calc(20% - 0.25rem);
+		}
+	}
+
+	@media(max-width: 350px) {
+		.jersey-waffle_game {
+			width: calc(25% - 0.25rem);
+		}
 	}
 </style>

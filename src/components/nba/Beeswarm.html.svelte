@@ -3,6 +3,7 @@
   Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
  -->
 <script>
+	import viewport from "$stores/viewport.js";
 	import { getContext } from "svelte";
 	import { forceSimulation, forceX, forceY, forceCollide } from "d3-force";
 	import getTeamCode from "../../utils/getTeamCode";
@@ -10,10 +11,22 @@
 	const { data, xGet, height, width, zGet, xScale, yScale } =
 		getContext("LayerCake");
 
+	let adjustedWidth;
+
+	$: {
+		if ($width) {
+			adjustedWidth = $width - 42;
+		}
+
+		if ($xScale) {
+			$xScale.range([0, adjustedWidth]);
+		}
+	}
+
 	$: nodes = $data.map((d) => ({ ...d, code: getTeamCode(d.team) }));
 
 	/** @type {Number} [r=4] - The circle radius size in pixels. */
-	export let r = 4;
+	export let r = 16;
 
 	/** @type {String} [fill='#f95346'] - The circle's fill color. */
 	export let fill = "#f95346";
@@ -25,21 +38,24 @@
 	export let strokeWidth = 1;
 
 	/** @type {Number} [xStrength=0.95] - The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
-	export let xStrength = 0.99;
 
 	export let selectedTeamName;
 
-	export let jerseySize = 38;
+	export let jerseySize = 36;
 
 	// also adjust the Y using force
 	$: simulation = forceSimulation(nodes)
 		.force(
 			"x",
 			forceX()
-				.x((d) => $xGet(d) + ($xScale.bandwidth ? $xScale.bandwidth() / 2 : 0))
+				.x((d) => {
+					// Use the reactive $xScale with the adjusted width if it exists
+					const xPos = $xScale ? $xGet(d) + ($xScale.bandwidth ? $xScale.bandwidth() / 2 : 0) : 0;
+					return xPos;
+				})
 				.strength(0.99)
 		)
-		.force("y", forceY().strength(1 / 1000))
+		.force("y", forceY().strength(0.05))
 		.force("collide", forceCollide(r))
 		.stop();
 
@@ -58,7 +74,7 @@
 	}
 </script>
 
-{#if $width >= 500}
+{#if $viewport.width >= 700}
 	<svg
 		width="100%"
 		height="2"
@@ -68,7 +84,8 @@
 	</svg>
 	<div class="bee-container">
 		<div class="flair-explain">
-			<span class="left"><span class="caret-left"></span> Less flair</span>
+			<span class="left"><span class="caret-left"></span>Less flair
+			</span>
 			<span class="right">More flair <span class="caret-right"></span></span>
 		</div>
 		<!-- draw a full-width horizontal line halfway down the container -->
@@ -76,7 +93,7 @@
 			<div
 				class="jersey-container"
 				style="
-          left: {node.x}px;
+          left: {node.x + 16}px;
           top: {node.y * 2 + $height / 2}px;
         	width: {jerseySize}px;
         "
@@ -91,8 +108,8 @@
 				<div
 					class="team-container"
 					style="
-            left: {node.x}px;
-            top: {node.y * 2 + $height / 2 - 50}px;
+            left: {node.x + 16}px;
+            top: {node.y * 2 + $height / 2 - 60}px;
             "
 				>
 					<span>Your team: <strong>{selectedTeamName}</strong> </span>
@@ -148,6 +165,7 @@
 
 <style>
 	.bee-container {
+		width: 100%;
 		position: relative;
 		height: 100%;
 	}
@@ -167,9 +185,9 @@
 		width: 80px;
 		position: absolute;
 		transform: translate(-50%, -40%);
-		background-color: rgba(255, 255, 255, 0.75);
-		border-radius: 5px;
-		border: 1px solid black;
+		background-color: rgba(255, 255, 255, 0.9);
+		border-radius: 3px;
+		border: 1px solid var(--color-fg);
 		z-index: 2;
 		font-family: var(--sans);
 	}
@@ -188,14 +206,16 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px;
-		width: 100%;
+		height: 100%;
 		font-family: var(--sans);
 		font-size: 14px;
+		width: 56px;
 		font-weight: bold;
 
-		@media screen and (min-width: 500px) {
+		@media screen and (min-width: 700px) {
 			flex-direction: row;
+			height: auto;
+			width: 100%;
 		}
 	}
 
@@ -216,7 +236,7 @@
 	}
 
 	.caret-left {
-		@media screen and (min-width: 500px) {
+		@media screen and (min-width: 700px) {
 			margin-right: 5px;
 			width: 0;
 			height: 0;
@@ -227,7 +247,7 @@
 	}
 
 	.caret-right {
-		@media screen and (min-width: 500px) {
+		@media screen and (min-width: 700px) {
 			margin-left: 5px;
 			width: 0;
 			height: 0;

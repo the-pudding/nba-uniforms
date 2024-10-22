@@ -13,6 +13,7 @@
   	import AxisX from '$components/layercake/AxisX.html.svelte';
   	import AxisY from '$components/layercake/AxisY.html.svelte';
 	import TeamCompare from "$components/nba/TeamCompare.svelte";
+	import viewport from "$stores/viewport.js";
 
 	import flair23 from "$data/nba2324/flairScore.json";
 	import flair13 from "$data/nba2324/flairScore13.json";
@@ -69,25 +70,25 @@
 
 <section class="graphic-wrapper"  bind:clientWidth>
 	{#if id == "waffle-home-away"}
-		{#if clientWidth >= 768}
-			<div class="middle-line"></div>
-		{/if}
-		<div class="chart-wrapper with-bg">
-			<JerseyLayout
-				title={`2023-24 Home`}
-				{data}
-				teamCode={selectedTeam}
-				homeAwayFilter={"home"}
-			/>
-		</div>
-		<div class="chart-wrapper with-bg">
-			<JerseyLayout
-				title={`2023-24 Away`}
-				{data}
-				teamCode={selectedTeam}
-				homeAwayFilter={"away"}
-			/>
-		</div>
+			{#if clientWidth >= 750}
+				<div class="middle-line"></div>
+			{/if}
+			<div class="chart-wrapper with-bg with-padding-left">
+				<JerseyLayout
+					title={`2023-24 Home`}
+					{data}
+					teamCode={selectedTeam}
+					homeAwayFilter={"home"}
+				/>
+			</div>
+			<div class="chart-wrapper with-bg with-padding-right">
+				<JerseyLayout
+					title={`2023-24 Away`}
+					{data}
+					teamCode={selectedTeam}
+					homeAwayFilter={"away"}
+				/>
+			</div>
 	{:else if id == "bars-compare"}
 		<div class="compare-bars graphic-wide graphic">
 			<div class="chart-wrapper chart-wrapper__wide">
@@ -112,38 +113,42 @@
 	{:else if id == "beeswarm-flair-23"}
 		<div class="beeswarm graphic-wide graphic">
 			<h3>All Teams By 2023-24 Flair</h3>
-			<LayerCake let:width data={flairData} x={"2023 Score"} height={({width}) => width >= 500 ? 400 : 600}>
-				<Beeswarm {selectedTeamName} />
-			</LayerCake>
+			<div class="graphic-inner">
+				<LayerCake let:width data={flairData} x={"2023 Score"} height={({width}) => width >= 700 ? 600 : 1000}>
+					<Beeswarm {selectedTeamName} />
+				</LayerCake>
+			</div>
 		</div>
 	{:else if id == "beeswarm-flair-13"}
 		<div class={`lollipop graphic-wide graphic ${unfurlFlair ? 'lollipop-unfurled' : ''}`}>
 			<h3>Change in Flair from 2013-14 to 2023-24</h3>
 			<button class={`lollipop-button ${unfurlFlair ? 'lollipop-button-unfurled' : ''}`} on:click={() => unfurlFlair = true}>View All Teams</button>
-			<LayerCake
-				let:width
-				ssr
-				percentRange
-				padding={{ right: 10, bottom: 20, left: 30 }}
-				x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
-					(d) => !["team", "rank"].includes(d)
-				)}
-				xDomain={[0, null]}
-				xPadding={[0, 0]}
-				xRange={({width}) => width >= 500 
-					? [32, 90] 
-					: [25, 80]}
-				y={"rank"}
-				yScale={d3.scaleBand().paddingInner(0.2).round(true)}
-				yRange={[0, 100]}
-				zScale={d3.scaleOrdinal()}
-				data={filterFlairData(flairData, selectedTeamName)}
-			>
-				<Lollipop />
-			</LayerCake>
+			<div class="graphic-inner">
+				<LayerCake
+					let:width
+					ssr
+					percentRange
+					padding={{ right: 10, bottom: 20, left: 30 }}
+					x={Object.keys(filterFlairData(flairData, selectedTeamName)[0]).filter(
+						(d) => !["team", "rank"].includes(d)
+					)}
+					xDomain={[0, null]}
+					xPadding={[0, 0]}
+					xRange={({width}) => width >= 500 
+						? [32, 90] 
+						: [25, 80]}
+					y={"rank"}
+					yScale={d3.scaleBand().paddingInner(0.2).round(true)}
+					yRange={[0, 100]}
+					zScale={d3.scaleOrdinal()}
+					data={filterFlairData(flairData, selectedTeamName)}
+				>
+					<Lollipop />
+				</LayerCake>
+			</div>
 		</div>
 	{:else if id == "city-bars"}
-		<div class="barchart graphic-wide graphic">
+		<div class="barchart graphic-wide graphic city-bars">
 			<TeamCompare data={teamTotals} />
 		</div>
 	{/if}
@@ -157,7 +162,7 @@
 		justify-content: center;
 		position: relative;
 
-		@media screen and (min-width: 768px) {
+		@media screen and (min-width: 750px) {
 			display: flex;
 			flex-direction: row;
 			gap: 4rem;
@@ -179,24 +184,35 @@
 		padding: 1rem;
 		border: 5px solid var(--color-gray-1000);
 
-		@media screen and (min-width: 768px) {
+		@media screen and (min-width: 750px) {
 			width: calc(50% - 2rem);
-			max-width: 400px;
+			max-width: 500px;
 		}
+	}
+	.with-padding-left {
+		margin-left: 1rem;
+	}
+
+	.with-padding-right {
+		margin-right: 1rem;
 	}
 
 	.chart-wrapper.chart-wrapper__wide {
 		width: 100%;
-		max-width: unset;
+		max-width: 1000px;
 		border: unset;
+		margin: 0 auto;
 	}
     .graphic-wrapper {
         margin: 0 auto;
         padding: 0;
     }
+	.graphic-wrapper-pad {
+		padding: 0 1rem;
+	}
 	.graphic-wide {
 		max-width: unset;
-		padding: 0 2rem 4rem;
+		padding: 2rem 1rem;
 		border-top: 5px solid black;
 		border-bottom: 5px solid black;
 		background-color: rgba(255, 255, 255, 0.75);
@@ -209,14 +225,26 @@
 		background-color: unset;
 	}
 
+	.padding-wrapper {
+		padding: 0 1rem;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 3rem;
+	}
+
 	:global(.graphic-wide .layercake-container) {
 		max-width: 1000px;
 		margin: 0 auto;
 	}
+	.graphic-wide.city-bars {
+		padding: 0 0 3rem 0;
+	}
 
 	.lollipop{
 			padding-left: 10px;
-			height: 50vh;
+			height: 700px;
 			overflow: hidden;
 			transition: height 0.5s ease;
 
@@ -246,9 +274,15 @@
 
 	.beeswarm {
 		height: 600px;
+	}
+	.beeswarm h3, .lollipop h3 {
+		max-width: 1000px;
+		margin: 0 auto 1rem auto;
+	}
 
-		@media screen and (min-width: 500px) {
-			height: 325px;
+	@media(max-width: 700px) {
+		.beeswarm {
+			height: 800px;
 		}
 	}
 
@@ -258,5 +292,24 @@
 
 	.barchart {
 		width: 100%;
+	}
+
+	.graphic-inner {
+		width: 100%;
+		height: calc(100% - 2rem);
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	@media(max-width: 750px) {
+		.with-padding-left {
+			width: calc(100% - 2rem);
+			margin: 0 1rem 1rem 1rem;
+		}
+
+		.with-padding-right {
+			width: calc(100% - 2rem);
+			margin: 0 1rem;
+		}
 	}
 </style>

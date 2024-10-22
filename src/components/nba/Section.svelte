@@ -3,7 +3,13 @@
     import { getContext } from 'svelte';
     import { selectedTeamStore } from '$stores/teamSelection';
     import Graphic from "$components/nba/Graphic.svelte";
+    import { annotationVisible } from "$stores/misc.js";
+    import inView from "$actions/inView.js";
     export let copy;
+
+    function showAnno(annoID) { annotationVisible.set([true, +annoID]); }
+
+    function hideAnno(annoID) { annotationVisible.set([false, +annoID]); }
 
 	const data = getContext("data");
 	const teams = getContext("teams");
@@ -55,7 +61,17 @@
                 {#if ['subhead', 'byline', 'subbyline'].includes(graf.type)}
                     <span class={`intro_${graf.type}`}>{@html graf.value}</span>
                 {:else}
-                    <p>{@html graf.value}</p>
+                    {#if graf.value.includes("annotrigger")}
+                        {@const annoID = graf.value.split("annotrigger")[1].split(">")[0]}
+                        <p
+                            use:inView={{ bottom: 300 }}
+                            on:enter={() => showAnno(annoID)}
+                            on:exit={() => hideAnno(annoID)}
+                        >
+                            {@html graf.value}</p>
+                    {:else}
+                        <p>{@html graf.value}</p>
+                    {/if}
                 {/if}
             {/each}
         </div>    
@@ -82,6 +98,15 @@
     <div class="after-line"></div>
 {:else if copy.contentType == "graphic"}
     <Graphic id={copy.graphicID} />
+{:else if copy.contentType == "methods"}
+    <div class="methods">
+        <div class="methods-inner">
+            <h3>{copy.hed}</h3>
+            {#each copy.text as graf, i}
+                <p>{@html graf.value}</p>
+            {/each}
+        </div>
+    </div>
 {/if}
 
 <style>
@@ -106,7 +131,7 @@
         text-align: center;
         margin: 2rem 0 0 -1rem;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 750px) {
             font-size: 150px;
         }
     }
@@ -130,6 +155,7 @@
         max-width: 40rem;
         width: calc(100% - 2rem);
         margin: 0 auto;
+        line-height: 1.65rem;
 	}
 
     .intro_subhead, .intro_byline, .intro_subbyline {
@@ -142,13 +168,25 @@
     }
 
     .intro_subhead {
-        font-size: var(--24px);
+        font-size: var(--28px);
         font-weight: 700;
-        margin: 0 0 1rem;
+        margin: 0 0 2rem 0;
+        line-height: 1.25;
     }
 
     .intro_byline {
         font-size: var(--20px);
+        margin: 0 0 0.5rem 0;
+    }
+    .intro_subbyline {
+        font-size: var(--14px);
+        font-style: italic;
+        line-height: 1;
+        margin: 0 0 2rem 0;
+    }
+
+    :global(.prose a:hover, .methods a:hover) {
+        color: #FF661F;
     }
 
     :global(.after-line) {
@@ -173,23 +211,20 @@
         border-bottom: 5px solid var(--color-gray-1000);
         background-color: rgba(255, 255, 255, 0.75);
         position: relative;
-        height: fit-content;
+        height: 20rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         font-family: var(--sans);
         overflow: hidden;
-
-         @media screen and (min-width: 768px) {
-            height: 20rem;
-         }
+        padding: 2rem 1rem;
     }
 
     .left-circle, .right-circle {
         visibility: hidden;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 750px) {
             height: 100%;
             position: absolute;
             aspect-ratio: 1;
@@ -211,30 +246,22 @@
         transform: translate(50%, 0); 
     }
 
-    ul.edition-list-wrapper {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        width: 100%;
-
-        @media screen and (min-width: 768px) {
-            display: flex;
-            width: calc(100% - 24rem);
-            flex-direction: row;
-            list-style: none;
-            gap: 1rem;
-            padding: 1rem 0;
-        }
+    .edition-list-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% - 24rem);
+        flex-direction: row;
+        list-style: none;
+        gap: 1rem;
+        padding: 1rem 0;
     }
 
     li {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        padding-bottom: 2rem;
-        @media screen and (min-width: 768px) {
-            width: 25%;
-        }
+        width:  calc(25% - 1rem);
+        padding: 1rem 1rem 2rem 1rem;
     }
 
     .img-wrapper {
@@ -256,5 +283,56 @@
 
     .list-desc {
         font-size: var(--14px);
+        line-height: 1;
+    }
+
+    .methods {
+        width: 100%;
+        border-top: 5px solid var(--color-gray-1000);
+        background-color: rgba(255, 255, 255, 0.75);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 2rem 6rem 2rem;
+    }
+    
+    .methods-inner {
+        max-width: 800px;
+    }
+    .methods p {
+        font-family: var(--sans);
+    }
+
+    :global(.jersey-highlight) {
+        font-family: var(--sans);
+        font-weight: 700;
+    }
+
+    @media(max-width: 1000px) {
+        .left-circle, .right-circle {
+            display: none;
+        }
+        .edition-list-wrapper {
+            width: 100%;
+        }
+    }
+
+    @media(max-width: 600px) {
+        .line-inset {
+            padding: 1rem 2rem;
+        }
+
+        .full-court-wrapper {
+            height: auto;
+            padding: 1rem;
+        }
+
+        .edition-list-wrapper {
+            padding: 0;
+        }
+
+        li {
+            width: calc(50% - 1rem);
+        }
     }
 </style>

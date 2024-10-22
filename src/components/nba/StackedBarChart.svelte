@@ -17,7 +17,6 @@
 	let barStroke = 1.5;
 
 	let fontSize = 12;
-	if (width >= 500) fontSize = 14;
 
 	const editions = [
 		'Association Edition',
@@ -91,6 +90,7 @@
 				text-anchor="left"
 				font-size={`${fontSize}px`}
 				font-family="sans-serif"
+				font-weight=700
 			>
 				{`${d.edition.replace(' Edition', '')}`}
 			</text>

@@ -46,7 +46,7 @@
 						<div
 							class="year-text"
 							style="
-                left: calc({circleX}% + 15px);
+                left: calc({circleX}% + 20px);
               "
 						>
 							{"2023-24"}
@@ -55,8 +55,8 @@
 							class="jersey-container"
 							style="
               left: {circleX}%;
-              width: 25px;
-              height: 33px;
+              width: 36px;
+              height: 54px;
             "
 						>
 							<img
@@ -100,7 +100,25 @@
 	.dot-row {
 		display: flex;
 		align-items: center;
-		height: 40px;
+		height: 70px;
+		margin: 0.5rem 0;
+	}
+	.row-selected {
+		background: rgba(255, 255, 255, 0.95);
+		border-bottom: 3px solid var(--color-fg);
+		position: relative;
+	}
+
+	.row-selected .row-team:before {
+		content: "Your team";
+		text-transform: none;
+		font-weight: 500;
+		text-align: right;
+		font-size: var(--14px);
+		position: relative;
+		top: -1rem;
+		right: 0;
+		transform: translate(100%, 0);
 	}
 
 	.row-team {
