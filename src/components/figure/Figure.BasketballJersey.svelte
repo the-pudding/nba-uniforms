@@ -34,7 +34,7 @@
 	on:mouseover={onMouseOver}
 	on:mouseleave={onMouseLeave}
 >
-	<img src="/assets/jerseys/{$selectedTeamStore}_{editionFormatted}.png" />
+	<img src="/assets/jerseys/{$selectedTeamStore}_{editionFormatted}.png" alt="{$selectedTeamStore} {editionFormatted} jersey" />
 	{#if tooltipVisible}
 		<div class="tooltip">
 			<p>{gameDate}</p>

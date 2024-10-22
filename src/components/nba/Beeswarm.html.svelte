@@ -100,7 +100,7 @@
 			>
 				<img
 					src={`./assets/jerseys/${node.code}_icon.png`}
-					alt={getTeamCode(node.team)}
+					alt={`${getTeamCode(node.team)} icon jersey`}
 					class="jersey-illustration"
 				/>
 			</div>
@@ -143,7 +143,7 @@
 			>
 				<img
 					src={`./assets/jerseys/${node.code}_icon.png`}
-					alt={getTeamCode(node.team)}
+					alt={`${getTeamCode(node.team)} icon jersey`}
 					class="jersey-illustration"
 				/>
 			</div>

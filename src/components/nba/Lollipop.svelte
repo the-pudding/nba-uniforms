@@ -48,7 +48,7 @@
 						<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
 							<img
 								src={`./assets/jerseys/${getTeamCode(yourTeamData[0].team)}_icon.png`}
-								alt={yourTeamData[0].team}
+								alt={`${yourTeamData[0].team} icon jersey`}
 								class="jersey-illustration"
 							/>
 						</div>
@@ -86,7 +86,7 @@
 							<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
 								<img
 									src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
-									alt={row.team}
+									alt={`${row.team} icon jersey`}
 									class="jersey-illustration"
 								/>
 							</div>
@@ -146,6 +146,7 @@
 		position: sticky;
 		top: 4rem;
 		z-index: 1000;
+		margin: 0 0 0.5rem 0;
 	}
 
 	.row-selected span {
@@ -209,13 +210,14 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 1rem 0 200px;
+		padding: 0 1rem 0 210px;
 		width: 100%;
 		max-width: 1000px;
 		margin: 0 auto;
 		font-family: var(--sans);
 		font-size: 14px;
 		font-weight: bold;
+		background-color: rgba(255, 255, 255, 0.75);
 	}
 
 	.left,
@@ -248,6 +250,9 @@
 		}
 		.row-data {
 			width: calc(100% - 30px);
+		}
+		.flair-explain {
+			padding: 0 1rem 0 60px;
 		}
 	}
 </style>

@@ -6,6 +6,7 @@
     import { fly, fade } from 'svelte/transition';
     import StoryHeaderGrid from "$components/StoryHeaderGrid.svelte";
     import viewport from "$stores/viewport.js";
+    import { reducedMotion } from "$stores/reducedMotion.js";
 
     let scrollIndex;
     let innerWidth;
@@ -78,16 +79,18 @@
 	<div class="sticky">
         {#if scrollIndex == undefined && innerWidth}
             <div class="intro-video-wrapper" out:fade={{duration: 300}}>
-                <iframe
-                    width="100%"
-                    height="{mobile ? 300 : 450}px"
-                    src="https://www.youtube.com/embed/ODN_L2ke-d4?si=Lz09zUCdEPbIGdxL"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen
-                ></iframe>
+                <div class="iframe-wrapper">
+                    <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/ODN_L2ke-d4?si=Lz09zUCdEPbIGdxL"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                    ></iframe>
+                </div>
                 <div class="intro-top">
                     <p>{@html introCopy.text[0].value}</p>
                     <div class="icon-wrapper">
@@ -120,16 +123,16 @@
             {/if}
             <div class="right" style={rightProps}>
                 {#if scrollIndex >= 3}
-                    <div transition:fly={{delay: 0, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(255,255,255,0.9)">
+                    <div transition:fly={!$reducedMotion ? {delay: 0, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0} : undefined} class="right-edition" style="background-color: rgba(255,255,255,0.9)">
                         <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-association.png" alt="Stephen Curry association jersey" />
                     </div>
-                    <div transition:fly={{delay: 250, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(26, 66, 138, 0.9)">
+                    <div transition:fly={!$reducedMotion ? {delay: 250, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0} : undefined} class="right-edition" style="background-color: rgba(26, 66, 138, 0.9)">
                         <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-icon.png" alt="Stephen Curry icon jersey" />
                     </div>
-                    <div transition:fly={{delay: 500, duration: 300,x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(39, 46, 83, 0.9)">
+                    <div transition:fly={!$reducedMotion ? {delay: 500, duration: 300,x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0} : undefined} class="right-edition" style="background-color: rgba(39, 46, 83, 0.9)">
                         <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-statement.png" alt="Stephen Curry statement jersey" />
                     </div>
-                    <div transition:fly={{delay: 750, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0}} class="right-edition" style="background-color: rgba(0, 0, 0, 0.9)">
+                    <div transition:fly={!$reducedMotion ? {delay: 750, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0} : undefined} class="right-edition" style="background-color: rgba(0, 0, 0, 0.9)">
                         <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-city.png" alt="Stephen Curry city jersey" />
                     </div>
                 {/if}
@@ -169,7 +172,7 @@
     .sticky {
 		position: sticky;
 		top: 0;
-		transition: all 1s;
+		transition: all calc(var(--1s) * 0.5);
 		min-height: 100svh;
         z-index: 1;
         overflow-x: hidden;
@@ -211,17 +214,17 @@
         align-items: center;
         position: absolute;
         width: 100%;
-        height: 100vh;
+        height: 100svh;
         top: 3rem;
         left: 0;
         padding: 0 2rem;
+    }
 
-        & iframe {
-			aspect-ratio: 16 / 9;
-			width: 100%;
-            max-width: 900px;
-		    outline: 5px solid var(--color-fg);
-		}
+    .iframe-wrapper {
+        aspect-ratio: 16 / 9;
+		width: 100%;
+        max-width: 900px;
+		outline: 5px solid var(--color-fg);
     }
 
     .intro-top {
@@ -261,7 +264,7 @@
 
     .slides {
         width: 100%;
-        height: 100vh;
+        height: 100svh;
         position: absolute;
         top: 0;
         left: 0;
@@ -274,12 +277,12 @@
     .middle-line {
         background: var(--color-fg);
         width: 5px;
-        height: 100vh;
+        height: 100svh;
     }
 
     .left {
         background: rgba(255, 255, 255, 0.9);
-        height: 100vh;
+        height: 100svh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -290,7 +293,7 @@
     }
 
     .right {
-        height: 100vh;
+        height: 100svh;
         display: flex;
         flex-direction: row;
         padding: 0;
@@ -357,6 +360,9 @@
 	}
 
     @media(max-width: 700px){
+        .intro-top {
+            font-size: var(--36px);
+        }
         .slides {
             flex-direction: column;
         }
@@ -415,6 +421,12 @@
             left: 2rem;
             transform: translate(0,0);
         }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .icon-wrapper {
+            animation: none;
+        } 
     }
  </style>
 

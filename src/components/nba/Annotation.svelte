@@ -9,6 +9,7 @@
     let annoPos;
 
     let imageIDs = ["lebron-sleeves", "butler-vice", "wemby"];
+    let altIDs = ["lebron james in the cleveland cavalier's black sleeved jersey", "jimmy butler in miami heat's vice jersey", "victor wembanyama is the san antonio spurs' hemisfair jersey"];
 
     function imgMatch(annoID) {
 		const img = imageIDs[annoID];
@@ -28,7 +29,7 @@
 
 <div id="annotation-block" style="left: {$viewport.width >= 800 ? annoPos-125 : annoPos-225}px">
     <div class="img-wrapper" in:fly={!$reducedMotion ? { delay: 0, duration: 300, y: 100} : undefined} out:fade={!$reducedMotion ? {duration: fadeDuration} : undefined}>
-        <img src="./assets/imgs/{imgMatch($annotationVisible[1])}.png" alt="character" />
+        <img src="./assets/imgs/{imgMatch($annotationVisible[1])}.png" alt="{altIDs[$annotationVisible[1]]}" />
     </div>
 </div>
 
@@ -74,4 +75,10 @@
 			width: 200px;
 		}
 	}
+
+    @media (prefers-reduced-motion: reduce) {
+        #annotation-block {
+            animation: none;
+        } 
+    }
 </style>
