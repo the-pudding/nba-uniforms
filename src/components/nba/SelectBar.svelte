@@ -111,4 +111,16 @@
 		pointer-events: none;
 	}
 
+	@media(max-width: 600px) {
+		label, select {
+			font-size: var(--12px);
+		}
+		label {
+			top: 0;
+		}
+		.select-container {
+			width: 150px;
+		}
+	}
+
 </style>

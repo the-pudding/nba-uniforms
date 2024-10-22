@@ -217,25 +217,28 @@
 	}
 
 	.intro-panel-image-2013 {
-		width: 75%;
-		max-width: 450px;
+		width: 25%;
 	}
 
 	.intro-panel-text {
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		font-size: 30px;
-		font-family: var(--sans);
+		font-size: var(--36px);
+		font-family: var(--headline);
 		text-transform: uppercase;
 		font-weight: 900;
+		font-style: italic;
 	}
 
 	.intro-video-wrapper {
 		display: flex;
 		justify-content: center;
-		margin: 0 auto;
-		width: 75%;
+		align-items: center;
+		margin: 3rem auto;
+		width: 100%;
+		max-width: 900px;
+		outline: 5px solid var(--color-fg);
 
 		& iframe {
 			aspect-ratio: 16 / 9;
@@ -257,6 +260,7 @@
 
 		& div {
 			height: 100vh;
+			width: 25%;
 			display: flex;
 			flex-direction: column;
 			justify-content: end;
@@ -284,7 +288,7 @@
 		max-width: 500px;
 		margin: 0 auto 75vh;
 		padding: 0 20px;
-		background-color: rgba(255, 255, 255, 0.75);
+		background-color: rgba(255, 255, 255, 0.95);
 		padding: 20px;
 		border: 5px solid black;
 	}

@@ -36,6 +36,7 @@
 	--color-input-bg: var(--color-gray-50);
 	--color-input-fg: var(--color-gray-900);
 	--color-placeholder: var(--color-gray-500);
+	--color-orange: #FF661F;
 
 	/* "1" second duration */
 	--1s: 1ms;

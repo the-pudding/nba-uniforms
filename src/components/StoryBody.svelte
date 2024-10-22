@@ -2,9 +2,11 @@
 	import { browser } from "$app/environment";
 	import { getContext } from "svelte";
 	import { LayerCake, Svg } from "layercake";
-  import { selectedTeamStore } from '$stores/teamSelection';
+  	import { selectedTeamStore } from '$stores/teamSelection';
+  	import { showSelectBarStore } from '$stores/showSelectBar';
 	import Section from "$components/nba/Section.svelte";
 	import * as d3 from "d3";
+	import inView from "$actions/inView.js";
 
 	import JerseyLayout from "$components/nba/JerseyLayout.svelte";
 	import Beeswarm from "$components/nba/Beeswarm.html.svelte";
@@ -21,10 +23,6 @@
   const data = getContext("data");
   const data1314 = getContext("data1314");
 	const teams = getContext("teams");
-
-
-
-    $: console.log(copy);
 
 	$: flairData = flair23.map((d) => ({
 		team: d.team,
@@ -98,7 +96,10 @@
 	}
 </script>
 
-<div id="nba">
+<div id="nba"
+	use:inView={{ bottom: 0 }}
+	on:enter={() => showSelectBarStore.set(true)}
+>
 	{#each copy.copy as section, i}
 		<Section copy={section} />
 	{/each}

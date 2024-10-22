@@ -1,8 +1,8 @@
 <script>
-	export let title = "Title TK";
-	export let description = "Description TK";
-	export let url = "https://pudding.cool";
-	export let keywords = "";
+	export let title = "Colors of The Court";
+	export let description = "Traditions, trends, and who's wearing what in today's NBA";
+	export let url = "https://pudding.cool/2024/10/nba-uniforms";
+	export let keywords = "nba, basketball, uniform, team, color, jersey, kit, sports";
 	export let preloadFont = [];
 </script>
 

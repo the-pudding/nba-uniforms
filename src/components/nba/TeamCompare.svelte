@@ -34,7 +34,7 @@
     $: allOtherTeams = dataBars ? dataBars
         .filter(d => getTeamCode(d.team) !== $selectedTeamStore)
         .sort((a, b) => {
-            const aIndex = a.jerseys.findIndex(j => j.type === sortedBy);
+              const aIndex = a.jerseys.findIndex(j => j.type === sortedBy);
               const bIndex = b.jerseys.findIndex(j => j.type === sortedBy);
               return d3.descending(a.jerseys[aIndex]?.percentage, b.jerseys[bIndex]?.percentage);
         })
@@ -98,6 +98,8 @@
                     <div class="jersey-img">
                         {#if editionExists[edition.type]}
                             <img src="assets/jerseys/{$selectedTeamStore}_{edition.type}.png">
+                        {:else}
+                            <img src="assets/jerseys/blank.png">
                         {/if}
                     </div>
                     <div class="jersey-type">
@@ -136,7 +138,7 @@
         padding: 0.5rem 0 0 0;
         z-index: 1000;
         margin-bottom: 2rem;
-        border-bottom: 5px solid var(--color-fg);
+        border-bottom: 3px solid var(--color-fg);
     }
     .team-row {
         width: 100%;
@@ -261,7 +263,7 @@
             gap: 0.5rem;
         }
         .your-team-row .jersey-wrapper {
-            width: calc(20% - 0.5rem);
+            width: 20%;
         }
         .your-team-row .name::after {
             top: -1.75rem;
