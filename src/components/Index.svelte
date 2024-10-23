@@ -26,12 +26,6 @@
 		console.error(err);
 	});
 
-	if (typeof window !== 'undefined') {
-		selectedTeamStore.subscribe((value) => {
-			localStorage.setItem('selectedTeam', value);
-		});
-	}
-
 	const copy = getContext("copy");
 	const data = getContext("data");
 </script>
