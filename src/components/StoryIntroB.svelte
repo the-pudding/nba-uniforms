@@ -23,7 +23,7 @@
                                 "width:100%; transform: translateX(0%); opacity: 1",
                                 "width:20%; transform: translateX(0%); opacity: 1", 
                                 "width:20%; transform: translateX(0%); opacity: 1", 
-                                "width:20%; transform: translateX(-110%); opacity: 1"
+                                "width:20%; transform: translateX(-110%); opacity: 1;"
                             ];
     const leftPropsMobile = ["height:calc(50% - 2.5px); transform: translateY(-110%); opacity: 0", 
                                 "height:calc(50% - 2.5px); transform: translateY(0%); opacity: 1", 
@@ -37,7 +37,7 @@
                                 "width:0%; transform: translateX(110%); opacity: 0; background-color: transparent", 
                                 "width:calc(80% - 5px); transform: translateX(110%); opacity: 0; background-color: transparent", 
                                 "width:calc(80% - 5px); transform: translateX(0%); opacity: 1; background-color: transparent",
-                                "width:calc(80% - 5px); transform: translateX(110%); background-color: transparent; opacity: 1"
+                                "width:calc(80% - 5px); transform: translateX(110%); opacity: 1; background-color: transparent;"
                             ];
     const rightPropsMobile = ["height:calc(50% - 2.5px); transform: translateY(110%); background-color: rgba(26, 66, 138, 0.9); opacity: 0",
                             "height:calc(50% - 2.5px); transform: translateY(0%); opacity: 1; background-color: rgba(26, 66, 138, 0.9)", 
@@ -106,7 +106,7 @@
                 </div>
             </div>
         {/if}
-        <div class="slides" in:fade={{duration: 300}}>
+        <div class="slides">
             <div class="left" style={leftProps}>
                 <div class="text">
                     {#if scrollIndex > 0}
@@ -122,7 +122,7 @@
                 <div class="middle-line"></div>
             {/if}
             <div class="right" style={rightProps}>
-                {#if scrollIndex >= 3}
+                {#if scrollIndex >= 3 || scrollIndex == "exit"}
                     <div transition:fly={!$reducedMotion ? {delay: 0, duration: 300, x: mobile ? 0 : innerWidth, y: mobile ? innerHeight : 0} : undefined} class="right-edition" style="background-color: rgba(255,255,255,0.9)">
                         <img in:fade={{ delay: 300, duration: 300}} src="assets/imgs/steph-association.png" alt="Stephen Curry association jersey" />
                     </div>
@@ -166,17 +166,14 @@
     #scrolly {
 		position: relative;
 		margin: 0;
-		z-index: 1000;
-        pointer-events: none;
+		z-index:998;
 	}
     .sticky {
 		position: sticky;
 		top: 0;
-		transition: all calc(var(--1s) * 0.5);
 		min-height: 100svh;
         z-index: 1;
         overflow-x: hidden;
-		pointer-events: none;
 		display: flex;
 		justify-content: center;
         align-items: center;
@@ -187,11 +184,10 @@
 	.step {
 		height: 80vh;
 		text-align: center;
-        z-index: 1000;
         max-width: 30rem;
         margin: 0 auto;
 		pointer-events: auto;
-        z-index: 1000;
+        z-index: 999;
         position: relative;
         pointer-events: none;
 	}
@@ -218,6 +214,7 @@
         top: 3rem;
         left: 0;
         padding: 0 2rem;
+        pointer-events: auto;
     }
 
     .iframe-wrapper {
@@ -272,6 +269,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         overflow-x: hidden;
+        pointer-events: none;
     }
 
     .middle-line {
@@ -289,7 +287,7 @@
         justify-content: flex-end;
         padding: 2rem 0;
         transform: translateX(-110%);
-        transition: all calc(var(--1s) * 0.3) ease-out;
+        transition: width calc(var(--1s) * 0.5), height calc(var(--1s) * 0.5), transform calc(var(--1s) * 0.5);
     }
 
     .right {
@@ -298,7 +296,7 @@
         flex-direction: row;
         padding: 0;
         transform: translateX(110%);
-        transition: all calc(var(--1s) * 0.3) ease-out;
+        transition: width calc(var(--1s) * 0.5), height calc(var(--1s) * 0.5), transform calc(var(--1s) * 0.5);
     }
 
     .right-edition {

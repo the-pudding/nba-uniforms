@@ -149,7 +149,7 @@
         left: 0;
         background: rgba(255,255,255,0.95);
         padding: 0.5rem 0 0 0;
-        z-index: 1000;
+        z-index: 999;
         margin-bottom: 2rem;
         border-bottom: 3px solid var(--color-fg);
     }

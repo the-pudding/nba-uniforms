@@ -43,7 +43,7 @@
         min-width: 250px;
 		flex-direction: column;
 		align-items: end;
-		z-index: 1000;
+		z-index: 900;
         transform: translate(-20%, -50%) rotate(5deg);
 		pointer-events: none;
         animation: rocking 2.5s infinite ease-in-out;

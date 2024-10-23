@@ -126,7 +126,7 @@
         font-weight: 700;
         line-height: 0.85;
         text-transform: uppercase;
-        z-index: 999;
+        z-index: 100;
         font-style: italic;
         text-align: center;
         margin: 2rem 0 0 -1rem;

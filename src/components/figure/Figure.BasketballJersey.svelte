@@ -83,7 +83,7 @@
 		font-size: var(--12px);
 		background-color: white;
 		padding: 0.25rem;
-		z-index: 999;
+		z-index: 900;
 		width: 120px;
 		border: 2px solid var(--color-gray-1000);
 		pointer-events: none;

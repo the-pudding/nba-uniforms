@@ -19,6 +19,8 @@
 	export let r = 5;
 	export let unfurlFlair = false;
 
+	$: console.log(unfurlFlair)
+
 	$: yourTeamData = $data.filter((d) => getTeamCode(d.team) == $selectedTeamStore);
 	$: otherTeamData = $data.filter((d) => getTeamCode(d.team) !== $selectedTeamStore);
 
@@ -111,6 +113,7 @@
 		width: 100%;
 		height: 700px;
 		overflow-y: hidden;
+		transition: height calc(var(--1s) * 0.5);
 	}
 
 	.dot-plot.your-team {
@@ -120,7 +123,7 @@
 		border-bottom: 3px solid var(--color-fg);
 		position: sticky;
 		top: 4rem;
-		z-index: 1000;
+		z-index: 999;
 		height: 70px;
 	}
 
@@ -147,7 +150,7 @@
 		border-bottom: 3px solid var(--color-fg);
 		position: sticky;
 		top: 4rem;
-		z-index: 1000;
+		z-index: 999;
 		margin: 0 0 0.5rem 0;
 	}
 
