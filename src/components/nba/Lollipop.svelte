@@ -22,6 +22,28 @@
 	$: yourTeamData = $data.filter((d) => getTeamCode(d.team) == $selectedTeamStore);
 	$: otherTeamData = $data.filter((d) => getTeamCode(d.team) !== $selectedTeamStore);
 
+
+	let rowWidth;
+
+	function calculateLeft(circleXPercent, containerWidth) {
+		console.log(circleXPercent, containerWidth)
+		if (containerWidth) {
+				// Convert percentage to pixels based on the container's width
+				const circleXInPx = (circleXPercent / 100) * containerWidth;
+
+				// Subtract 35px
+				let leftValue = circleXInPx - 35;
+
+				// Ensure that the value is not negative
+				if (leftValue < 90) {
+					leftValue = 90;
+				}
+
+				console.log(leftValue)
+
+				return leftValue;
+				}
+		}
 </script>
 
 <div class="flair-explain">
@@ -40,20 +62,36 @@
 				{/if}
 				{$viewport.width  >= 800 ? yourTeamData[0].team : getTeamCode(yourTeamData[0].team)}
 			</div>
-			<div class="row-data">
+			<div class="row-data" bind:clientWidth={rowWidth}>
 				<div class="line" style="left: calc({Math.min(...$xGet(yourTeamData[0]))}% + 50px); right: calc({100 - Math.max(...$xGet(yourTeamData[0]))}% + 50px);"></div>
 				{#each $xGet(yourTeamData[0]) as circleX, i}
 					{#if i === 0}
-						<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
-							{"2023-24"}
-						</div>
-						<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
-							<img
-								src={`./assets/jerseys/${getTeamCode(yourTeamData[0].team)}_icon.png`}
-								alt={`${yourTeamData[0].team} icon jersey`}
-								class="jersey-illustration"
-							/>
-						</div>
+						{#if $viewport.width <= 600 && getTeamCode(yourTeamData[0].team) == "CHI"}
+							<div class="year-text" style="top: calc(50% - 1px); left: {calculateLeft(circleX, rowWidth)+20}px;">
+								{"2023-24"}
+							</div>
+						{:else}
+							<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
+								{"2023-24"}
+							</div>
+						{/if}
+						{#if $viewport.width <= 600 && getTeamCode(yourTeamData[0].team) == "CHI"}
+							<div class="jersey-container" style="top: 50%;  left: {calculateLeft(circleX, rowWidth)}px; width: 36px; height: 54px;">
+								<img
+									src={`./assets/jerseys/${getTeamCode(yourTeamData[0].team)}_icon.png`}
+									alt={`${yourTeamData[0].team} icon jersey`}
+									class="jersey-illustration"
+								/>
+							</div>
+						{:else}
+							<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
+								<img
+									src={`./assets/jerseys/${getTeamCode(yourTeamData[0].team)}_icon.png`}
+									alt={`${yourTeamData[0].team} icon jersey`}
+									class="jersey-illustration"
+								/>
+							</div>
+						{/if}
 					{:else}
 						<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 5px);">
 							{"2013-14"}
@@ -82,16 +120,32 @@
 					<div class="line" style="left: calc({Math.min(...scaledXValues)}% + 50px); right: calc({100 - Math.max(...scaledXValues)}% + 50px);"></div>
 					{#each scaledXValues as circleX, i}
 						{#if i === 0}
-							<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
-								{"2023-24"}
-							</div>
-							<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
-								<img
-									src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
-									alt={`${row.team} icon jersey`}
-									class="jersey-illustration"
-								/>
-							</div>
+							{#if $viewport.width <= 600 && getTeamCode(row.team) == "CHI"}
+								<div class="year-text" style="top: calc(50% - 1px); left: {calculateLeft(circleX, rowWidth)+20}px;">
+									{"2023-24"}
+								</div>
+							{:else}
+								<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 15px);">
+									{"2023-24"}
+								</div>
+							{/if}
+							{#if $viewport.width <= 600 && getTeamCode(row.team) == "CHI"}
+								<div class="jersey-container" style="top: 50%;  left: {calculateLeft(circleX, rowWidth)}px; width: 36px; height: 54px;">
+									<img
+										src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
+										alt={`${row.team} icon jersey`}
+										class="jersey-illustration"
+									/>
+								</div>
+							{:else}
+								<div class="jersey-container" style="top: 50%;  left: calc({circleX}% - 35px); width: 36px; height: 54px;">
+									<img
+										src={`./assets/jerseys/${getTeamCode(row.team)}_icon.png`}
+										alt={`${row.team} icon jersey`}
+										class="jersey-illustration"
+									/>
+								</div>
+							{/if}
 						{:else}
 							<div class="year-text" style="top: calc(50% - 1px); left: calc({circleX}% - 5px);">
 								{"2013-14"}
@@ -264,6 +318,10 @@
 			width: calc(100% - 30px);
 		}
 		.flair-explain {
+			padding: 0 1rem 0 60px;
+		}
+
+		.flair-inner {
 			padding: 0 1rem 0 60px;
 		}
 	}
