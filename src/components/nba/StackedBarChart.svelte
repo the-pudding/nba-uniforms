@@ -1,6 +1,7 @@
 <script>
 	import { getContext } from "svelte";
 	import convertToPercent from "../../utils/convertToPercent";
+	import viewport from "$stores/viewport.js";
 
 	import * as d3 from "d3";
 	import { Home } from "lucide-svelte";
@@ -15,6 +16,7 @@
 
 	export let height;
 	let barStroke = 1.5;
+	const barSpacing = 2;
 
 	let fontSize = 12;
 
@@ -63,7 +65,7 @@
 
 	$: x = d3.scaleLinear()
 			.domain([0, d3.sum(groupedData, (d) => d.total)])
-			.range([0, width - (groupedData.length * (barStroke / 2))]);
+			.range([0, width - (groupedData.length * (barSpacing + barStroke))]);
 
 		$: y = d3.scaleBand()
 			.domain([0, 1])
@@ -84,8 +86,8 @@
 		<g>
 		{#if d.total / 41 >= .05}
 			<text
-				x={x(d.cumulative)}
-				y={10}
+				x={x(d.cumulative) + i * (barSpacing + barStroke)}
+				y={$viewport.width <= 600 && i % 2 !== 0  ? 60 : 10}
 				fill="#000"
 				text-anchor="left"
 				font-size={`${fontSize}px`}
@@ -95,8 +97,8 @@
 				{`${d.edition.replace(' Edition', '')}`}
 			</text>
 			<text
-				x={x(d.cumulative)}
-				y={24}
+				x={x(d.cumulative) + i * (barSpacing + barStroke)}
+				y={$viewport.width <= 600 && i % 2 !== 0  ? 74 : 24}
 				fill="#000"
 				text-anchor="left"
 				font-size={`${fontSize}px`}
@@ -107,7 +109,7 @@
 		{/if}
 		<rect
 		  class="bar"
-			x={x(d.cumulative)}
+			x={x(d.cumulative) + i * (barSpacing + barStroke)}
 			y={28}
 			fill={d.colorHex}
 			width={x(d.total)}

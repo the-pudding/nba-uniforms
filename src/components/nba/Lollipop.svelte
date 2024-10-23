@@ -270,7 +270,7 @@
 		font-family: var(--sans);
 		font-size: 14px;
 		font-weight: bold;
-		background-color: rgba(255, 255, 255, 0.75);
+		background-color: rgba(255, 255, 255, 0.95);
 	}
 
 	.flair-inner {

@@ -107,7 +107,10 @@
                         </span>
                     </button>
                     <div class="jersey-img">
-                        {#if editionExists[edition.type]}
+                        {#if edition.type !== "classic"}
+                            <img src="assets/jerseys/{$selectedTeamStore}_{edition.type}.png"
+                                alt="{$selectedTeamStore} {edition.type} jersey">
+                        {:else if edition.type == "classic" && edition.percentage > 0}
                             <img src="assets/jerseys/{$selectedTeamStore}_{edition.type}.png"
                                 alt="{$selectedTeamStore} {edition.type} jersey">
                         {:else}

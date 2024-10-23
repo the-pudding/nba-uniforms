@@ -291,7 +291,6 @@
 	.lollipop h3 {
 		padding: 2rem 1rem 1rem 1rem;
 		margin: 0 auto;
-		background-color: rgba(255, 255, 255, 0.75);
 	}
 
 	.city-bars h3 {
@@ -301,7 +300,7 @@
 	}
 
 	.header-wrapper {
-		background-color: rgba(255, 255, 255, 0.75);
+		background-color: rgba(255, 255, 255, 0.95);
 		width: 100%;
 	}
 
