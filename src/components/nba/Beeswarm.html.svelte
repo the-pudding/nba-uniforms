@@ -256,16 +256,6 @@
 		align-items: center;
 	}
 
-	.left {
-		position: absolute;
-		bottom: 15px;
-
-    @media screen and (min-width: 500px) {
-      position: unset;
-      
-    }
-	}
-
 	.caret-left {
 		@media screen and (min-width: 700px) {
 			margin-right: 5px;
