@@ -126,7 +126,7 @@
         font-weight: 700;
         line-height: 0.85;
         text-transform: uppercase;
-        z-index: 999;
+        z-index: 100;
         font-style: italic;
         text-align: center;
         margin: 2rem 0 0 -1rem;
@@ -365,6 +365,12 @@
 
         .heading-wrapper h2 {
             font-size: 80px;
+        }
+    }
+
+    @media(max-width: 400px) {
+        .heading-wrapper h2 {
+            font-size: 70px;
         }
     }
 </style>

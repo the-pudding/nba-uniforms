@@ -2,8 +2,6 @@
 	import { getContext } from "svelte";
 
 	const { data, xGet, yGet, xScale, yScale } = getContext("LayerCake");
-
-	console.log($yScale.range());
 </script>
 
 <div class="bar-label-wrapper">

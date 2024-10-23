@@ -45,7 +45,7 @@
 <style>
 	div.select-bar {
 		position: fixed;
-		z-index: 999999999;
+		z-index: 1000;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -94,9 +94,9 @@
 	.select-container {
 		position: relative;
 		display: inline-block;
-		width: 220px;
+		width: 200px;
 	}
-
+	
 	.select-container::after {
 		width: 0; 
 		height: 0; 

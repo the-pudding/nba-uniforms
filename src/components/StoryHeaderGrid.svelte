@@ -8,16 +8,16 @@
 
 	$: selectedTeam = $selectedTeamStore;
 
-	function handleTeamSelect(event) {
-		selectedTeamStore.set(event.target.alt);
+	function handleTeamSelect(team) {
+		selectedTeamStore.set(team);
 	}
 </script>
 
   <div class="header-grid__container">
     {#each teams as team}
 			<div class="header-grid__jersey">
-				<button aria-label={`Select ${team.team}`} on:click={handleTeamSelect}>
-					<img src={`./assets/jerseys/${team.code}_icon.png`} alt={team.code} class={team.code === selectedTeam ? 'selected-team-jersey' : ''}/>
+				<button aria-label={`Select ${team.team}`} on:click={() => handleTeamSelect(team.code)}>
+					<img src={`./assets/jerseys/${team.code}_icon.png`} alt="{team.code} icon jersey" class={team.code === selectedTeam ? 'selected-team-jersey' : ''}/>
 				</button>
 			</div>
 		{/each}

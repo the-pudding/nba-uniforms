@@ -72,6 +72,23 @@
 			simulation.tick();
 		}
 	}
+
+	function jerseyEnter(team, event) {
+		if (team == selectedTeamName) {
+			return
+		} else {
+			let teamContainer = event.currentTarget.parentElement.querySelector('.team-container');
+			teamContainer.style.opacity = 1;
+		}
+	}
+	function jerseyOut(team, event) {
+		if (team == selectedTeamName) {
+			return
+		} else {
+			let teamContainer = event.currentTarget.parentElement.querySelector('.team-container');
+			teamContainer.style.opacity = 0;
+		}
+	}
 </script>
 
 {#if $viewport.width >= 700}
@@ -90,32 +107,32 @@
 		</div>
 		<!-- draw a full-width horizontal line halfway down the container -->
 		{#each simulation.nodes() as node}
-			<div
-				class="jersey-container"
-				style="
-          left: {node.x + 16}px;
-          top: {node.y * 2 + $height / 2}px;
-        	width: {jerseySize}px;
-        "
-			>
-				<img
-					src={`./assets/jerseys/${node.code}_icon.png`}
-					alt={getTeamCode(node.team)}
-					class="jersey-illustration"
-				/>
-			</div>
-			{#if node.team === selectedTeamName}
+			<div class="node-wrapper">
+				<div
+					class="jersey-container"
+					style="left: {node.x + 16}px; top: {node.y * 2 + $height / 2}px; width: {jerseySize}px;"
+					on:mouseenter={(event) => jerseyEnter(node.team, event)}
+					on:mouseout={(event) => jerseyOut(node.team, event)}
+				>
+					<img
+						src={`./assets/jerseys/${node.code}_icon.png`}
+						alt={`${getTeamCode(node.team)} icon jersey`}
+						class="jersey-illustration"
+					/>
+				</div>
 				<div
 					class="team-container"
-					style="
-            left: {node.x + 16}px;
-            top: {node.y * 2 + $height / 2 - 60}px;
-            "
+					style="left: {node.x + 16}px;
+            			top: {node.y * 2 + $height / 2 - 60}px;
+						opacity: {node.team === selectedTeamName ? 1 : 0}"
 				>
-					<span>Your team: <strong>{selectedTeamName}</strong> </span>
+					{#if node.team === selectedTeamName}
+						<span>Your team:</span>
+					{/if}
+					<span><strong>{node.team}</strong></span>
 					<div class="caret"></div>
 				</div>
-			{/if}
+			</div>
 		{/each}
 	</div>
 {:else}
@@ -133,6 +150,7 @@
 		</div>
 		<!-- draw a full-width horizontal line halfway down the container -->
 		{#each simulation.nodes() as node}
+		<div class="node-wrapper">
 			<div
 				class="jersey-container"
 				style="
@@ -153,12 +171,17 @@
 					style="
 					top: {$height - node.x - 100}px;
 					left: {node.y * 2 + $width / 2}px;
+					opacity: {node.team === selectedTeamName ? 1 : 0}
 					"
 				>
-					<span>Your team: <strong>{selectedTeamName}</strong> </span>
+					{#if node.team === selectedTeamName}
+						<span>Your team:</span>
+					{/if}
+					<span><strong>{node.team}</strong></span>
 					<div class="caret"></div>
 				</div>
 			{/if}
+			</div>
 		{/each}
 	</div>
 {/if}
@@ -173,6 +196,15 @@
 	.jersey-container {
 		position: absolute;
 		transform: translate(-50%, -50%);
+		cursor: pointer;
+	}
+	.jersey-container:hover {
+		z-index: 800;
+	}
+	.jersey-container:hover img {
+		transform: scale(1.25);
+		transform-origin: 50% 50%;
+		transition: transform calc(var(--1s) * 0.3);
 	}
 
 	.team-container {
@@ -182,7 +214,7 @@
 		position: relative;
 		font-size: 13px;
 		line-height: 13px;
-		width: 80px;
+		width: 90px;
 		position: absolute;
 		transform: translate(-50%, -40%);
 		background-color: rgba(255, 255, 255, 0.9);
@@ -190,6 +222,9 @@
 		border: 1px solid var(--color-fg);
 		z-index: 2;
 		font-family: var(--sans);
+		pointer-events: none;
+		transition: opacity calc(var(--1s) * 0.5);
+		z-index: 900;
 	}
 
 	.caret {
