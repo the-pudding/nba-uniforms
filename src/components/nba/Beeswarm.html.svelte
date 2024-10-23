@@ -55,7 +55,7 @@
 				})
 				.strength(0.99)
 		)
-		.force("y", forceY().strength(0.05))
+		.force("y", forceY().strength($viewport.width >= 700 ? 0.05 : 0.59))
 		.force("collide", forceCollide(r))
 		.stop();
 
@@ -136,7 +136,7 @@
 			<div
 				class="jersey-container"
 				style="
-        top: {$height - node.x - 50}px;
+        top: {($height - (node.x * (500 / $viewport.width)) - 50)}px;
         left: {node.y * 2 + $width / 2}px;
         width: {jerseySize}px;
       "

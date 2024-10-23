@@ -281,7 +281,7 @@
 
 	@media(max-width: 700px) {
 		.beeswarm {
-			height: 800px;
+			height: 100vh;
 		}
 	}
 
