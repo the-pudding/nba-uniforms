@@ -52,6 +52,7 @@
   margin: 4rem auto 1rem auto;
   max-width: 1200px;
   pointer-events: auto;
+  z-index: 400;
 
   @media screen and (max-width: 750px) {
     grid-template-columns: repeat(6, 1fr);

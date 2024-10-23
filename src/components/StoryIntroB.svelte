@@ -210,8 +210,8 @@
         align-items: center;
         position: absolute;
         width: 100%;
-        height: 100dvh;
-        top: 3rem;
+        height: calc(100dvh - 2rem);
+        top: 2rem;
         left: 0;
         padding: 0 2rem;
         pointer-events: auto;
@@ -268,8 +268,9 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        overflow-x: hidden;
+        overflow: hidden;
         pointer-events: none;
+        z-index: 500;
     }
 
     .middle-line {
@@ -418,6 +419,12 @@
             bottom: 2rem;
             left: 2rem;
             transform: translate(0,0);
+        }
+    }
+
+    @media(max-width: 400px){
+        .intro-top {
+            font-size: var(--28px);
         }
     }
 
