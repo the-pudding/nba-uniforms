@@ -19,8 +19,6 @@
 	export let r = 5;
 	export let unfurlFlair = false;
 
-	$: console.log(unfurlFlair)
-
 	$: yourTeamData = $data.filter((d) => getTeamCode(d.team) == $selectedTeamStore);
 	$: otherTeamData = $data.filter((d) => getTeamCode(d.team) !== $selectedTeamStore);
 

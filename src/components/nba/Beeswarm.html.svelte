@@ -73,13 +73,21 @@
 		}
 	}
 
-	function jerseyEnter() {
-		let teamContainer = this.parentElement.querySelector('.team-container');
-		teamContainer.style.opacity = 1;
+	function jerseyEnter(team, event) {
+		if (team == selectedTeamName) {
+			return
+		} else {
+			let teamContainer = event.currentTarget.parentElement.querySelector('.team-container');
+			teamContainer.style.opacity = 1;
+		}
 	}
-	function jerseyOut() {
-		let teamContainer = this.parentElement.querySelector('.team-container');
-		teamContainer.style.opacity = 0;
+	function jerseyOut(team, event) {
+		if (team == selectedTeamName) {
+			return
+		} else {
+			let teamContainer = event.currentTarget.parentElement.querySelector('.team-container');
+			teamContainer.style.opacity = 0;
+		}
 	}
 </script>
 
@@ -103,8 +111,8 @@
 				<div
 					class="jersey-container"
 					style="left: {node.x + 16}px; top: {node.y * 2 + $height / 2}px; width: {jerseySize}px;"
-					on:mouseenter={jerseyEnter}
-					on:mouseout={jerseyOut}
+					on:mouseenter={(event) => jerseyEnter(node.team, event)}
+					on:mouseout={(event) => jerseyOut(node.team, event)}
 				>
 					<img
 						src={`./assets/jerseys/${node.code}_icon.png`}
@@ -142,21 +150,19 @@
 		</div>
 		<!-- draw a full-width horizontal line halfway down the container -->
 		{#each simulation.nodes() as node}
-			<div
-				class="jersey-container"
-				style="
-        top: {$height - node.x - 50}px;
-        left: {node.y * 2 + $width / 2}px;
-        width: {jerseySize}px;
-      "
-			>
-				<img
-					src={`./assets/jerseys/${node.code}_icon.png`}
-					alt={`${getTeamCode(node.team)} icon jersey`}
-					class="jersey-illustration"
-				/>
-			</div>
-			{#if node.team === selectedTeamName}
+			<div class="node-wrapper">
+				<div
+					class="jersey-container"
+					style="top: {$height - node.x - 50}px; left: {node.y * 2 + $width / 2}px; width: {jerseySize}px;"
+					on:mouseenter={(event) => jerseyEnter(node.team, event)}
+					on:mouseout={(event) => jerseyOut(node.team, event)}
+				>
+					<img
+						src={`./assets/jerseys/${node.code}_icon.png`}
+						alt={`${getTeamCode(node.team)} icon jersey`}
+						class="jersey-illustration"
+					/>
+				</div>
 				<div
 					class="team-container"
 					style="
@@ -165,10 +171,13 @@
 					opacity: {node.team === selectedTeamName ? 1 : 0}
 					"
 				>
-					<span>Your team: <strong>{selectedTeamName}</strong> </span>
+					{#if node.team === selectedTeamName}
+						<span>Your team:</span>
+					{/if}
+					<span><strong>{node.team}</strong></span>
 					<div class="caret"></div>
 				</div>
-			{/if}
+			</div>
 		{/each}
 	</div>
 {/if}
@@ -186,7 +195,7 @@
 		cursor: pointer;
 	}
 	.jersey-container:hover {
-		z-index: 999;
+		z-index: 800;
 	}
 	.jersey-container:hover img {
 		transform: scale(1.25);
@@ -211,6 +220,7 @@
 		font-family: var(--sans);
 		pointer-events: none;
 		transition: opacity calc(var(--1s) * 0.5);
+		z-index: 900;
 	}
 
 	.caret {
