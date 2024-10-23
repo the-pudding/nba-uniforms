@@ -153,11 +153,9 @@
 		<div class="node-wrapper">
 			<div
 				class="jersey-container"
-				style="
-        top: {($height - (node.x * (500 / $viewport.width)) - 50)}px;
-        left: {node.y * 2 + $width / 2}px;
-        width: {jerseySize}px;
-      "
+				style="top: {(node.x * $height/$width)+20}px; left: {node.y * 2 + $width / 2}px; width: {jerseySize}px;"
+				on:mouseenter={(event) => jerseyEnter(node.team, event)}
+				on:mouseout={(event) => jerseyOut(node.team, event)}
 			>
 				<img
 					src={`./assets/jerseys/${node.code}_icon.png`}
@@ -165,22 +163,20 @@
 					class="jersey-illustration"
 				/>
 			</div>
-			{#if node.team === selectedTeamName}
-				<div
-					class="team-container"
-					style="
-					top: {$height - node.x - 100}px;
-					left: {node.y * 2 + $width / 2}px;
-					opacity: {node.team === selectedTeamName ? 1 : 0}
-					"
-				>
-					{#if node.team === selectedTeamName}
-						<span>Your team:</span>
-					{/if}
-					<span><strong>{node.team}</strong></span>
-					<div class="caret"></div>
-				</div>
-			{/if}
+			<div
+				class="team-container"
+				style="
+				top: {(node.x * $height/$width)-30}px;
+				left: {node.y * 2 + $width / 2}px;
+				opacity: {node.team === selectedTeamName ? 1 : 0}
+				"
+			>
+				{#if node.team === selectedTeamName}
+					<span>Your team:</span>
+				{/if}
+				<span><strong>{node.team}</strong></span>
+				<div class="caret"></div>
+			</div>
 			</div>
 		{/each}
 	</div>

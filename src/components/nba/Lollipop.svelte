@@ -26,7 +26,6 @@
 	let rowWidth;
 
 	function calculateLeft(circleXPercent, containerWidth) {
-		console.log(circleXPercent, containerWidth)
 		if (containerWidth) {
 				// Convert percentage to pixels based on the container's width
 				const circleXInPx = (circleXPercent / 100) * containerWidth;
@@ -38,8 +37,6 @@
 				if (leftValue < 90) {
 					leftValue = 90;
 				}
-
-				console.log(leftValue)
 
 				return leftValue;
 				}

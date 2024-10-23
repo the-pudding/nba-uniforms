@@ -276,6 +276,9 @@
 		height: 600px;
 		overflow: hidden;
 	}
+	:global(.beeswarm .layercake-container) {
+		height: calc(100% - 3rem) !important;
+	}
 	h3 {
 			font-size: var(--28px);
 			line-height: 1;
@@ -304,7 +307,7 @@
 
 	@media(max-width: 700px) {
 		.beeswarm {
-			height: 100vh;
+			height: 80vh;
 		}
 	}
 

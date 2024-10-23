@@ -49,7 +49,6 @@
     $: imgMax = mobile ? `max-height: ${innerHeight/5}px` : `max-width: ${innerWidth/5}px`
 
     function setProps(scrollIndex, mobile) {
-        console.log(scrollIndex, mobile)
         if (scrollIndex == undefined) {
             leftProps = mobile ? leftPropsMobile[0] : leftPropsDesktop[0];
             rightProps = mobile ? rightPropsMobile[0] : rightPropsDesktop[0];
