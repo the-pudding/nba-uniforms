@@ -171,7 +171,7 @@
     .sticky {
 		position: sticky;
 		top: 0;
-		min-height: 100svh;
+		min-height: 100dvh;
         z-index: 1;
         overflow-x: hidden;
 		display: flex;
@@ -210,7 +210,7 @@
         align-items: center;
         position: absolute;
         width: 100%;
-        height: 100svh;
+        height: 100dvh;
         top: 3rem;
         left: 0;
         padding: 0 2rem;
@@ -261,7 +261,7 @@
 
     .slides {
         width: 100%;
-        height: 100svh;
+        height: 100dvh;
         position: absolute;
         top: 0;
         left: 0;
@@ -275,12 +275,12 @@
     .middle-line {
         background: var(--color-fg);
         width: 5px;
-        height: 100svh;
+        height: 100dvh;
     }
 
     .left {
         background: rgba(255, 255, 255, 0.9);
-        height: 100svh;
+        height: 100dvh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -291,7 +291,7 @@
     }
 
     .right {
-        height: 100svh;
+        height: 100dvh;
         display: flex;
         flex-direction: row;
         padding: 0;
