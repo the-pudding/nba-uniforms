@@ -1,5 +1,5 @@
 <script>
-	import { setContext, getContext } from 'svelte';
+	import { setContext, getContext, onMount } from 'svelte';
   import { selectedTeamStore } from '$stores/teamSelection';
 	import StoryBody from "$components/StoryBody.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
@@ -18,13 +18,15 @@
 
 	export let scrollProgress;
 
-	locate(true).then(data => {
-		const [lat, lon] = data.loc.split(',').map(Number);
-		const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
-        selectedTeamStore.set(closestArena.code);
-	}).catch(err => {
-		console.error(err);
-	});
+	onMount(() => {
+		locate(false).then(data => {
+			const [lat, lon] = data.loc.split(',').map(Number);
+			const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
+			selectedTeamStore.set(closestArena.code);
+		}).catch(err => {
+			console.error(err);
+		});
+	})
 
 	const copy = getContext("copy");
 	const data = getContext("data");
