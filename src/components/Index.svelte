@@ -19,23 +19,12 @@
 	export let scrollProgress;
 
 	onMount(() => {
-		// Check if localStorage has a selected team
-		const localStorageTeam = localStorage.getItem('selectedTeam');
-
-		if (storedTeam) {
-			selectedTeamStore.set(localStorageTeam);
-		} else {
-			locate(false).then(data => {
-				const [lat, lon] = data.loc.split(',').map(Number);
-				const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
-				selectedTeamStore.set(closestArena.code);
-			}).catch(err => {
-				console.error(err);
-			});
-		}
-
-		selectedTeamStore.subscribe((value) => {
-			localStorage.setItem('selectedTeam', value);
+		locate(false).then(data => {
+			const [lat, lon] = data.loc.split(',').map(Number);
+			const closestArena = findClosestPoint({ lat: lat, lon: lon }, teams);
+			selectedTeamStore.set(closestArena.code);
+		}).catch(err => {
+			console.error(err);
 		});
 	})
 
