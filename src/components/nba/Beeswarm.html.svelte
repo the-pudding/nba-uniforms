@@ -136,13 +136,15 @@
 		{/each}
 	</div>
 {:else}
-	<svg
-		width="2"
-		height={$height}
-		style="position: absolute; left: {$width / 2}px;"
-	>
-		<line y1="30" x1="0" y2={$height-30} x2="0" stroke="black" stroke-width="2" />
-	</svg>
+	{#if $height}
+		<svg
+			width="2"
+			height={$height}
+			style="position: absolute; left: {$width / 2}px;"
+		>
+			<line y1="30" x1="0" y2={$height-30} x2="0" stroke="black" stroke-width="2" />
+		</svg>
+	{/if}
 	<div class="bee-container">
 		<div class="flair-explain">
 			<span class="left"><span class="caret-left"></span> Less flair</span>
