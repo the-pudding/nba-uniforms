@@ -122,6 +122,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 0.25rem;
+		margin-top: 1.5rem;
 	}
 
 	.jersey-waffle_game {

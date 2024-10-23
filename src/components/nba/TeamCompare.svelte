@@ -50,16 +50,7 @@
             return false;
         }
     }
-
-    // Reactive block to update `editionExists` when team or editions change
-    $: if ($selectedTeamStore && editions) {
-        (async () => {
-            for (const edition of editions) {
-                const imageUrl = `assets/jerseys/${$selectedTeamStore}_${edition}.png`;
-                editionExists[edition] = await fetchJersey(imageUrl);
-            }
-        })();
-    }
+    
     $: innerWidth = 0;
 
     function dataSort(edition) {
