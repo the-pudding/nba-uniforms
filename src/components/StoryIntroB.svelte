@@ -172,7 +172,7 @@
 		top: 0;
 		min-height: 100dvh;
         z-index: 1;
-        overflow-x: hidden;
+        overflow: hidden;
 		display: flex;
 		justify-content: center;
         align-items: center;
@@ -214,12 +214,14 @@
         left: 0;
         padding: 0 2rem;
         pointer-events: auto;
+        overflow: hidden;
     }
 
     .iframe-wrapper {
         aspect-ratio: 16 / 9;
 		width: 100%;
-        max-width: 900px;
+        max-width: 700px;
+        max-height: 50vh;
 		outline: 5px solid var(--color-fg);
     }
 
@@ -228,7 +230,7 @@
         font-weight: 700;
         color: var(--color-fg);
         font-style: italic;
-        font-size: var(--48px);
+        font-size: 42px;
         width: 100%;
         max-width: 700px;
         text-align: center;
