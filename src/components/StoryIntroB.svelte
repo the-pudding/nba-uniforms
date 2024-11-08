@@ -137,7 +137,7 @@
                 {/if}
                 <div class="text">
                     {#if scrollIndex > 0}
-                        <p class="year">2023-14</p>
+                        <p class="year">2023-24</p>
                     {/if}
                     <p>{scrollIndex >= 3 ? "Home" : "Away"}</p>
                 </div>
